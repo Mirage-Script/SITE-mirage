@@ -2,12 +2,13 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { BuildingOffice2Icon, UsersIcon, ChartBarIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 
 const stats = [
-  { label: 'Clientes enterprise ativos', value: '42+', icon: '🏢' },
-  { label: 'Colaboradores técnicos', value: '120+', icon: '👩‍💻' },
-  { label: 'Horas de code review/semana', value: '1.8k', icon: '📊' },
-  { label: 'Squads simultâneos', value: '12', icon: '🚀' }
+  { label: 'Clientes enterprise ativos', value: '42+', Icon: BuildingOffice2Icon },
+  { label: 'Colaboradores técnicos', value: '120+', Icon: UsersIcon },
+  { label: 'Horas de code review/semana', value: '1.8k', Icon: ChartBarIcon },
+  { label: 'Squads simultâneos', value: '12', Icon: RocketLaunchIcon }
 ];
 
 export function StatsCounter() {
@@ -20,6 +21,8 @@ export function StatsCounter() {
 
     const counters = sectionRef.current.querySelectorAll('.stat-value');
 
+    const localTriggers: ScrollTrigger[] = [];
+
     counters.forEach((counter) => {
       const target = counter.getAttribute('data-target');
       if (!target) return;
@@ -30,14 +33,14 @@ export function StatsCounter() {
       const numericTarget = parseFloat(target.replace(/[+k]/g, ''));
       const suffix = target.includes('+') ? '+' : target.includes('k') ? 'k' : '';
 
-      ScrollTrigger.create({
+      const trig = ScrollTrigger.create({
         trigger: counter,
         start: 'top 80%',
         once: true,
         onEnter: () => {
           gsap.to(counter, {
             textContent: numericTarget,
-            duration: 2.5,
+            duration: 2.0,
             ease: 'power2.out',
             snap: { textContent: 0.1 },
             onUpdate() {
@@ -47,10 +50,11 @@ export function StatsCounter() {
           });
         }
       });
+      localTriggers.push(trig);
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      localTriggers.forEach((t) => t.kill());
     };
   }, []);
 
@@ -74,9 +78,7 @@ export function StatsCounter() {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
             >
-              <span className="text-5xl" aria-hidden>
-                {stat.icon}
-              </span>
+              <stat.Icon className="h-12 w-12 text-primary dark:text-accent" aria-hidden />
               <dd
                 className="stat-value text-4xl font-bold text-primary transition-colors group-hover:text-accent dark:text-accent dark:group-hover:text-primary"
                 data-target={stat.value}

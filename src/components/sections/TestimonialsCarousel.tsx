@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 const testimonials = [
   {
@@ -9,8 +10,7 @@ const testimonials = [
       'A MIRAGE entregou não apenas código, mas uma operação completa: dashboards, runbooks e treinamentos hands-on que transformaram nossa capacidade de escalar.',
     author: 'Carlos Mendes',
     role: 'CTO',
-    company: 'TechSolutions',
-    avatar: '👨‍💼'
+    company: 'TechSolutions'
   },
   {
     id: 'testimonial-2',
@@ -18,8 +18,7 @@ const testimonials = [
       'Processos maduros, visibilidade total e zero surpresas. Cada sprint review vinha com métricas claras e planos de evolução alinhados ao board.',
     author: 'Ana Silva',
     role: 'Head de Produto',
-    company: 'InnovaCorp',
-    avatar: '👩‍💼'
+    company: 'InnovaCorp'
   },
   {
     id: 'testimonial-3',
@@ -27,8 +26,7 @@ const testimonials = [
       'Arquitetura desenhada para crescer. Três anos depois, a base que a MIRAGE construiu ainda sustenta nossos lançamentos semanais sem downtime.',
     author: 'Roberto Alves',
     role: 'VP Engineering',
-    company: 'DataStream',
-    avatar: '🧑‍💻'
+    company: 'DataStream'
   }
 ];
 
@@ -93,9 +91,7 @@ export function TestimonialsCarousel() {
               {testimonial.quote}
             </blockquote>
             <footer className="mt-auto flex items-center gap-4 border-t border-neutral-200 pt-6 dark:border-neutral-700">
-              <span className="text-4xl" aria-hidden>
-                {testimonial.avatar}
-              </span>
+              <UserCircleIcon className="h-10 w-10 text-neutral-400" aria-hidden />
               <div>
                 <p className="font-semibold text-neutral-900 dark:text-neutral-100">{testimonial.author}</p>
                 <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">
