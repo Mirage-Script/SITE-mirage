@@ -1,52 +1,59 @@
 # MIRAGE · Task Schedule
 
-## Semana 1 · Tipografia e Microinterações
+## Semana 1 · Fundamentos GSAP/ScrollTrigger e Degradação Acessível
 
-- **Objetivo**: Elevar headlines com animações tipográficas cinematográficas.
-- **Tarefas**:
-  - Integrar SplitType/TextScramble no Hero e CTAs críticos.
-  - Garantir fallback acessível quando `prefers-reduced-motion` estiver ativo.
-  - Criar testes de regressão visual (Jest DOM snapshots) para validar estados degradados.
-- **Entregáveis**:
-  - `HeroSection.tsx` atualizado com novas animações.
-  - Documentação de uso na seção "Destaques" do README.
+- Objetivo: padronizar padrões de scroll (pinning, scrub, parallax leve), sincronizar com Lenis e garantir degrade por `prefers-reduced-motion`.
+- Tarefas:
+  - Auditar animações atuais; remover jank e ajustar thresholds.
+  - Criar util de sincronização Lenis + ScrollTrigger.
+  - Definir contratos de animação (easing, durações, delays) e tokens.
+  - Testes de regressão visual para estados degradados.
+- Entregáveis:
+  - Guia curto de padrões GSAP (docs/anims.md).
+  - Tokens de animação (theme/tokens).
 
-## Semana 2 · Imersão Visual
+## Semana 2 · Dados e Dashboard (React Query + Supabase + Recharts)
 
-- **Objetivo**: Entregar hero imersivo e marquee com partículas reativas.
-- **Tarefas**:
-  - Prototipar cena Three.js/React Three Fiber com fallback estático.
-  - Implementar partículas PixiJS no marquee técnico sincronizado com scroll.
-  - Otimizar performance (suspense/lazy e medição de FPS).
-- **Entregáveis**:
-  - `HeroSection.tsx` com versão R3F + fallback.
-  - Novo utilitário de monitoramento de performance em `src/lib/metrics`.
-  - **Status**: ✅ Hero imersivo + PixiJS marquee entregues com monitor de performance ativo.
+- Objetivo: camada de cache para dados públicos/admin e painel com métricas.
+- Tarefas:
+  - Integrar React Query sobre `supabase-js` (queries, invalidations, suspense-ready).
+  - Painel Admin: KPIs e séries temporais com Recharts; loading/empty/error states.
+  - Rotas/serviços: contagem de posts/serviços/cases e eventos de conversão.
+- Entregáveis:
+  - Hook compartilhado para dados.
+  - Admin com gráficos e filtros básicos.
 
-## Semana 3 · Feedback e Celebrations
+## Semana 3 · Formulários e Celebrations (UX Completa)
 
-- **Objetivo**: Fortalecer sensação de conquista em conversões.
-- **Tarefas**:
-  - Integrar React Confetti após submissão bem-sucedida de formulários.
-  - Adicionar campos avançados (React Select, DatePicker, Input Mask) no fluxo de contato.
-  - Garantir testes de acessibilidade (axe) e UX de teclado.
-- **Entregáveis**:
-  - `ContactForm.tsx` expandido com novos campos e feedback celebratório.
-  - Storybook ou docs curtas demonstrando estados do formulário.
+- Objetivo: melhorar o fluxo de contato e reforçar senso de conquista.
+- Tarefas:
+  - Campos avançados: React Select, DatePicker, Input Mask; Zod + RHF; mensagens localizadas.
+  - Confetti controlado (1x por conversão/sessão), respeitando `prefers-reduced-motion`.
+  - Acessibilidade: navegação por teclado, foco visível, validação ARIA.
+- Entregáveis:
+  - ContactForm com campos avançados e feedback celebratório.
+  - Testes de integração do fluxo.
 
-## Semana 4 · Dados e Estado Reativo
+## Semana 4 · Performance, Observabilidade e DX
 
-- **Objetivo**: Conectar Supabase em tempo real e dashboards de liderança.
-- **Tarefas**:
-  - Mapear fetch assíncrono com React Query ou SWR para dados editoriais.
-  - Introduzir Recharts no dashboard administrativo para indicadores executivos.
-  - Avaliar Zustand/Jotai para orquestrar estados de animação/dados.
-- **Entregáveis**:
-  - `AdminDashboard.tsx` com gráficos e camadas reativas.
-  - Hook compartilhado (`src/hooks/useSupabaseQuery.ts`) com cache e suspense-ready.
+- Objetivo: garantir budgets e visibilidade contínua de qualidade.
+- Tarefas:
+  - Orçamentos: JS inicial < 180 KB; CSS crítico; imagens responsivas (avif/webp/srcset).
+  - Code splitting por rota/área; prefetch prudente.
+  - Web Vitals + monitor de FPS; logs de jank; relatório semanal.
+  - CI: lint/type-check/test + verifica tamanho de bundle.
+- Entregáveis:
+  - Relatório de performance e configuração de métricas contínuas.
+  - Pipeline CI com gates de qualidade.
+
+## Extensões (Opcional · Semanas 5–6)
+
+- Cursor avançado (Mouse Follower) em páginas selecionadas; estados para links/mídia/drag.
+- Sequências tipográficas multi-linhas; fallback sem FOUT/FOIT.
+- Orquestração de estado reativo com Zustand/Jotai para cenas mais complexas.
 
 ## Continuidade
 
-- Reavaliar backlog ao final de cada semana, incorporando insights de stakeholders.
-- Manter README e `docs/task-list.md` sincronizados com o progresso.
-- Rodar `npm run lint`, `npm run type-check` e `npm run test` ao concluir cada ciclo semanal.
+- Revisar backlog semanalmente com stakeholders.
+- Manter README e `docs/task-list.md` sincronizados.
+- Executar `npm run lint`, `npm run type-check` e `npm run test` ao fechar cada ciclo.
