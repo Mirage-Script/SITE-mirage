@@ -1,0 +1,265 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeroSection matches snapshot when prefers-reduced-motion is enabled 1`] = `
+<div>
+  <section
+    class="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
+  >
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]"
+    />
+    <div
+      aria-hidden="true"
+      class="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]"
+    />
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 mix-blend-screen opacity-80 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]"
+    />
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow"
+    />
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow"
+    />
+    <div
+      class="relative grid gap-10 lg:grid-cols-[3fr_2fr]"
+    >
+      <div>
+        <p
+          class="text-sm uppercase tracking-[0.5em] text-neutral-400"
+        >
+          Engenharia orientada a resultado
+        </p>
+        <h1
+          class="hero-heading mt-6 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
+        >
+          Mirage transforma ideias em plataformas digitais enterprise-grade.
+        </h1>
+        <div
+          class="hero-subline mt-5 min-h-[2.5rem] overflow-hidden text-lg font-medium text-accent"
+        >
+          <span
+            class="block"
+          >
+            Experiências imersivas com GSAP + Lenis
+          </span>
+        </div>
+        <p
+          class="mt-6 max-w-xl text-neutral-200"
+        >
+          Arquiteturas composable, Supabase Edge e pipelines observáveis desde o sprint 0. Utilizamos GSAP, Lenis e Framer Motion para entregar microinterações sofisticadas enquanto mantemos governança, RLS e auditoria contínua.
+        </p>
+        <div
+          class="mt-10 flex flex-wrap items-center gap-4"
+        >
+          <div
+            class=""
+            style="transform: none;"
+          >
+            <button
+              aria-label="Planejar sprint"
+              class="inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-primary text-white hover:bg-primary/90 focus-visible:outline-primary shadow-subtle px-6 py-3 text-base bg-white text-neutral-900 hover:bg-neutral-200"
+              type="button"
+            >
+              <span
+                class="sr-only"
+              >
+                Planejar Sprint
+              </span>
+              <span
+                class="uppercase tracking-widest"
+              >
+                Planejar Sprint
+              </span>
+            </button>
+          </div>
+          <div
+            class=""
+            style="transform: none;"
+          >
+            <button
+              aria-label="Portfólio técnico"
+              class="inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-transparent text-neutral-700 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:bg-neutral-800 focus-visible:outline-neutral-400 px-6 py-3 text-base border border-white/30 bg-transparent text-white hover:bg-white/10"
+              type="button"
+            >
+              <span
+                class="sr-only"
+              >
+                Portfólio técnico
+              </span>
+              <span
+                class="uppercase tracking-[0.35em]"
+              >
+                Portfólio técnico
+              </span>
+            </button>
+          </div>
+        </div>
+        <dl
+          class="hero-stats mt-12 grid gap-6 text-sm sm:grid-cols-3"
+        >
+          <div>
+            <dt
+              class="text-neutral-400"
+            >
+              Deploys assistidos por IA
+            </dt>
+            <dd
+              class="mt-1 text-2xl font-semibold"
+            >
+              42
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="text-neutral-400"
+            >
+              Plataformas escaladas
+            </dt>
+            <dd
+              class="mt-1 text-2xl font-semibold"
+            >
+              +80
+            </dd>
+          </div>
+          <div>
+            <dt
+              class="text-neutral-400"
+            >
+              SLA crítico
+            </dt>
+            <dd
+              class="mt-1 text-2xl font-semibold"
+            >
+              99.98%
+            </dd>
+          </div>
+        </dl>
+        <div
+          class="mt-10 grid gap-4 rounded-3xl border border-white/20 bg-white/5 p-6 text-xs uppercase tracking-[0.35em] text-neutral-300 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          <div>
+            <span
+              class="text-neutral-400"
+            >
+              Discovery assistida por IA
+            </span>
+            <p
+              class="mt-2 text-sm normal-case text-white"
+            >
+              Priorizamos demandas com dados de analytics, entrevistas e matriz RICE em até 10 dias úteis.
+            </p>
+          </div>
+          <div>
+            <span
+              class="text-neutral-400"
+            >
+              Observabilidade conectada
+            </span>
+            <p
+              class="mt-2 text-sm normal-case text-white"
+            >
+              Dashboards executivos com DORA, NPS e SLOs prontos para o board em toda sprint review.
+            </p>
+          </div>
+          <div>
+            <span
+              class="text-neutral-400"
+            >
+              Experiências cinemáticas
+            </span>
+            <p
+              class="mt-2 text-sm normal-case text-white"
+            >
+              Coreografamos Lottie, Motion One e áudio responsivo para jornadas que convertem em alto impacto.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="space-y-6"
+      >
+        <div
+          class="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+        >
+          <p
+            class="text-xs uppercase tracking-[0.4em] text-accent"
+          >
+            Stack em sinergia
+          </p>
+          <ul
+            class="mt-4 space-y-3 text-sm text-neutral-200"
+          >
+            <li>
+              React 18.3.1 · TypeScript · Tailwind CSS
+            </li>
+            <li>
+              Supabase · PostgreSQL com RLS
+            </li>
+            <li>
+              GSAP ScrollTrigger · Lenis · Motion One
+            </li>
+            <li>
+              Observabilidade · Weights & Logs
+            </li>
+          </ul>
+        </div>
+        <div
+          class="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+        >
+          <p
+            class="text-xs uppercase tracking-[0.4em] text-accent"
+          >
+            Governança completa
+          </p>
+          <ul
+            class="mt-4 space-y-3 text-sm text-neutral-200"
+          >
+            <li>
+              Playbooks de incidentes e SRE
+            </li>
+            <li>
+              Security by design + audits contínuos
+            </li>
+            <li>
+              CI/CD com zero-downtime
+            </li>
+            <li>
+              Dashboards, analytics real-time e data storytelling
+            </li>
+          </ul>
+        </div>
+        <div
+          class="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+        >
+          <p
+            class="text-xs uppercase tracking-[0.4em] text-accent"
+          >
+            Squads e operações
+          </p>
+          <ul
+            class="mt-4 space-y-3 text-sm text-neutral-200"
+          >
+            <li>
+              Cell-based squads com chapter leads
+            </li>
+            <li>
+              Ritos semanais com board view e OKRs dinâmicos
+            </li>
+            <li>
+              Feature flags e experimentação guiada
+            </li>
+            <li>
+              Metodologia Mirage Delivery Playbook
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;
