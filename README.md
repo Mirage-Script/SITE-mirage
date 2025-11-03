@@ -2,7 +2,7 @@
 
 Plataforma corporativa focada em apresentar serviços de engenharia web, mobile e software com padrão enterprise-grade. Implementada com React 18, TypeScript, Tailwind CSS, GSAP ScrollTrigger, Framer Motion e integração Supabase.
 
-## 🚀 Stack principal
+##  Stack principal
 
 - React 18.3 + React Router 6
 - TypeScript 5.6
@@ -19,7 +19,7 @@ Plataforma corporativa focada em apresentar serviços de engenharia web, mobile 
 - Jest + Testing Library
 - ESLint + Prettier
 
-## 📁 Scripts disponíveis
+##  Scripts disponíveis
 
 ```bash
 npm install          # instala dependências
@@ -31,7 +31,7 @@ npm run test         # Jest + Testing Library
 npm run format       # Prettier
 ```
 
-## 🔌 Variáveis de ambiente
+##  Variáveis de ambiente
 
 Configure um arquivo `.env.local` baseado no `.env.example`:
 
@@ -42,7 +42,7 @@ SUPABASE_ANON_KEY=
 
 > Caso as variáveis estejam vazias, o formulário de contato apenas exibirá mensagens de simulação.
 
-## 🧱 Estrutura
+##  Estrutura
 
 - `src/components` – Layout, navegação, seções reutilizáveis
 - `src/routes` – Páginas Home, Serviços, Sobre, Blog, Contato e Admin
@@ -60,10 +60,10 @@ SUPABASE_ANON_KEY=
 - Blog e dashboard admin com loading skeletons e cards animados
 - Cursor customizado e reveals suaves com Lenis + GSAP
 
-## 🧪 Testes
+##  Testes
 
 Execute `npm run test` para rodar Jest. Ajuste ou crie novos testes em `src/**/*.test.tsx` conforme evoluir o projeto.
 
-## 📄 Licença
+##  Licença
 
 Projeto proprietário MIRAGE. Todos os direitos reservados.
