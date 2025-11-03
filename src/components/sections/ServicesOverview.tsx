@@ -4,36 +4,36 @@ import { useEffect, useRef } from 'react';
 
 import { services } from '@/data/services';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { ANIM, prefersReducedMotion as checkReducedMotion } from '@/lib/animTokens';
 
 export function ServicesOverview() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const framerReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion || !sectionRef.current) {
+    if (framerReducedMotion || checkReducedMotion() || !sectionRef.current) {
       return;
     }
 
     const cards = sectionRef.current.querySelectorAll('.service-card');
-
     const triggers: ScrollTrigger[] = [];
 
     cards.forEach((card, index) => {
       const tween = gsap.fromTo(
         card,
-        { y: 40, opacity: 0 },
+        { y: ANIM.distance.y.md, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.9,
-          ease: 'power3.out',
-          delay: index * 0.1
+          duration: ANIM.duration.md,
+          ease: ANIM.ease.out,
+          delay: index * 0.08
         }
       );
 
       const trigger = ScrollTrigger.create({
         trigger: card,
-        start: 'top 80%',
+        start: ANIM.scroll.start,
         animation: tween,
         once: true
       });
@@ -44,7 +44,7 @@ export function ServicesOverview() {
     return () => {
       triggers.forEach((trigger) => trigger.kill());
     };
-  }, [prefersReducedMotion]);
+  }, []);
 
   return (
     <section ref={sectionRef} className="mt-24">

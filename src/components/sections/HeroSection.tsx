@@ -8,6 +8,7 @@ import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
 import { gsap, ScrollTrigger, useGsapTimeline } from '@/lib/gsap';
+import { ANIM } from '@/lib/animTokens';
 
 import { Button } from '../ui/Button';
 
@@ -83,18 +84,18 @@ export function HeroSection() {
         yPercent: 110,
         opacity: 0,
         rotateX: -90,
-        duration: 1.05,
-        ease: 'power3.out',
+        duration: ANIM.duration.lg,
+        ease: ANIM.ease.out,
         stagger: { each: 0.015, from: 'random' }
       });
 
       timeline.from(
         '.hero-subline',
         {
-          y: 12,
+          y: ANIM.distance.y.sm,
           opacity: 0,
-          duration: 0.8,
-          ease: 'power3.out'
+          duration: ANIM.duration.md,
+          ease: ANIM.ease.out
         },
         '-=0.6'
       );
@@ -102,11 +103,11 @@ export function HeroSection() {
       timeline.from(
         '.hero-stats',
         {
-          y: 20,
+          y: ANIM.distance.y.sm,
           opacity: 0,
-          duration: 1,
-          ease: 'power3.out',
-          stagger: 0.15
+          duration: ANIM.duration.lg,
+          ease: ANIM.ease.out,
+          stagger: 0.12
         },
         '-=0.4'
       );

@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 
 import { capabilityHighlights } from '@/data/highlights';
+import { ANIM } from '@/lib/animTokens';
 
 export function OperationalHighlights() {
   const prefersReducedMotion = useReducedMotion();
@@ -25,10 +26,10 @@ export function OperationalHighlights() {
           <motion.article
             key={highlight.id}
             className="group relative flex h-full flex-col justify-between gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-sm transition-colors hover:border-primary/40 hover:shadow-subtle dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40"
-            initial={prefersReducedMotion ? undefined : { opacity: 0, y: 24 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, y: ANIM.distance.y.sm }}
             whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
-            transition={prefersReducedMotion ? undefined : { duration: 0.6, ease: 'easeOut', delay: index * 0.08 }}
+            transition={prefersReducedMotion ? undefined : { duration: ANIM.duration.md, ease: 'easeOut', delay: index * 0.08 }}
           >
             <div>
               <span className="text-[0.65rem] uppercase tracking-[0.45em] text-neutral-500 dark:text-neutral-400">

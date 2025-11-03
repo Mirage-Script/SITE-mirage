@@ -2,15 +2,17 @@ import { useEffect, useRef } from 'react';
 
 import { gsap, ScrollTrigger } from '@/lib/gsap';
 
+import { BuildingOffice2Icon, RocketLaunchIcon, ChartBarIcon, CloudIcon, LockClosedIcon, CpuChipIcon, Cog6ToothIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
+
 const partners = [
-  { id: 1, name: 'TechCorp', logo: '🏢' },
-  { id: 2, name: 'InnovateLab', logo: '🚀' },
-  { id: 3, name: 'DataStream', logo: '📊' },
-  { id: 4, name: 'CloudNine', logo: '☁️' },
-  { id: 5, name: 'SecureVault', logo: '🔐' },
-  { id: 6, name: 'AIFlow', logo: '🤖' },
-  { id: 7, name: 'DevOpsHub', logo: '⚙️' },
-  { id: 8, name: 'CodeFactory', logo: '💻' }
+  { id: 1, name: 'TechCorp', Icon: BuildingOffice2Icon },
+  { id: 2, name: 'InnovateLab', Icon: RocketLaunchIcon },
+  { id: 3, name: 'DataStream', Icon: ChartBarIcon },
+  { id: 4, name: 'CloudNine', Icon: CloudIcon },
+  { id: 5, name: 'SecureVault', Icon: LockClosedIcon },
+  { id: 6, name: 'AIFlow', Icon: CpuChipIcon },
+  { id: 7, name: 'DevOpsHub', Icon: Cog6ToothIcon },
+  { id: 8, name: 'CodeFactory', Icon: ComputerDesktopIcon }
 ];
 
 export function PartnersShowcase() {
@@ -23,8 +25,10 @@ export function PartnersShowcase() {
 
     const logos = sectionRef.current.querySelectorAll('.partner-logo');
 
+    const localTriggers: ScrollTrigger[] = [];
+
     logos.forEach((logo, index) => {
-      gsap.fromTo(
+      const intro = gsap.fromTo(
         logo,
         { opacity: 0, scale: 0.8, rotateY: -90 },
         {
@@ -41,8 +45,11 @@ export function PartnersShowcase() {
           delay: index * 0.08
         }
       );
+      if ((intro as any).scrollTrigger) {
+        localTriggers.push((intro as any).scrollTrigger as ScrollTrigger);
+      }
 
-      ScrollTrigger.create({
+      const floatTrig = ScrollTrigger.create({
         trigger: logo,
         start: 'top bottom',
         end: 'bottom top',
@@ -56,10 +63,11 @@ export function PartnersShowcase() {
           });
         }
       });
+      localTriggers.push(floatTrig);
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      localTriggers.forEach((t) => t.kill());
     };
   }, []);
 
@@ -80,9 +88,7 @@ export function PartnersShowcase() {
               className="partner-logo group flex flex-col items-center justify-center gap-3 rounded-2xl border border-neutral-200 bg-neutral-50 p-6 transition-all hover:scale-110 hover:border-primary/40 hover:shadow-subtle dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-accent/40"
               style={{ perspective: '1000px' }}
             >
-              <span className="text-4xl transition-transform group-hover:scale-125" aria-hidden>
-                {partner.logo}
-              </span>
+              <partner.Icon className="h-10 w-10 text-neutral-500 transition-transform group-hover:scale-125 dark:text-neutral-400" aria-hidden />
               <span className="text-xs font-medium uppercase tracking-wider text-neutral-600 dark:text-neutral-300">
                 {partner.name}
               </span>

@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 
 import { deliveryPlaybook } from '@/data/highlights';
+import { ANIM } from '@/lib/animTokens';
 
 export function DeliveryPlaybook() {
   const prefersReducedMotion = useReducedMotion();
@@ -27,10 +28,10 @@ export function DeliveryPlaybook() {
           <motion.li
             key={stage.id}
             className="relative flex h-full flex-col gap-4 rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm"
-            initial={prefersReducedMotion ? undefined : { opacity: 0, y: 28 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, y: ANIM.distance.y.sm }}
             whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
-            transition={prefersReducedMotion ? undefined : { duration: 0.6, ease: 'easeOut', delay: index * 0.08 }}
+            transition={prefersReducedMotion ? undefined : { duration: ANIM.duration.md, ease: 'easeOut', delay: index * 0.08 }}
           >
             <span className="text-[0.65rem] uppercase tracking-[0.45em] text-accent/80">{stage.duration}</span>
             <h3 className="text-lg font-semibold text-white">{stage.title}</h3>

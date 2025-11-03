@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 
 import { caseStudies } from '@/data/cases';
 import { gsap } from '@/lib/gsap';
+import { ANIM } from '@/lib/animTokens';
 
 export function CaseShowcase() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -16,19 +17,19 @@ export function CaseShowcase() {
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
-        start: 'top 70%'
+        start: ANIM.scroll.start
       }
     });
 
     timeline.fromTo(
       sectionRef.current.querySelectorAll('.case-card'),
-      { y: 32, opacity: 0 },
+      { y: ANIM.distance.y.md, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.2
+        duration: ANIM.duration.md,
+        ease: ANIM.ease.out,
+        stagger: 0.15
       }
     );
 
