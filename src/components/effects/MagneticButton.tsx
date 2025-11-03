@@ -3,6 +3,8 @@ import { useGesture } from '@use-gesture/react';
 import { useReducedMotion } from 'framer-motion';
 import { useCallback, useRef } from 'react';
 
+import { ANIM } from '@/lib/animTokens';
+
 interface MagneticButtonProps {
   children: React.ReactNode;
   className?: string;
@@ -19,7 +21,7 @@ export function MagneticButton({ children, className = '', strength = 0.3 }: Mag
     rotateX: 0,
     rotateY: 0,
     scale: 1,
-    config: { mass: 1, tension: 280, friction: 22 }
+    config: { mass: 1, tension: 280, friction: 22, duration: ANIM.duration.sm * 1000 }
   }));
   const calculateOffset = useCallback(
     (clientX: number, clientY: number) => {

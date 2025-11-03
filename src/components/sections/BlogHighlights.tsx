@@ -5,6 +5,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { NavLink } from 'react-router-dom';
 
 import { blogPosts } from '@/data/blog';
+import { ANIM } from '@/lib/animTokens';
 
 const categories = [
   { id: 'all', label: 'Todos' },
@@ -19,7 +20,7 @@ export function BlogHighlights() {
   const featuredPosts = useMemo(() => blogPosts.slice(0, 3), []);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => setIsLoading(false), 600);
+    const timeout = window.setTimeout(() => setIsLoading(false), ANIM.duration.md * 1000);
     return () => window.clearTimeout(timeout);
   }, []);
 
