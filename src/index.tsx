@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
+import { QueryProvider } from './providers/QueryProvider';
 import { ThemeProvider } from './providers/ThemeProvider';
 
 import './index.css';
@@ -19,11 +20,13 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <HelmetProvider>
-      <ThemeProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
+      <QueryProvider>
+        <ThemeProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </QueryProvider>
     </HelmetProvider>
   </React.StrictMode>
 );
