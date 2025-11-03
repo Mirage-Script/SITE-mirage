@@ -1,0 +1,21 @@
+# Supabase Configuration
+
+[project]
+project_id = "mwcfjleyruysmxhzpkoa"
+region = "us-east-1"
+
+[api]
+enabled = true
+max_body_size = "20mb"
+
+[db]
+major_version = 15
+
+[auth]
+enable_signup = true
+enable_anonymous_signups = false
+jwt_expiry = 3600
+refresh_token_rotation_enabled = true
+refresh_token_reuse_interval = 10
+enable_refresh_token_rotation = true
+

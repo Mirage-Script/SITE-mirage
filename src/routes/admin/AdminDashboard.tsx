@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { SupabaseStatus } from '../../components/admin/SupabaseStatus';
 
 const tabs = [
+  { id: 'database', label: 'Database' },
   { id: 'analytics', label: 'Analytics' },
   { id: 'posts', label: 'Publicações' },
   { id: 'comments', label: 'Comentários' },
@@ -76,6 +78,10 @@ export default function AdminDashboard() {
         </Tab.List>
 
         <Tab.Panels className="mt-8" aria-busy={isLoading}>
+          <Tab.Panel>
+            <SupabaseStatus />
+          </Tab.Panel>
+
           <Tab.Panel>
             <div className="grid gap-6 md:grid-cols-3">
               {isLoading
