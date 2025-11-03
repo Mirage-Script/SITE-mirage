@@ -2,7 +2,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 import { gsap } from '@/lib/gsap';
-
+import { ANIM } from '@/lib/animTokens';
+import { revealDefaults } from '@/lib/scroll';
 interface SmoothScrollRevealProps {
   children: React.ReactNode;
   className?: string;
@@ -21,25 +22,26 @@ export function SmoothScrollReveal({ children, className = '' }: SmoothScrollRev
     }
 
     const ctx = gsap.context(() => {
+      const d = revealDefaults();
       gsap.fromTo(
         ref.current,
         {
           opacity: 0,
-          y: 60,
-          scale: 0.95
+          y: d.y,
+          scale: d.scale
         },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 1,
-          ease: 'power3.out',
+          duration: d.duration,
+          ease: d.ease,
           scrollTrigger: {
             trigger: ref.current,
-            start: 'top 80%',
-            end: 'top 50%',
-            scrub: 1,
-            once: false
+            start: d.start,
+            end: d.end,
+            scrub: d.scrub,
+            once: d.once
           }
         }
       );
