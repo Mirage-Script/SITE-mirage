@@ -1,51 +1,91 @@
-import { motion, useReducedMotion } from 'framer-motion';
+// src/components/sections/OperationalHighlights.tsx (MODIFICADO - Logo Maior)
 
-import { capabilityHighlights } from '@/data/highlights';
-import { ANIM } from '@/lib/animTokens';
+import { CheckIcon } from '@heroicons/react/24/outline';
+import logoMirage from '@/assets/logotipo.png';
 
 export function OperationalHighlights() {
-  const prefersReducedMotion = useReducedMotion();
-
   return (
-    <section className="mt-24">
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-[0.4em] text-primary">Operação</p>
-          <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
-            Governança que sustenta produtos críticos diariamente.
-          </h2>
-        </div>
-        <p className="max-w-xl text-sm text-neutral-600 dark:text-neutral-300">
-          Monitoramento em tempo real, resposta a incidentes e segurança aplicada desde a discovery. Um ecossistema com
-          processos maduros para manter squads enxutos e confiáveis.
-        </p>
+    <section className="mt-24 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+      
+      {/* Títulos da Secção */}
+      <div className="mb-10 text-center">
+        <p className="text-xs uppercase tracking-[0.4em] text-primary">OPERAÇÃO E GOVERNANÇA</p>
+        <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
+          Engenharia de Confiança para Produtos Críticos.
+        </h2>
       </div>
 
-      <div className="mt-12 grid gap-6 lg:grid-cols-4">
-        {capabilityHighlights.map((highlight, index) => (
-          <motion.article
-            key={highlight.id}
-            className="group relative flex h-full flex-col justify-between gap-6 rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-sm transition-colors hover:border-primary/40 hover:shadow-subtle dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40"
-            initial={prefersReducedMotion ? undefined : { opacity: 0, y: ANIM.distance.y.sm }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={prefersReducedMotion ? undefined : { duration: ANIM.duration.md, ease: 'easeOut', delay: index * 0.08 }}
-          >
-            <div>
-              <span className="text-[0.65rem] uppercase tracking-[0.45em] text-neutral-500 dark:text-neutral-400">
-                {highlight.signal}
-              </span>
-              <h3 className="mt-4 text-lg font-semibold text-neutral-900 transition-colors group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">
-                {highlight.title}
-              </h3>
-              <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300">{highlight.description}</p>
-            </div>
+      {/* Grid de 2 Colunas Abertas */}
+      <div className="mt-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        
+        <div className="flex items-center justify-center">
+          {/* ==================================================================
+           * DOCUMENTAÇÃO (A CORREÇÃO)
+           *
+           * Mudei "max-w-sm" (384px) para "max-w-md" (448px)
+           * para que o seu logo fique maior e com mais destaque.
+           * ================================================================== */}
+          <img
+            src={logoMirage} 
+            alt="Logotipo da Mirage Script"
+            className="h-auto w-full max-w-md" // <-- MUDANÇA AQUI
+            width={448} // <-- MUDANÇA AQUI
+            height={448} // <-- MUDANÇA AQUI
+          />
+        </div>
 
-            <div className="rounded-2xl border border-dashed border-neutral-200 bg-neutral-100/60 px-4 py-3 text-xs text-neutral-600 transition group-hover:border-primary/40 group-hover:text-primary dark:border-neutral-700 dark:bg-neutral-800/40 dark:text-neutral-300 dark:group-hover:border-accent/40 dark:group-hover:text-accent">
-              {highlight.detail}
+        {/* COLUNA DA DIREITA (O CONTEÚDO) */}
+        <div>
+          <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+            A Nossa Garantia de Performance
+          </h3>
+          <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-300">
+            O nosso trabalho não termina no *deploy*. Na Mirage Script, 'Governança' significa que
+            garantimos a saúde do seu produto com um ecossistema robusto de segurança e
+            monitoramento 24/7. Aplicamos processos de resposta a incidentes e um *delivery* ágil
+            para que o seu sistema esteja sempre online, seguro e confiável.
+          </p>
+
+          {/* CHECKLIST */}
+          <div className="mt-8 space-y-4">
+            <div className="flex items-start gap-3">
+              <CheckIcon
+                className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
+                aria-hidden="true"
+              />
+              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+                Segurança de ponta a ponta
+              </span>
             </div>
-          </motion.article>
-        ))}
+            <div className="flex items-start gap-3">
+              <CheckIcon
+                className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
+                aria-hidden="true"
+              />
+              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+                Monitoramento Ativo 24/7
+              </span>
+            </div>
+            <div className="flex items-start gap-3">
+              <CheckIcon
+                className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
+                aria-hidden="true"
+              />
+              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+                Resposta Rápida a Incidentes
+              </span>
+            </div>
+            <div className="flex items-start gap-3">
+              <CheckIcon
+                className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
+                aria-hidden="true"
+              />
+              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+                Entregas Ágeis e Previsíveis (CI/CD)
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

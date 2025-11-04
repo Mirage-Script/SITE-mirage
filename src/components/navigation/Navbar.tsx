@@ -1,8 +1,10 @@
+// src/components/navigation/Navbar.tsx (CORRIGIDO - Sombra Removida e Nome Completo)
+
 import {
   Bars3Icon,
   MoonIcon,
   SunIcon,
-  XMarkIcon
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { useReducedMotion } from 'framer-motion';
@@ -11,6 +13,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import { gsap } from '@/lib/gsap';
 import { useTheme } from '@/providers/ThemeProvider';
+import logoMirage from '@/assets/logotipo.png'; // Seu logo importado
 
 import { Button } from '../ui/Button';
 
@@ -18,7 +21,7 @@ const navItems = [
   { label: 'Início', path: '/' },
   { label: 'Serviços', path: '/servicos' },
   { label: 'Sobre', path: '/sobre' },
-  { label: 'Blog', path: '/blog' }
+  // { label: 'Blog', path: '/blog' }
 ];
 
 export function Navbar() {
@@ -52,7 +55,7 @@ export function Navbar() {
       gsap.fromTo(
         logoRef.current,
         { opacity: 0, x: -30 },
-        { opacity: 1, x: 0, duration: 0.8, ease: 'back.out(1.6)' }
+        { opacity: 1, x: 0, duration: 0.8, ease: 'back.out(1.6)' },
       );
     }, logoRef);
 
@@ -80,8 +83,8 @@ export function Navbar() {
           duration: 0.6,
           ease: 'power2.out',
           stagger: 0.08,
-          delay: 0.2
-        }
+          delay: 0.2,
+        },
       );
     }, navListRef);
 
@@ -94,17 +97,27 @@ export function Navbar() {
         'fixed inset-x-0 top-0 z-40 transition-all duration-300',
         isScrolled
           ? 'bg-white/90 shadow-lg shadow-primary/5 backdrop-blur dark:bg-neutral-900/90'
-          : 'bg-transparent'
+          : 'bg-transparent',
       )}
     >
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
-        <NavLink to="/" className="group flex items-center gap-2 text-lg font-bold uppercase tracking-[0.25em]">
+        
+        {/* ==================================================================
+         * CORREÇÃO: Removido 'uppercase tracking-[0.25em]' do NavLink
+         * e inseri 'MIRAGE SCRIPT' no <span>.
+         * ================================================================== */}
+        <NavLink to="/" className="group flex items-center gap-2 text-lg font-bold">
           <div ref={logoRef} className="flex items-center gap-2">
-            <span className="rounded-full bg-primary px-3 py-1 text-sm font-black text-white shadow-subtle transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/40">
-              M
-            </span>
-            <span className="text-neutral-700 transition-colors duration-300 group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">
-              Mirage
+            
+            <img
+              src={logoMirage}
+              alt="Mirage Script Logo"
+              width={56}
+              height={56}
+              className="h-14 w-14 flex-shrink-0 transition-all duration-300" 
+            />
+            <span className="uppercase tracking-[0.25em] text-neutral-700 transition-colors duration-300 group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">
+              MIRAGE SCRIPT 
             </span>
           </div>
         </NavLink>
@@ -121,7 +134,7 @@ export function Navbar() {
                       'relative transition-colors hover:text-primary dark:hover:text-accent',
                       isActive
                         ? 'text-primary after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full after:bg-primary'
-                        : 'text-neutral-600 dark:text-neutral-300'
+                        : 'text-neutral-600 dark:text-neutral-300',
                     )
                   }
                 >
@@ -167,7 +180,9 @@ export function Navbar() {
                     className={({ isActive }: { isActive: boolean }) =>
                       clsx(
                         'block rounded-lg px-4 py-2 transition-all hover:bg-neutral-100 dark:hover:bg-neutral-800',
-                        isActive ? 'bg-neutral-100 text-primary dark:bg-neutral-800 dark:text-accent' : 'text-neutral-700 dark:text-neutral-200'
+                        isActive
+                          ? 'bg-neutral-100 text-primary dark:bg-neutral-800 dark:text-accent'
+                          : 'text-neutral-700 dark:text-neutral-200',
                       )
                     }
                   >

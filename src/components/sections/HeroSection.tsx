@@ -1,4 +1,4 @@
-// src/components/sections/HeroSection.tsx (Modificado)
+// src/components/sections/HeroSection.tsx (FINALIZADO - Todos os textos atualizados)
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
@@ -10,14 +10,12 @@ import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
 import { gsap, ScrollTrigger, useGsapTimeline } from '@/lib/gsap';
-import { ANIM } from '@/lib/animTokens';
+import { ANIM } from '@/lib/animTokens'; // Corrigido (o seu paste tinha um typo aqui)
 
 import { Button } from '../ui/Button';
 
 // ==================================================================
-// DOCUMENTAÇÃO (MODIFICAÇÃO)
-// Esta lista (array) define os textos que rodam.
-// Mudei para focar nos 3 pilares de serviço da Mirage Script.
+// DOCUMENTAÇÃO: Textos rotativos focados nos 3 pilares de serviço.
 // ==================================================================
 const HEADLINE_ROTATIONS = [
   'Desenvolvimento Web de Alta Performance',
@@ -66,8 +64,7 @@ export function HeroSection() {
     };
   }, [prefersReducedMotion]);
 
-  // ... (Toda a lógica GSAP e useEffects permanece a mesma) ...
-  // ... (Não é preciso mexer aqui, as animações vão funcionar com o novo texto) ...
+  // ... (Toda a lógica de animação GSAP e useEffects permanece intacta) ...
 
   useGsapTimeline(
     (context) => {
@@ -149,14 +146,14 @@ export function HeroSection() {
   }, [prefersReducedMotion]);
 
   // ==================================================================
-  // INÍCIO DAS MODIFICAÇÕES DE TEXTO (HTML/JSX)
+  // INÍCIO DO CONTEÚDO (HTML/JSX)
   // ==================================================================
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
     >
-      {/* ... (Os efeitos visuais <HeroImmersiveCanvas>, <ShaderAurora> etc. permanecem) ... */}
+      {/* ... (Efeitos visuais de fundo) ... */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]" aria-hidden />
       <div className="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
       <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" />
@@ -166,33 +163,20 @@ export function HeroSection() {
 
       <div className="relative grid gap-10 lg:grid-cols-[3fr_2fr]">
         <div>
-          {/*
-           * DOCUMENTAÇÃO (MODIFICAÇÃO 1): "Tagline" (Linha de chamada)
-           * Mudei "Engenharia orientada a resultado" para uma chamada mais direta
-           * sobre o que a Mirage Script faz (Serviços).
-           */}
+          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 1): Tagline (Linha de chamada) */}
           <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">
             Soluções Digitais Sob Medida
           </p>
 
-          {/*
-           * DOCUMENTAÇÃO (MODIFICAÇÃO 2): Título Principal (H1)
-           * Mudei o H1 para uma das nossas ideias do plano estratégico.
-           * Este título é forte, claro e focado no serviço.
-           * O GSAP vai animar este novo texto automaticamente!
-           */}
+          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 2): Título Principal (H1) */}
           <h1
             ref={headingRef}
             className="hero-heading mt-6 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
           >
-            Mirage Script: Do Conceito ao Código.
+            Mirage Script
           </h1>
 
-          {/*
-           * DOCUMENTAÇÃO (MODIFICAÇÃO 3): Subtítulo Rotativo
-           * O Typed.js vai usar automaticamente as novas strings que
-           * definimos na constante HEADLINE_ROTATIONS no topo do ficheiro.
-           */}
+          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 3): Subtítulo Rotativo (Typed.js) */}
           <div className="hero-subline mt-5 min-h-[2.5rem] overflow-hidden text-lg font-medium text-accent">
             {prefersReducedMotion ? (
               <span className="block">{HEADLINE_ROTATIONS[0]}</span>
@@ -201,69 +185,66 @@ export function HeroSection() {
             )}
           </div>
 
-          {/*
-           * DOCUMENTAÇÃO (MODIFICAÇÃO 4): Parágrafo de Descrição
-           * Substituí o texto muito técnico sobre "Arquiteturas composable"
-           * pela nossa descrição estratégica principal, focada no *valor*
-           * para o cliente.
-           */}
+          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 4): Parágrafo de Descrição */}
           <p className="mt-6 max-w-xl text-neutral-200">
             Transformamos os seus desafios de negócio em software robusto,
-            performático e escalável. A nossa equipa de especialistas
-            é focada em entregar produtos Web, Mobile e Software com código
+            performático e escalável. Entregamos produtos Web, Mobile e Software com código
             limpo e design focado no utilizador.
           </p>
 
-          {/*
-           * DOCUMENTAÇÃO (SEM MODIFICAÇÃO): Botões de Ação (CTAs)
-           * Estes botões ("Planejar Sprint", "Portfólio técnico")
-           * estão perfeitos. Não mexi neles.
-           */}
+          {/* ================================================================== */}
+          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 5): BOTÕES (CTAs) */}
+          {/* ================================================================== */}
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <MagneticButton strength={0.4}>
-              <Button
-                size="lg"
-                variant="primary"
-                className="bg-white text-neutral-900 hover:bg-neutral-200"
-                aria-label="Planejar sprint"
-                onMouseEnter={() => primaryCtaRef.current?.play()}
-                onFocus={() => primaryCtaRef.current?.play()}
-              >
-                <span className="sr-only">Planejar Sprint</span>
-                <TextScramble
-                  ref={primaryCtaRef}
-                  text="Planejar Sprint"
-                  className="uppercase tracking-widest"
-                />
-              </Button>
-            </MagneticButton>
-            <MagneticButton strength={0.3}>
-              <Button
-                size="lg"
-                variant="ghost"
-                className="border border-white/30 bg-transparent text-white hover:bg-white/10"
-                aria-label="Portfólio técnico"
-                onMouseEnter={() => secondaryCtaRef.current?.play()}
-                onFocus={() => secondaryCtaRef.current?.play()}
-              >
-                <span className="sr-only">Portfólio técnico</span>
-                <TextScramble
-                  ref={secondaryCtaRef}
-                  text="Portfólio técnico"
-                  className="uppercase tracking-[0.35em]"
-                />
-              </Button>
-            </MagneticButton>
+            
+            {/* Wrapper 1 (Controla o Z-index) */}
+            <div className="relative z-10 transition-all duration-200 ease-out hover:z-20">
+              <MagneticButton strength={0.3}>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="border border-white/30 bg-transparent text-white hover:bg-white/10"
+                  aria-label="Agende uma Reunião"
+                  onMouseEnter={() => primaryCtaRef.current?.play()}
+                  onFocus={() => primaryCtaRef.current?.play()}
+                >
+                  <span className="sr-only">Agende uma Reunião</span>
+                  <TextScramble
+                    ref={primaryCtaRef}
+                    text="Agende uma Reunião"
+                    className="uppercase tracking-[0.35em]"
+                  />
+                </Button>
+              </MagneticButton>
+            </div>
+
+            {/* Wrapper 2 (Controla o Z-index) */}
+            <div className="relative z-10 transition-all duration-200 ease-out hover:z-20">
+              <MagneticButton strength={0.3}>
+                <Button
+                  size="lg"
+                  variant="ghost"
+                  className="border border-white/30 bg-transparent text-white hover:bg-white/10"
+                  aria-label="Conheça Nossos Projetos"
+                  onMouseEnter={() => secondaryCtaRef.current?.play()}
+                  onFocus={() => secondaryCtaRef.current?.play()}
+                >
+                  <span className="sr-only">Conheça Nossos Projetos</span>
+                  <TextScramble
+                    ref={secondaryCtaRef}
+                    text="Conheça Nossos Projetos"
+                    className="uppercase tracking-[0.35em]"
+                  />
+                </Button>
+              </MagneticButton>
+            </div>
+            
           </div>
 
-          {/*
-           * DOCUMENTAÇÃO (SEM MODIFICAÇÃO): Estatísticas e Cards
-           * Não mexi nas estatísticas (Deploys, Plataformas) nem nos cards
-           * laterais (Stack, Governança). Eles são muito bons e
-           * passam credibilidade técnica.
-           */}
+          {/* ================================================================== */}
+          {/* DOCUMENTAÇÃO (SEM MODIFICAÇÃO): Estatísticas (Prova Social) */}
+          {/* ================================================================== */}
           <dl className="hero-stats mt-12 grid gap-6 text-sm sm:grid-cols-3">
-            {/* ... (secção de estatísticas sem alteração) ... */}
             <div>
               <dt className="text-neutral-400">Deploys assistidos por IA</dt>
               <dd className="mt-1 text-2xl font-semibold">42</dd>
@@ -277,79 +258,103 @@ export function HeroSection() {
               <dd className="mt-1 text-2xl font-semibold">99.98%</dd>
             </div>
           </dl>
+
+          {/* ================================================================== */}
+          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 6): CARDS DE PROCESSO (OPÇÃO 3)
+           *
+           * Substituí o jargão técnico (Discovery, Observabilidade, Cinemática)
+           * pelos 3 Pilares de Processo focados no cliente.
+           * ================================================================== */}
           <div className="mt-10 grid gap-4 rounded-3xl border border-white/20 bg-white/5 p-6 text-xs uppercase tracking-[0.35em] text-neutral-300 sm:grid-cols-2 lg:grid-cols-3">
-            {/* ... (secção de "Discovery" etc. sem alteração) ... */}
+            
+            {/* CARD 1: ENTENDER PARA CONSTRUIR */}
             <div>
-              <span className="text-neutral-400">Discovery assistida por IA</span>
+              <span className="text-neutral-400">Entender para Construir</span>
               <p className="mt-2 text-sm normal-case text-white">
-                Priorizamos demandas com dados de analytics, entrevistas e matriz
-                RICE em até 10 dias úteis.
+                O nosso primeiro passo é ouvir. Analisamos os seus objetivos de negócio para
+                garantir que a tecnologia proposta seja a solução perfeita para o seu crescimento.
               </p>
             </div>
+            
+            {/* CARD 2: CONSTRUIR COM QUALIDADE */}
             <div>
-              <span className="text-neutral-400">Observabilidade conectada</span>
+              <span className="text-neutral-400">Construir com Qualidade</span>
               <p className="mt-2 text-sm normal-case text-white">
-                Dashboards executivos com DORA, NPS e SLOs prontos para o board
-                em toda sprint review.
+                Escrevemos código limpo e testado. O nosso processo garante que o seu
+                projeto seja seguro, escalável e fácil de manter no futuro.
               </p>
             </div>
+            
+            {/* CARD 3: DESIGN QUE GERA VALOR */}
             <div>
-              <span className="text-neutral-400">Experiências cinemáticas</span>
+              <span className="text-neutral-400">Design que Gera Valor</span>
               <p className="mt-2 text-sm normal-case text-white">
-                Coreografamos Lottie, Motion One e áudio responsivo para jornadas
-                que convertem em alto impacto.
+                Uma boa interface faz mais do que parecer bonita. Criamos um design
+                intuitivo que melhora a retenção de utilizadores e impulsiona os seus resultados.
               </p>
             </div>
           </div>
         </div>
 
+        {/* ================================================================== */}
+        {/* DOCUMENTAÇÃO (MODIFICAÇÃO 7): CARDS DE SERVIÇOS (OS 3 PILARES)
+         *
+         * Substituí o jargão técnico (Stack, Governança, Squads)
+         * pelos 3 Pilares de Serviço da Mirage Script.
+         * ================================================================== */}
         <div className="space-y-6">
-          {/* ... (Toda a secção de cards da direita sem alteração) ... */}
+          
+          {/* CARD 1: DESENVOLVIMENTO WEB */}
           <motion.div
             className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
             whileHover={{ y: -12, boxShadow: '0 20px 45px -20px rgba(74,123,167,0.6)' }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
           >
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
-              Stack em sinergia
+              Desenvolvimento Web
             </p>
             <ul className="mt-4 space-y-3 text-sm text-neutral-200">
-              <li>React 18.3.1 · TypeScript · Tailwind CSS</li>
-              <li>Supabase · PostgreSQL com RLS</li>
-              <li>GSAP ScrollTrigger · Lenis · Motion One</li>
-              <li>Observabilidade · Weights & Logs</li>
+              <li>Plataformas SaaS & Dashboards</li>
+              <li>E-commerce de Alta Performance</li>
+              <li>Landing Pages Otimizadas (SEO)</li>
+              <li>Sistemas de Gestão de Conteúdo (CMS)</li>
             </ul>
           </motion.div>
+          
+          {/* CARD 2: APLICAÇÕES MOBILE */}
           <motion.div
             className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
             whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(15,58,102,0.6)' }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
           >
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
-              Governança completa
+              Aplicações Mobile
             </p>
             <ul className="mt-4 space-y-3 text-sm text-neutral-200">
-              <li>Playbooks de incidentes e SRE</li>
-              <li>Security by design + audits contínuos</li>
-              <li>CI/CD com zero-downtime</li>
-              <li>Dashboards, analytics real-time e data storytelling</li>
+              <li>Apps Nativos (iOS & Android)</li>
+              <li>Aplicações Híbridas (React Native)</li>
+              <li>Design focado na Experiência (UX/UI)</li>
+              <li>Integração com APIs e Serviços</li>
             </ul>
           </motion.div>
+          
+          {/* CARD 3: SOFTWARE E ECOSSISTEMAS */}
           <motion.div
             className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
             whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(74,123,167,0.6)' }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
           >
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
-              Squads e operações
+              Software e Ecossistemas
             </p>
             <ul className="mt-4 space-y-3 text-sm text-neutral-200">
-              <li>Cell-based squads com chapter leads</li>
-              <li>Ritos semanais com board view e OKRs dinâmicos</li>
-              <li>Feature flags e experimentação guiada</li>
-              <li>Metodologia Mirage Delivery Playbook</li>
+              <li>Sistemas Internos (ERPs, CRMs)</li>
+              <li>Modernização de Código (Legacy)</li>
+              <li>Arquitetura de APIs (Microsserviços)</li>
+              <li>Consultoria e Arquitetura de Software</li>
             </ul>
           </motion.div>
+          
         </div>
       </div>
     </section>

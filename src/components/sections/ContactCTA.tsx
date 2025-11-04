@@ -1,3 +1,5 @@
+// src/components/sections/ContactCTA.tsx (MODIFICADO - CTA Final)
+
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -23,9 +25,9 @@ export function ContactCTA() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
-          once: true
-        }
-      }
+          once: true,
+        },
+      },
     );
   }, []);
 
@@ -49,23 +51,41 @@ export function ContactCTA() {
       <div className="relative flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.4em] text-accent">Próximo passo</p>
+          
+          {/* ==================================================================
+           * DOCUMENTAÇÃO (MODIFICAÇÃO DO TÍTULO)
+           * Trocamos o título focado em "roadmap" por um mais direto.
+           * ================================================================== */}
           <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
-            Vamos destravar seu roadmap com engenharia confiável.
+            Pronto para Começar?
           </h2>
+          
+          {/* ==================================================================
+           * DOCUMENTAÇÃO (MODIFICAÇÃO DA DESCRIÇÃO)
+           * Removemos o jargão de "squads" e destacamos a sessão "sem custo"
+           * e o acesso direto aos "fundadores".
+           * ================================================================== */}
           <p className="mt-4 max-w-2xl text-sm text-neutral-200">
-            Montamos squads, aceleramos entregas críticas e estruturamos processos. Sessão estratégica sem custo para mapear
-            o cenário atual e priorizar iniciativas.
+            Tem um desafio ou uma nova ideia? Agende uma sessão estratégica **sem custo**,
+            diretamente com os nossos fundadores, e vamos desenhar a solução técnica ideal para o seu negócio.
           </p>
         </div>
         <div className="flex flex-col gap-4 text-sm text-neutral-200">
+          
+          {/* ==================================================================
+           * DOCUMENTAÇÃO (MODIFICAÇÃO DO BOTÃO)
+           * Trocamos "Agendar discovery call" por "Agendar uma Reunião"
+           * para consistência e clareza.
+           * ================================================================== */}
           <NavLink
             to="/contato"
             className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-neutral-900 shadow-subtle transition hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
-            Agendar discovery call
+            Agendar uma Reunião
           </NavLink>
+          
           <span className="text-xs uppercase tracking-[0.4em] text-neutral-400">
-            SLA de resposta em até 12h úteis
+            Tempo de resposta em até 12h
           </span>
         </div>
       </div>
