@@ -1,3 +1,5 @@
+// src/components/sections/HeroSection.tsx (Modificado)
+
 import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import SplitType from 'split-type';
@@ -12,10 +14,15 @@ import { ANIM } from '@/lib/animTokens';
 
 import { Button } from '../ui/Button';
 
+// ==================================================================
+// DOCUMENTAÇÃO (MODIFICAÇÃO)
+// Esta lista (array) define os textos que rodam.
+// Mudei para focar nos 3 pilares de serviço da Mirage Script.
+// ==================================================================
 const HEADLINE_ROTATIONS = [
-  'Experiências imersivas com GSAP + Lenis',
-  'Supabase + RLS entregues com auditoria contínua',
-  'Design systems acessíveis com Framer Motion'
+  'Desenvolvimento Web de Alta Performance',
+  'Aplicações Mobile Nativas e Híbridas',
+  'Software e Sistemas Escaláveis',
 ];
 
 export function HeroSection() {
@@ -50,7 +57,7 @@ export function HeroSection() {
       backDelay: 2200,
       smartBackspace: true,
       loop: true,
-      showCursor: false
+      showCursor: false,
     });
 
     return () => {
@@ -59,47 +66,43 @@ export function HeroSection() {
     };
   }, [prefersReducedMotion]);
 
+  // ... (Toda a lógica GSAP e useEffects permanece a mesma) ...
+  // ... (Não é preciso mexer aqui, as animações vão funcionar com o novo texto) ...
+
   useGsapTimeline(
     (context) => {
       if (prefersReducedMotion || !headingRef.current) {
         return;
       }
-
       const splitHeading = new SplitType(headingRef.current, {
-        types: 'lines,words,chars'
+        types: 'lines,words,chars',
       });
-
       splitHeading.lines?.forEach((line) => {
         line.style.overflow = 'hidden';
       });
-
       gsap.set(splitHeading.chars, {
         display: 'inline-block',
-        transformOrigin: '50% 100%'
+        transformOrigin: '50% 100%',
       });
-
       const timeline = gsap.timeline();
-
       timeline.from(splitHeading.chars, {
         yPercent: 110,
         opacity: 0,
         rotateX: -90,
         duration: ANIM.duration.lg,
         ease: ANIM.ease.out,
-        stagger: { each: 0.015, from: 'random' }
+        stagger: { each: 0.015, from: 'random' },
       });
-
       timeline.from(
         '.hero-subline',
         {
           y: ANIM.distance.y.sm,
           opacity: 0,
           duration: ANIM.duration.md,
-          ease: ANIM.ease.out
+          ease: ANIM.ease.out,
         },
-        '-=0.6'
+        '-=0.6',
       );
-
       timeline.from(
         '.hero-stats',
         {
@@ -107,29 +110,25 @@ export function HeroSection() {
           opacity: 0,
           duration: ANIM.duration.lg,
           ease: ANIM.ease.out,
-          stagger: 0.12
+          stagger: 0.12,
         },
-        '-=0.4'
+        '-=0.4',
       );
-
       context.add(() => {
         timeline.kill();
         splitHeading.revert();
       });
     },
     [prefersReducedMotion],
-    sectionRef
+    sectionRef,
   );
 
   useEffect(() => {
     if (prefersReducedMotion || !sectionRef.current) {
       return;
     }
-
     const cards = sectionRef.current.querySelectorAll('.hero-card');
-
     const triggers: ScrollTrigger[] = [];
-
     cards.forEach((card) => {
       const trigger = ScrollTrigger.create({
         trigger: card,
@@ -138,36 +137,62 @@ export function HeroSection() {
           gsap.fromTo(
             card,
             { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
+            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
           );
-        }
+        },
       });
-
       triggers.push(trigger);
     });
-
     return () => {
       triggers.forEach((trigger) => trigger.kill());
     };
   }, [prefersReducedMotion]);
 
+  // ==================================================================
+  // INÍCIO DAS MODIFICAÇÕES DE TEXTO (HTML/JSX)
+  // ==================================================================
   return (
-    <section ref={sectionRef} className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
+    >
+      {/* ... (Os efeitos visuais <HeroImmersiveCanvas>, <ShaderAurora> etc. permanecem) ... */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]" aria-hidden />
       <div className="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
-  <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" />
-  <ShaderAurora className="pointer-events-none absolute inset-0 mix-blend-screen opacity-80" />
+      <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" />
+      <ShaderAurora className="pointer-events-none absolute inset-0 mix-blend-screen opacity-80" />
       <div className="pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
       <div className="pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
+
       <div className="relative grid gap-10 lg:grid-cols-[3fr_2fr]">
         <div>
-          <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">Engenharia orientada a resultado</p>
+          {/*
+           * DOCUMENTAÇÃO (MODIFICAÇÃO 1): "Tagline" (Linha de chamada)
+           * Mudei "Engenharia orientada a resultado" para uma chamada mais direta
+           * sobre o que a Mirage Script faz (Serviços).
+           */}
+          <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">
+            Soluções Digitais Sob Medida
+          </p>
+
+          {/*
+           * DOCUMENTAÇÃO (MODIFICAÇÃO 2): Título Principal (H1)
+           * Mudei o H1 para uma das nossas ideias do plano estratégico.
+           * Este título é forte, claro e focado no serviço.
+           * O GSAP vai animar este novo texto automaticamente!
+           */}
           <h1
             ref={headingRef}
             className="hero-heading mt-6 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
           >
-            Mirage transforma ideias em plataformas digitais enterprise-grade.
+            Mirage Script: Do Conceito ao Código.
           </h1>
+
+          {/*
+           * DOCUMENTAÇÃO (MODIFICAÇÃO 3): Subtítulo Rotativo
+           * O Typed.js vai usar automaticamente as novas strings que
+           * definimos na constante HEADLINE_ROTATIONS no topo do ficheiro.
+           */}
           <div className="hero-subline mt-5 min-h-[2.5rem] overflow-hidden text-lg font-medium text-accent">
             {prefersReducedMotion ? (
               <span className="block">{HEADLINE_ROTATIONS[0]}</span>
@@ -175,10 +200,25 @@ export function HeroSection() {
               <span ref={typedElementRef} className="block" />
             )}
           </div>
+
+          {/*
+           * DOCUMENTAÇÃO (MODIFICAÇÃO 4): Parágrafo de Descrição
+           * Substituí o texto muito técnico sobre "Arquiteturas composable"
+           * pela nossa descrição estratégica principal, focada no *valor*
+           * para o cliente.
+           */}
           <p className="mt-6 max-w-xl text-neutral-200">
-            Arquiteturas composable, Supabase Edge e pipelines observáveis desde o sprint 0. Utilizamos GSAP, Lenis e Framer
-            Motion para entregar microinterações sofisticadas enquanto mantemos governança, RLS e auditoria contínua.
+            Transformamos os seus desafios de negócio em software robusto,
+            performático e escalável. A nossa equipa de especialistas
+            é focada em entregar produtos Web, Mobile e Software com código
+            limpo e design focado no utilizador.
           </p>
+
+          {/*
+           * DOCUMENTAÇÃO (SEM MODIFICAÇÃO): Botões de Ação (CTAs)
+           * Estes botões ("Planejar Sprint", "Portfólio técnico")
+           * estão perfeitos. Não mexi neles.
+           */}
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <MagneticButton strength={0.4}>
               <Button
@@ -207,11 +247,23 @@ export function HeroSection() {
                 onFocus={() => secondaryCtaRef.current?.play()}
               >
                 <span className="sr-only">Portfólio técnico</span>
-                <TextScramble ref={secondaryCtaRef} text="Portfólio técnico" className="uppercase tracking-[0.35em]" />
+                <TextScramble
+                  ref={secondaryCtaRef}
+                  text="Portfólio técnico"
+                  className="uppercase tracking-[0.35em]"
+                />
               </Button>
             </MagneticButton>
           </div>
+
+          {/*
+           * DOCUMENTAÇÃO (SEM MODIFICAÇÃO): Estatísticas e Cards
+           * Não mexi nas estatísticas (Deploys, Plataformas) nem nos cards
+           * laterais (Stack, Governança). Eles são muito bons e
+           * passam credibilidade técnica.
+           */}
           <dl className="hero-stats mt-12 grid gap-6 text-sm sm:grid-cols-3">
+            {/* ... (secção de estatísticas sem alteração) ... */}
             <div>
               <dt className="text-neutral-400">Deploys assistidos por IA</dt>
               <dd className="mt-1 text-2xl font-semibold">42</dd>
@@ -226,34 +278,41 @@ export function HeroSection() {
             </div>
           </dl>
           <div className="mt-10 grid gap-4 rounded-3xl border border-white/20 bg-white/5 p-6 text-xs uppercase tracking-[0.35em] text-neutral-300 sm:grid-cols-2 lg:grid-cols-3">
+            {/* ... (secção de "Discovery" etc. sem alteração) ... */}
             <div>
               <span className="text-neutral-400">Discovery assistida por IA</span>
               <p className="mt-2 text-sm normal-case text-white">
-                Priorizamos demandas com dados de analytics, entrevistas e matriz RICE em até 10 dias úteis.
+                Priorizamos demandas com dados de analytics, entrevistas e matriz
+                RICE em até 10 dias úteis.
               </p>
             </div>
             <div>
               <span className="text-neutral-400">Observabilidade conectada</span>
               <p className="mt-2 text-sm normal-case text-white">
-                Dashboards executivos com DORA, NPS e SLOs prontos para o board em toda sprint review.
+                Dashboards executivos com DORA, NPS e SLOs prontos para o board
+                em toda sprint review.
               </p>
             </div>
             <div>
               <span className="text-neutral-400">Experiências cinemáticas</span>
               <p className="mt-2 text-sm normal-case text-white">
-                Coreografamos Lottie, Motion One e áudio responsivo para jornadas que convertem em alto impacto.
+                Coreografamos Lottie, Motion One e áudio responsivo para jornadas
+                que convertem em alto impacto.
               </p>
             </div>
           </div>
         </div>
 
         <div className="space-y-6">
+          {/* ... (Toda a secção de cards da direita sem alteração) ... */}
           <motion.div
             className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
             whileHover={{ y: -12, boxShadow: '0 20px 45px -20px rgba(74,123,167,0.6)' }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-accent">Stack em sinergia</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-accent">
+              Stack em sinergia
+            </p>
             <ul className="mt-4 space-y-3 text-sm text-neutral-200">
               <li>React 18.3.1 · TypeScript · Tailwind CSS</li>
               <li>Supabase · PostgreSQL com RLS</li>
@@ -266,7 +325,9 @@ export function HeroSection() {
             whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(15,58,102,0.6)' }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-accent">Governança completa</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-accent">
+              Governança completa
+            </p>
             <ul className="mt-4 space-y-3 text-sm text-neutral-200">
               <li>Playbooks de incidentes e SRE</li>
               <li>Security by design + audits contínuos</li>
@@ -279,7 +340,9 @@ export function HeroSection() {
             whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(74,123,167,0.6)' }}
             transition={{ type: 'spring', stiffness: 260, damping: 18 }}
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-accent">Squads e operações</p>
+            <p className="text-xs uppercase tracking-[0.4em] text-accent">
+              Squads e operações
+            </p>
             <ul className="mt-4 space-y-3 text-sm text-neutral-200">
               <li>Cell-based squads com chapter leads</li>
               <li>Ritos semanais com board view e OKRs dinâmicos</li>
