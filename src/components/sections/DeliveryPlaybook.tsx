@@ -1,15 +1,30 @@
 // src/components/sections/DeliveryPlaybook.tsx (MODIFICADO - Novos Títulos)
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { useRef } from 'react';
 
 import { deliveryPlaybook } from '@/data/highlights';
-import { ANIM } from '@/lib/animTokens';
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 
 export function DeliveryPlaybook() {
-  const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useSectionReveal(sectionRef, {
+    targets: ['.playbook-badge', '.playbook-title', '.playbook-copy'],
+    y: 36,
+    stagger: 0.14,
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.playbook-stage'],
+    y: 80,
+    stagger: 0.12,
+    once: false,
+    from: { y: 72, opacity: 0, rotateX: -12, transformPerspective: 1200 },
+    to: { y: 0, opacity: 1, rotateX: 0, transformPerspective: 1200, duration: 1, ease: 'power4.out' },
+  });
 
   return (
-    <section className="mt-24 rounded-[2.5rem] border border-neutral-200 bg-neutral-900 px-8 py-16 text-white shadow-2xl dark:border-neutral-800">
+    <section ref={sectionRef} className="mt-24 rounded-[2.5rem] border border-neutral-200 bg-neutral-900 px-8 py-16 text-white shadow-2xl dark:border-neutral-800">
       
       {/* ==================================================================
        * DOCUMENTAÇÃO (MODIFICAÇÃO DOS TÍTULOS)
@@ -20,11 +35,11 @@ export function DeliveryPlaybook() {
        * ================================================================== */}
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
         <div className="max-w-xl space-y-4">
-          <p className="text-xs uppercase tracking-[0.4em] text-accent">Playbook Mirage</p>
-          <h2 className="text-3xl font-semibold sm:text-4xl">
+          <p className="playbook-badge text-xs uppercase tracking-[0.4em] text-accent">Playbook Mirage</p>
+          <h2 className="playbook-title text-3xl font-semibold sm:text-4xl">
             O Nosso Processo: Da Ideia ao Lançamento.
           </h2>
-          <p className="text-sm text-neutral-200">
+          <p className="playbook-copy text-sm text-neutral-200">
             Trabalhamos em ciclos curtos e transparentes. Da descoberta ao suporte contínuo,
             o nosso playbook garante que o seu projeto seja entregue com qualidade, no prazo
             e alinhado com os seus objetivos.
@@ -37,13 +52,10 @@ export function DeliveryPlaybook() {
       */}
       <ol className="mt-12 grid gap-6 lg:grid-cols-4">
         {deliveryPlaybook.map((stage, index) => (
-          <motion.li
+          <li
             key={stage.id}
-            className="relative flex h-full flex-col gap-4 p-6"
-            initial={prefersReducedMotion ? undefined : { opacity: 0, y: ANIM.distance.y.sm }}
-            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={prefersReducedMotion ? undefined : { duration: ANIM.duration.md, ease: 'easeOut', delay: index * 0.08 }}
+            className="playbook-stage relative flex h-full flex-col gap-4 p-6"
+            style={{ transformStyle: 'preserve-3d' }}
           >
             {/* O conteúdo é carregado do novo array 'deliveryPlaybook' */}
             <span className="text-[0.65rem] uppercase tracking-[0.45em] text-accent/80">{stage.duration}</span>
@@ -62,7 +74,7 @@ export function DeliveryPlaybook() {
             {index < deliveryPlaybook.length - 1 ? (
               <span className="absolute -right-3 top-1/2 hidden h-px w-6 -translate-y-1/2 bg-gradient-to-r from-accent/40 to-transparent lg:block" aria-hidden />
             ) : null}
-          </motion.li>
+          </li>
         ))}
       </ol>
     </section>

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+
 import { SupabaseStatus } from '../../components/admin/SupabaseStatus';
 
 const tabs = [

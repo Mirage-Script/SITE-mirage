@@ -1,10 +1,11 @@
 import clsx from 'clsx';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { NavLink } from 'react-router-dom';
 
 import { blogPosts } from '@/data/blog';
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 import { ANIM } from '@/lib/animTokens';
 
 const categories = [
@@ -18,18 +19,35 @@ const categories = [
 export function BlogHighlights() {
   const [isLoading, setIsLoading] = useState(true);
   const featuredPosts = useMemo(() => blogPosts.slice(0, 3), []);
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const timeout = window.setTimeout(() => setIsLoading(false), ANIM.duration.md * 1000);
     return () => window.clearTimeout(timeout);
   }, []);
 
+  useSectionReveal(sectionRef, {
+    targets: ['.blog-badge', '.blog-title', '.blog-filter-chip'],
+    y: 32,
+    stagger: 0.1,
+    disabled: isLoading,
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.blog-card'],
+    y: 60,
+    stagger: 0.12,
+    from: { y: 80, opacity: 0, rotateX: -6, transformPerspective: 900 },
+    to: { y: 0, opacity: 1, rotateX: 0, transformPerspective: 900, duration: 0.9, ease: 'power3.out' },
+    disabled: isLoading,
+  });
+
   return (
-    <section className="mt-24">
+    <section ref={sectionRef} className="mt-24">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.4em] text-primary">Blog técnico</p>
-          <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
+          <p className="blog-badge text-xs uppercase tracking-[0.4em] text-primary">Blog técnico</p>
+          <h2 className="blog-title mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
             Conteúdo estratégico para times de produto e engenharia.
           </h2>
         </div>
@@ -38,7 +56,7 @@ export function BlogHighlights() {
             <span
               key={category.id}
               className={clsx(
-                'rounded-full border px-3 py-1 uppercase tracking-[0.3em] text-neutral-500 dark:border-neutral-700 dark:text-neutral-300',
+                'blog-filter-chip rounded-full border px-3 py-1 uppercase tracking-[0.3em] text-neutral-500 dark:border-neutral-700 dark:text-neutral-300',
                 category.id === 'web' && 'border-primary bg-primary/10 text-primary'
               )}
             >
@@ -66,7 +84,7 @@ export function BlogHighlights() {
           : featuredPosts.map((post) => (
               <article
                 key={post.id}
-                className="group flex h-full flex-col justify-between rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800 dark:bg-neutral-900"
+                className="blog-card group flex h-full flex-col justify-between rounded-3xl border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-2 hover:shadow-xl dark:border-neutral-800 dark:bg-neutral-900"
               >
                 <div>
                   <span className="text-xs uppercase tracking-[0.3em] text-accent">{post.category}</span>

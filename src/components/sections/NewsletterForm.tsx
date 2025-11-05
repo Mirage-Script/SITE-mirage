@@ -1,8 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import clsx from 'clsx';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
+
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 
 const newsletterSchema = z.object({
   email: z.string().email({ message: 'Informe um e-mail válido' })
@@ -11,6 +14,14 @@ const newsletterSchema = z.object({
 type NewsletterValues = z.infer<typeof newsletterSchema>;
 
 export function NewsletterForm() {
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  useSectionReveal(cardRef, {
+    targets: ['.newsletter-heading', '.newsletter-copy', '.newsletter-form', '.newsletter-meta'],
+    y: 28,
+    stagger: 0.08,
+  });
+
   const {
     register,
     handleSubmit,
@@ -30,12 +41,12 @@ export function NewsletterForm() {
   }
 
   return (
-    <div className="rounded-3xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900/40">
-      <h4 className="text-base font-semibold text-neutral-900 dark:text-neutral-100">Newsletter técnica</h4>
-      <p className="mt-2 text-sm text-neutral-600 dark:text-neutral-300">
+    <div ref={cardRef} className="rounded-3xl border border-neutral-200 bg-neutral-50 p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900/40">
+      <h4 className="newsletter-heading text-base font-semibold text-neutral-900 dark:text-neutral-100">Newsletter técnica</h4>
+      <p className="newsletter-copy mt-2 text-sm text-neutral-600 dark:text-neutral-300">
         Insights sobre arquitetura, GSAP ScrollTrigger, Supabase e práticas enterprise sem spam.
       </p>
-      <form className="mt-4 space-y-3" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form className="newsletter-form mt-4 space-y-3" onSubmit={handleSubmit(onSubmit)} noValidate>
         <div>
           <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-200" htmlFor="newsletter-email">
             E-mail corporativo
@@ -65,7 +76,7 @@ export function NewsletterForm() {
           {isSubmitting ? 'Enviando…' : 'Receber briefing'}
         </button>
       </form>
-      <p className="mt-3 text-xs text-neutral-500 dark:text-neutral-400">
+      <p className="newsletter-meta mt-3 text-xs text-neutral-500 dark:text-neutral-400">
         Atualizações mensais, com cancelamento a qualquer momento.
       </p>
     </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+
 import { supabase } from '../../lib/supabaseClient';
 
 interface TableStats {
@@ -45,8 +46,8 @@ export function SupabaseStatus() {
       setStats(newStats);
     };
 
-    fetchStats();
-  }, []);
+    void fetchStats();
+  }, [stats]);
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">

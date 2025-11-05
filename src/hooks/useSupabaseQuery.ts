@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { supabase } from '../lib/supabaseClient';
 
 interface UseSupabaseQueryOptions {
@@ -6,10 +7,18 @@ interface UseSupabaseQueryOptions {
   revalidateOnFocus?: boolean;
 }
 
+type SupabaseSelectBuilder = ReturnType<typeof supabase.from> extends infer FromBuilder
+  ? FromBuilder extends {
+      select: (...args: infer _Args) => infer Result;
+    }
+    ? Result
+    : never
+  : never;
+
 export function useSupabaseQuery<T>(
   table: string,
-  query?: (q: any) => any,
-  options: UseSupabaseQueryOptions = {}
+  query?: (builder: SupabaseSelectBuilder) => SupabaseSelectBuilder,
+  options: UseSupabaseQueryOptions = {},
 ) {
   const { enabled = true, revalidateOnFocus = true } = options;
   const [data, setData] = useState<T[] | null>(null);
@@ -22,16 +31,18 @@ export function useSupabaseQuery<T>(
     const fetchData = async () => {
       try {
         setLoading(true);
-        let q = supabase.from(table).select('*');
-        
-        if (query) {
-          q = query(q);
-        }
 
-        const { data: result, error: err } = await q;
+        const baseBuilder = supabase.from(table).select('*');
+  const builder = query ? query(baseBuilder) : baseBuilder;
+        const response = await builder;
+        const { error: err } = response;
 
         if (err) throw err;
-        setData(result as T[]);
+        if (Array.isArray(response.data)) {
+          setData(response.data as T[]);
+        } else {
+          setData(null);
+        }
         setError(null);
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Unknown error'));
@@ -41,7 +52,7 @@ export function useSupabaseQuery<T>(
       }
     };
 
-    fetchData();
+    void fetchData();
 
     if (revalidateOnFocus) {
       window.addEventListener('focus', fetchData);
@@ -52,21 +63,23 @@ export function useSupabaseQuery<T>(
   return { data, loading, error };
 }
 
-export function useSupabaseInsert<T>(table: string) {
+export function useSupabaseInsert<T extends Record<string, unknown>>(table: string) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   const insert = async (payload: T) => {
     try {
       setLoading(true);
-      const { data, error: err } = await supabase
-        .from(table)
-        .insert([payload])
-        .select();
+      const response = await supabase.from(table).insert(payload).select('*');
+      const { error: err } = response;
 
       if (err) throw err;
       setError(null);
-      return data;
+      if (Array.isArray(response.data)) {
+        return response.data as T[];
+      }
+
+      return [];
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);
@@ -79,22 +92,27 @@ export function useSupabaseInsert<T>(table: string) {
   return { insert, loading, error };
 }
 
-export function useSupabaseUpdate<T>(table: string) {
+export function useSupabaseUpdate<T extends Record<string, unknown>>(table: string) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
   const update = async (id: string, payload: Partial<T>) => {
     try {
       setLoading(true);
-      const { data, error: err } = await supabase
+      const response = await supabase
         .from(table)
         .update(payload)
         .eq('id', id)
-        .select();
+        .select('*');
+      const { error: err } = response;
 
       if (err) throw err;
       setError(null);
-      return data;
+      if (Array.isArray(response.data)) {
+        return response.data as T[];
+      }
+
+      return [];
     } catch (err) {
       const error = err instanceof Error ? err : new Error('Unknown error');
       setError(error);

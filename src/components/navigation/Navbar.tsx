@@ -11,11 +11,13 @@ import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
+import logoMirage from '@/assets/logotipo.png';
 import { gsap } from '@/lib/gsap';
 import { useTheme } from '@/providers/ThemeProvider';
-import logoMirage from '@/assets/logotipo.png'; // Seu logo importado
 
 import { Button } from '../ui/Button';
+
+const logoSrc = logoMirage;
 
 // ==================================================================
 // DOCUMENTAÇÃO: Removemos "Blog" para alinhar com a HomePage.
@@ -106,15 +108,14 @@ export function Navbar() {
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
         
         {/* ==================================================================
-         * DOCUMENTAÇÃO (A CORREÇÃO)
-         * Adicionámos "outline-none" ao NavLink para remover
-         * a borda branca (anel de foco) que aparece no link ativo.
+         * CORREÇÃO: Removido 'uppercase tracking-[0.25em]' do NavLink
+         * e inseri 'MIRAGE SCRIPT' no <span>.
          * ================================================================== */}
         <NavLink to="/" className="group flex items-center gap-2 text-lg font-bold outline-none focus:outline-none focus-visible:outline-none">
           <div ref={logoRef} className="flex items-center gap-2">
             
             <img
-              src={logoMirage}
+              src={logoSrc}
               alt="Mirage Script Logo"
               width={56}
               height={56}

@@ -78,12 +78,21 @@ export function measureWebVitals() {
     try {
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries();
-        const lastEntry = entries[entries.length - 1] as any;
-        vitals.lcp = lastEntry.renderTime || lastEntry.loadTime || 0;
+        const lastEntry = entries[entries.length - 1];
+
+        if (!lastEntry) {
+          return;
+        }
+
+        const lcpEntry = lastEntry as Partial<LargestContentfulPaint>;
+        const renderTime = typeof lcpEntry.renderTime === 'number' ? lcpEntry.renderTime : undefined;
+        const loadTime = typeof lcpEntry.loadTime === 'number' ? lcpEntry.loadTime : undefined;
+
+        vitals.lcp = renderTime ?? loadTime ?? 0;
       });
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
-    } catch (e) {
-      console.warn('LCP observer not supported');
+    } catch (error) {
+      console.warn('LCP observer not supported', error);
     }
   }
 

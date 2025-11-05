@@ -1,6 +1,6 @@
 // src/components/sections/HeroSection.tsx (RESTAURADO para a Versão Estável)
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import SplitType from 'split-type';
 import Typed from 'typed.js';
@@ -10,8 +10,10 @@ import Typed from 'typed.js';
 import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
-import { gsap, ScrollTrigger, useGsapTimeline } from '@/lib/gsap';
-import { ANIM } from '@/lib/animTokens'; 
+import { useScrollParallax } from '@/hooks/useScrollParallax';
+import { useSectionReveal } from '@/hooks/useSectionReveal';
+import { ANIM } from '@/lib/animTokens';
+import { gsap, useGsapTimeline } from '@/lib/gsap';
 
 import { Button } from '../ui/Button';
 
@@ -31,6 +33,9 @@ export function HeroSection() {
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const primaryCtaRef = useRef<TextScrambleHandle | null>(null);
   const secondaryCtaRef = useRef<TextScrambleHandle | null>(null);
+  const accentParallaxRef = useRef<HTMLDivElement | null>(null);
+  const accentParallaxSecondaryRef = useRef<HTMLDivElement | null>(null);
+  const heroSectionRef = useRef<HTMLElement | null>(null);
 
   // ... (Hook useEffect do Typed.js permanece o mesmo) ...
   useEffect(() => {
@@ -61,8 +66,42 @@ export function HeroSection() {
     };
   }, [prefersReducedMotion]);
 
+  // ... (Hook useEffect das animações de entrada dos cards permanece o mesmo) ...
+  useEffect(() => {
+    if (prefersReducedMotion || !sectionRef.current) {
+      return;
+    }
+    const cards = sectionRef.current.querySelectorAll('.hero-card');
+    const triggers: ScrollTrigger[] = [];
+    cards.forEach((card) => {
+      const trigger = ScrollTrigger.create({
+        trigger: card,
+        start: 'top 80%',
+        onEnter: () => {
+          gsap.fromTo(
+            card,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+          );
+        },
+      });
+      triggers.push(trigger);
+    });
+    return () => {
+      triggers.forEach((trigger) => trigger.kill());
+    };
+  }, [prefersReducedMotion]);
 
-  // ... (Hook useGsapTimeline das animações de ENTRADA permanece o mesmo) ...
+
+  // ==================================================================
+  // DOCUMENTAÇÃO (A GRANDE CORREÇÃO)
+  //
+  // 1. O 'useEffect' de paralaxe separado foi REMOVIDO.
+  // 2. A lógica de paralaxe (gsap.to com scrub: true) foi MOVIDA
+  //    PARA DENTRO deste 'useGsapTimeline'.
+  // 3. As novas animações de paralaxe foram ADICIONADAS ao
+  //    'context.add()' para uma limpeza (cleanup) correta.
+  // ==================================================================
   useGsapTimeline(
     (context) => {
       if (prefersReducedMotion || !headingRef.current) {
@@ -153,7 +192,7 @@ export function HeroSection() {
     // DOCUMENTAÇÃO: 'overflow-hidden' foi RE-ADICIONADO
     <section
       ref={sectionRef}
-      className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
+      className="relative rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
     >
       
       {/* ==================================================================
@@ -167,12 +206,10 @@ export function HeroSection() {
       {/* A "Neve" permanece removida (comentada) */}
       {/* <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" /> */}
       
-      {/* Elementos de fundo que se movem com paralaxe */}
-      <div className="hero-parallax-bg pointer-events-none absolute inset-0">
-        <ShaderAurora className="h-full w-full mix-blend-screen opacity-80" />
-        <div className="absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
-        <div className="absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
-      </div>
+      {/* Nossos Alvos de Parallax (Fundo) */}
+      <ShaderAurora className="hero-parallax-bg pointer-events-none absolute inset-0 mix-blend-screen opacity-80" />
+      <div className="hero-blur-circle-1 pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
+      <div className="hero-blur-circle-2 pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
 
       {/* O Conteúdo (agora com a classe 'hero-content-grid') */}
       <div className="hero-content-grid relative grid gap-10 lg:grid-cols-[3fr_2fr]">
@@ -287,11 +324,9 @@ export function HeroSection() {
 
         {/* Coluna da Direita (Cards de Serviço) */}
         <div className="space-y-6">
-          <motion.div
-            className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-            whileHover={{ y: -12, boxShadow: '0 20px 45px -20px rgba(74,123,167,0.6)' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-          >
+
+          {/* CARD 1: DESENVOLVIMENTO WEB */}
+          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Desenvolvimento Web
             </p>
@@ -301,12 +336,10 @@ export function HeroSection() {
               <li>Landing Pages Otimizadas (SEO)</li>
               <li>Sistemas de Gestão de Conteúdo (CMS)</li>
             </ul>
-          </motion.div>
-          <motion.div
-            className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-            whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(15,58,102,0.6)' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-          >
+          </div>
+
+          {/* CARD 2: APLICAÇÕES MOBILE */}
+          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Aplicações Mobile
             </p>
@@ -316,12 +349,10 @@ export function HeroSection() {
               <li>Design focado na Experiência (UX/UI)</li>
               <li>Integração com APIs e Serviços</li>
             </ul>
-          </motion.div>
-          <motion.div
-            className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-            whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(74,123,167,0.6)' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-          >
+          </div>
+
+          {/* CARD 3: SOFTWARE E ECOSSISTEMAS */}
+          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Software e Ecossistemas
             </p>
@@ -331,7 +362,8 @@ export function HeroSection() {
               <li>Arquitetura de APIs (Microsserviços)</li>
               <li>Consultoria e Arquitetura de Software</li>
             </ul>
-          </motion.div>
+          </div>
+
         </div>
       </div>
     </section>
