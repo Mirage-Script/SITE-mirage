@@ -1,83 +1,82 @@
+// src/data/services.ts (Modificado com 4 Cards e Novos Textos)
+
+// ==================================================================
+// DOCUMENTAÇÃO (MODIFICAÇÃO DO TIPO)
+// Tornei a propriedade 'investment' opcional (investment?: string)
+// para podermos removê-la dos nossos objetos sem causar um erro.
+// ==================================================================
 export type ServiceCategory = {
   id: string;
   title: string;
   description: string;
   features: string[];
   deliverables: string[];
-  investment: string;
+  investment?: string; // <-- Agora é opcional
   badge?: string;
 };
 
+// ==================================================================
+// DOCUMENTAÇÃO (MODIFICAÇÃO DOS DADOS)
+// Este é o novo array de serviços.
+// 1. Contém os 4 cards que definimos.
+// 2. O 5º card ("immersive") foi removido.
+// 3. Todos os textos foram atualizados para a nossa nova estratégia.
+// 4. As propriedades 'investment' foram removidas.
+// ==================================================================
 export const services: ServiceCategory[] = [
   {
     id: 'discovery',
     title: 'Discovery & Estratégia',
     description:
-      'Workshops executivos, roadmap orientado por dados e arquitetura alvo para acelerar decisões de negócio com lastro técnico.',
+      'O ponto de partida para o sucesso. Analisamos os seus objetivos de negócio e desenhamos o roadmap técnico completo da sua solução.',
     features: [
-      'Mapeamento de usuários, métricas e riscos',
-      'Canvas técnico com integrações críticas',
-      'Priorização RICE + impacto financeiro',
-      'Protótipos navegáveis e testes de usabilidade'
+      'Workshops de Imersão e Requisitos',
+      'Mapeamento da Jornada do Utilizador',
+      'Definição de Arquitetura e Stack',
+      'Protótipos Navegáveis (UI/UX)',
     ],
-    deliverables: ['Blueprint técnico', 'Roadmap trimestral', 'Plano de governance & squads'],
-    investment: 'A partir de R$ 12k',
-    badge: 'Start recomendado'
+    deliverables: ['BLUEPRINT TÉCNICO', 'ROADMAP DO PRODUTO', 'PROTÓTIPO INTERATIVO'],
+    badge: 'START RECOMENDADO',
   },
   {
     id: 'web',
     title: 'Desenvolvimento Web',
     description:
-      'Aplicações React, Next.js e TypeScript com foco em escalabilidade, SEO e integrações Supabase, além de microinterações premium.',
+      'Criamos soluções web de alta performance, desde e-commerce e plataformas SaaS até landing pages otimizadas, com foco em SEO, escalabilidade e design.',
     features: [
-      'Pipelines CI/CD com observabilidade em tempo real',
-      'Design systems acessíveis com Motion One e Storybook',
-      'Integrações GraphQL, REST e Webhooks com caching',
-      'Auditoria Lighthouse 95+ e Progressive Web Apps'
+      'Aplicações (React, Next.js, TypeScript)',
+      'Design de Alto Impacto (GSAP & Motion)',
+      'Integrações com APIs e CMS (Supabase, etc.)',
+      'Otimização de Performance (Core Web Vitals)',
     ],
-    deliverables: ['Arquitetura técnica completa', 'Playbooks de DevOps', 'Testes automatizados (unitários e E2E)'],
-    investment: 'A partir de R$ 18k',
-    badge: 'Mais solicitado'
+    deliverables: ['PLATAFORMA WEB COMPLETA', 'PLAYBOOKS DE DEVOPS', 'TESTES AUTOMATIZADOS'],
+    badge: 'MAIS SOLICITADO',
   },
   {
     id: 'mobile',
     title: 'Desenvolvimento Mobile',
-    description: 'Apps React Native e Flutter com arquitetura offline-first, push notifications e pipelines de publicação.',
+    description:
+      'Desenvolvemos aplicações nativas (iOS/Android) e híbridas (React Native/Flutter) focadas na experiência do utilizador, performance e arquitetura offline-first.',
     features: [
-      'Integração com APIs e SDKs nativos',
-      'Analytics e monitoramento em tempo real',
-      'Testes em dispositivos físicos e simuladores',
-      'Performance mobile otimizada'
+      'Nativo (Swift, Kotlin) & Híbrido (React Native)',
+      'Funcionalidades Offline-first e Push',
+      'Análise e Monitoramento em Tempo Real',
+      'Performance Mobile Otimizada',
     ],
-    deliverables: ['Playbook de release store', 'Testes instrumentados', 'Documentação técnica'],
-    investment: 'A partir de R$ 22k'
+    deliverables: ['PLAYBOOK DE RELEASE (STORES)', 'TESTES INSTRUMENTADOS', 'DOCUMENTAÇÃO TÉCNICA'],
   },
   {
     id: 'software',
     title: 'Engenharia de Software',
-    description: 'Soluções desktop, automações e integrações complexas com foco em segurança, observabilidade e RLS.',
-    features: [
-      'Arquitetura hexagonal e ports & adapters',
-      'Automação de processos e orquestração',
-      'Governança de dados com auditoria e RLS',
-      'Dashboards operacionais e analytics'
-    ],
-    deliverables: ['Guia de operação', 'Runbooks de incidentes', 'Treinamentos hands-on'],
-    investment: 'Sob demanda'
-  },
-  {
-    id: 'immersive',
-    title: 'Experiências Imersivas',
     description:
-      'Landing pages cinematográficas, motion design e interações 3D com foco em impacto e conversão para campanhas premium.',
+      'Para desafios complexos. Desenhamos e modernizamos sistemas internos (ERPs, CRMs), arquiteturas de microsserviços e automações seguras.',
     features: [
-      'Coreografias com GSAP ScrollTrigger + Lenis',
-      'Lottie, Rive e microinterações com Framer Motion',
-      'WebGL e Three.js para fundos generativos',
-      'Narrativas interativas com áudio e storytelling'
+      'Arquitetura de Microsserviços & APIs',
+      'Modernização de Código (Legacy)',
+      'Governança de Dados com Auditoria',
+      'Automação de Processos e Orquestração',
     ],
-    deliverables: ['Storyboard interativo', 'Biblioteca de animações reutilizáveis', 'Kit de performance e acessibilidade'],
-    investment: 'A partir de R$ 28k',
-    badge: 'Experiência premium'
-  }
+    deliverables: ['GUIA DE OPERAÇÃO', 'RUNBOOKS DE INCIDENTES', 'TREINAMENTOS HANDS-ON'],
+    badge: 'SOLUÇÕES ROBUSTAS', // Adicionei este selo que definimos
+  },
 ];
