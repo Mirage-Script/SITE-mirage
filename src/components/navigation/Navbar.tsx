@@ -1,4 +1,4 @@
-// src/components/navigation/Navbar.tsx (CORRIGIDO - Sombra Removida e Nome Completo)
+// src/components/navigation/Navbar.tsx (CORRIGIDO - Borda Branca Removida)
 
 import {
   Bars3Icon,
@@ -17,11 +17,14 @@ import logoMirage from '@/assets/logotipo.png'; // Seu logo importado
 
 import { Button } from '../ui/Button';
 
+// ==================================================================
+// DOCUMENTAÇÃO: Removemos "Blog" para alinhar com a HomePage.
+// ==================================================================
 const navItems = [
   { label: 'Início', path: '/' },
   { label: 'Serviços', path: '/servicos' },
   { label: 'Sobre', path: '/sobre' },
-  // { label: 'Blog', path: '/blog' }
+  // { label: 'Blog', path: '/blog' } // <-- REMOVIDO
 ];
 
 export function Navbar() {
@@ -103,10 +106,11 @@ export function Navbar() {
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
         
         {/* ==================================================================
-         * CORREÇÃO: Removido 'uppercase tracking-[0.25em]' do NavLink
-         * e inseri 'MIRAGE SCRIPT' no <span>.
+         * DOCUMENTAÇÃO (A CORREÇÃO)
+         * Adicionámos "outline-none" ao NavLink para remover
+         * a borda branca (anel de foco) que aparece no link ativo.
          * ================================================================== */}
-        <NavLink to="/" className="group flex items-center gap-2 text-lg font-bold">
+        <NavLink to="/" className="group flex items-center gap-2 text-lg font-bold outline-none focus:outline-none focus-visible:outline-none">
           <div ref={logoRef} className="flex items-center gap-2">
             
             <img
@@ -116,8 +120,9 @@ export function Navbar() {
               height={56}
               className="h-14 w-14 flex-shrink-0 transition-all duration-300" 
             />
+            {/* Adicionámos "SCRIPT" ao nome */}
             <span className="uppercase tracking-[0.25em] text-neutral-700 transition-colors duration-300 group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">
-              MIRAGE SCRIPT 
+              MIRAGE SCRIPT
             </span>
           </div>
         </NavLink>
@@ -168,6 +173,7 @@ export function Navbar() {
         </div>
       </nav>
 
+      {/* Menu Mobile */}
       {isOpen && (
         <div className="lg:hidden">
           <div className="border-t border-neutral-100 bg-white px-6 py-6 shadow-xl dark:border-neutral-800 dark:bg-neutral-900">

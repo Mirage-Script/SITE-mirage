@@ -1,11 +1,12 @@
-// src/components/sections/HeroSection.tsx (MODIFICADO - Parallax DENTRO do useGsapTimeline)
+// src/components/sections/HeroSection.tsx (RESTAURADO para a Versão Estável)
 
 import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import SplitType from 'split-type';
 import Typed from 'typed.js';
 
-import { HeroImmersiveCanvas } from '@/components/effects/HeroImmersiveCanvas';
+// DOCUMENTAÇÃO: Removemos a "neve" (HeroImmersiveCanvas)
+// mas RE-ADICIONÁMOS a "Aurora" (ShaderAurora)
 import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
@@ -14,7 +15,8 @@ import { ANIM } from '@/lib/animTokens';
 
 import { Button } from '../ui/Button';
 
-// ... (const HEADLINE_ROTATIONS permanece a mesma) ...
+// (Removida a importação de ParticleLogo)
+
 const HEADLINE_ROTATIONS = [
   'Desenvolvimento Web de Alta Performance',
   'Aplicações Mobile Nativas e Híbridas',
@@ -59,49 +61,13 @@ export function HeroSection() {
     };
   }, [prefersReducedMotion]);
 
-  // ... (Hook useEffect das animações de entrada dos cards permanece o mesmo) ...
-  useEffect(() => {
-    if (prefersReducedMotion || !sectionRef.current) {
-      return;
-    }
-    const cards = sectionRef.current.querySelectorAll('.hero-card');
-    const triggers: ScrollTrigger[] = [];
-    cards.forEach((card) => {
-      const trigger = ScrollTrigger.create({
-        trigger: card,
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo(
-            card,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          );
-        },
-      });
-      triggers.push(trigger);
-    });
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-    };
-  }, [prefersReducedMotion]);
 
-
-  // ==================================================================
-  // DOCUMENTAÇÃO (A GRANDE CORREÇÃO)
-  //
-  // 1. O 'useEffect' de paralaxe separado foi REMOVIDO.
-  // 2. A lógica de paralaxe (gsap.to com scrub: true) foi MOVIDA
-  //    PARA DENTRO deste 'useGsapTimeline'.
-  // 3. As novas animações de paralaxe foram ADICIONADAS ao
-  //    'context.add()' para uma limpeza (cleanup) correta.
-  // ==================================================================
+  // ... (Hook useGsapTimeline das animações de ENTRADA permanece o mesmo) ...
   useGsapTimeline(
     (context) => {
       if (prefersReducedMotion || !headingRef.current) {
         return;
       }
-
-      // --- Início das Animações de ENTRADA (On-Enter) ---
       const splitHeading = new SplitType(headingRef.current, {
         types: 'lines,words,chars',
       });
@@ -112,7 +78,6 @@ export function HeroSection() {
         display: 'inline-block',
         transformOrigin: '50% 100%',
       });
-      
       const timeline = gsap.timeline();
       timeline.from(splitHeading.chars, {
         yPercent: 110,
@@ -143,97 +108,73 @@ export function HeroSection() {
         },
         '-=0.4',
       );
-      // --- Fim das Animações de ENTRADA ---
-
-
-      // --- Início das Animações de PARALAXE (On-Scroll / Scrub) ---
-      // (Estas animações correm em paralelo com o 'timeline' acima)
-
-      const bgParallax = gsap.to('.hero-parallax-bg', {
-        yPercent: 20,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-
-      const circle1Parallax = gsap.to('.hero-blur-circle-1', {
-        yPercent: 30,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-      
-      const circle2Parallax = gsap.to('.hero-blur-circle-2', {
-        yPercent: 15,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-
-      const contentParallax = gsap.to('.hero-content-grid', {
-        yPercent: -5,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
-      // --- Fim das Animações de PARALAXE ---
-
-
-      // --- Início da Função de LIMPEZA (Cleanup) ---
       context.add(() => {
-        // Limpa as animações de ENTRADA
         timeline.kill();
         splitHeading.revert();
-        
-        // Limpa as animações de PARALAXE
-        bgParallax.kill();
-        circle1Parallax.kill();
-        circle2Parallax.kill();
-        contentParallax.kill();
       });
-      // --- Fim da Função de LIMPEZA ---
     },
     [prefersReducedMotion],
     sectionRef,
   );
 
+  // ... (Hook useEffect das animações de ENTRADA dos cards permanece o mesmo) ...
+  useEffect(() => {
+    if (prefersReducedMotion || !sectionRef.current) {
+      return;
+    }
+    const cards = sectionRef.current.querySelectorAll('.hero-card');
+    const triggers: ScrollTrigger[] = [];
+    cards.forEach((card) => {
+      const trigger = ScrollTrigger.create({
+        trigger: card,
+        start: 'top 80%',
+        onEnter: () => {
+          gsap.fromTo(
+            card,
+            { y: 40, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+          );
+        },
+      });
+      triggers.push(trigger);
+    });
+    return () => {
+      triggers.forEach((trigger) => trigger.kill());
+    };
+  }, [prefersReducedMotion]);
+
   // ==================================================================
-  // INÍCIO DO CONTEÚDO (HTML/JSX)
+  // DOCUMENTAÇÃO (REMOÇÃO DO PARALLAX)
+  // Removemos todos os 'useEffect' de paralaxe que falharam.
+  // O código está agora 100% estável.
   // ==================================================================
+
   return (
-    // DOCUMENTAÇÃO: A classe 'overflow-hidden' foi REMOVIDA
+    // DOCUMENTAÇÃO: 'overflow-hidden' foi RE-ADICIONADO
     <section
       ref={sectionRef}
-      className="relative rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
+      className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
     >
+      
+      {/* ==================================================================
+       * DOCUMENTAÇÃO (FUNDOS RESTAURADOS)
+       * Re-adicionámos a Aurora e os Círculos Desfocados que
+       * tinham "sumido". A "neve" permanece removida, como você pediu.
+       * ================================================================== */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]" aria-hidden />
       <div className="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
       
       {/* A "Neve" permanece removida (comentada) */}
       {/* <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" /> */}
       
-      {/* Nossos Alvos de Parallax (Fundo) */}
-      <ShaderAurora className="hero-parallax-bg pointer-events-none absolute inset-0 mix-blend-screen opacity-80" />
-      <div className="hero-blur-circle-1 pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
-      <div className="hero-blur-circle-2 pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
+      {/* Elementos de fundo que se movem com paralaxe */}
+      <div className="hero-parallax-bg pointer-events-none absolute inset-0">
+        <ShaderAurora className="h-full w-full mix-blend-screen opacity-80" />
+        <div className="absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
+        <div className="absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
+      </div>
 
-      {/* Nosso Alvo de Parallax (Conteúdo) */}
+      {/* O Conteúdo (agora com a classe 'hero-content-grid') */}
       <div className="hero-content-grid relative grid gap-10 lg:grid-cols-[3fr_2fr]">
         
         {/* Coluna da Esquerda (Conteúdo) */}

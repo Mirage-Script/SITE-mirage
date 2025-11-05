@@ -1,41 +1,56 @@
-// src/components/sections/OperationalHighlights.tsx (MODIFICADO - Logo Maior)
+// src/components/sections/OperationalHighlights.tsx (MODIFICADO - Mais Margem Acima da Animação)
 
 import { CheckIcon } from '@heroicons/react/24/outline';
 import logoMirage from '@/assets/logotipo.png';
+import { OrbitAnimation } from '@/components/effects/OrbitAnimation';
+
+// Removemos os imports desnecessários do GSAP deste ficheiro
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 
 export function OperationalHighlights() {
+  // Removemos o 'useEffect' do GSAP daqui,
+  // pois a animação está 100% no CSS do OrbitAnimation.tsx.
+
   return (
     <section className="mt-24 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
       
-      {/* Títulos da Secção */}
-      <div className="mb-10 text-center">
+      {/* Bloco de Título (com z-index por segurança) */}
+      <div className="relative z-10 mb-10 text-center">
         <p className="text-xs uppercase tracking-[0.4em] text-primary">OPERAÇÃO E GOVERNANÇA</p>
         <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
           Engenharia de Confiança para Produtos Críticos.
         </h2>
       </div>
 
-      {/* Grid de 2 Colunas Abertas */}
-      <div className="mt-16 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      {/* ==================================================================
+       * DOCUMENTAÇÃO (A CORREÇÃO)
+       *
+       * Aumentámos a margem superior de "mt-16" (4rem) para "mt-32" (8rem).
+       * Isto empurra a secção da animação para baixo,
+       * dando mais espaço para os títulos.
+       * ================================================================== */}
+      <div className="mt-32 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         
-        <div className="flex items-center justify-center">
-          {/* ==================================================================
-           * DOCUMENTAÇÃO (A CORREÇÃO)
-           *
-           * Mudei "max-w-sm" (384px) para "max-w-md" (448px)
-           * para que o seu logo fique maior e com mais destaque.
-           * ================================================================== */}
+        {/* COLUNA DA ESQUERDA (O VISUAL) */}
+        <div className="relative flex items-center justify-center h-96">
+          
+          {/* O SEU LOGO (NA FRENTE) */}
           <img
             src={logoMirage} 
             alt="Logotipo da Mirage Script"
-            className="h-auto w-full max-w-md" // <-- MUDANÇA AQUI
-            width={448} // <-- MUDANÇA AQUI
-            height={448} // <-- MUDANÇA AQUI
+            className="relative z-10 h-auto w-full max-w-sm"
+            width={384} 
+            height={384}
           />
+
+          {/* A ANIMAÇÃO (POR TRÁS) */}
+          <OrbitAnimation />
+
         </div>
 
         {/* COLUNA DA DIREITA (O CONTEÚDO) */}
-        <div>
+        <div className="relative z-10">
           <h3 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
             A Nossa Garantia de Performance
           </h3>

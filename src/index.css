@@ -38,7 +38,7 @@ html {
   }
 }
 
-@media (pointer: fine) {
+/*@media (pointer: fine) {
   body,
   a,
   button,
