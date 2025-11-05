@@ -1,8 +1,12 @@
-// src/routes/home/index.tsx (CORRIGIDO - Título e Descrição)
+// src/routes/home/index.tsx (MODIFICADO - A Correção Definitiva do Parallax)
 
 import { Helmet } from 'react-helmet-async';
+// DOCUMENTAÇÃO: Imports corretos do React e GSAP
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
+import { gsap, ScrollTrigger } from '@/lib/gsap';
 
-import { SmoothScrollReveal } from '@/components/effects/SmoothScrollReveal';
+// Importações das suas Secções
 import { CaseShowcase } from '@/components/sections/CaseShowcase';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { DeliveryPlaybook } from '@/components/sections/DeliveryPlaybook';
@@ -13,45 +17,100 @@ import { StatsCounter } from '@/components/sections/StatsCounter';
 import { TechMarquee } from '@/components/sections/TechMarquee';
 
 export default function HomePage() {
+  const mainRef = useRef<HTMLDivElement | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  // ==================================================================
+  // DOCUMENTAÇÃO (A CORREÇÃO DEFINITIVA)
+  //
+  // 1. Removemos o 'useGsapTimeline' (que era para "on-enter").
+  // 2. Usamos o 'useEffect' padrão do React.
+  // 3. 'gsap.context' é a forma moderna de criar animações GSAP
+  //    no React, pois lida com a "limpeza" (cleanup) automaticamente.
+  // 4. Aplicamos o 'yPercent: -20' a cada secção, como queríamos.
+  // ==================================================================
+  useEffect(() => {
+    if (prefersReducedMotion || !mainRef.current) {
+      return;
+    }
+
+    // Criamos um contexto GSAP para 'limpar' as animações
+    const ctx = gsap.context(() => {
+      // Seleciona todas as secções marcadas para o paralaxe
+      const sections = gsap.utils.toArray<HTMLElement>('[data-parallax="true"]');
+
+      sections.forEach((section) => {
+        // Aplica o efeito de paralaxe a cada secção
+        gsap.to(section, {
+          yPercent: -20, // Move 20% para CIMA (mais rápido que o scroll)
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top bottom', // Começa quando o topo da secção toca o fundo da tela
+            end: 'bottom top', // Termina quando o fundo da secção toca o topo da tela
+            scrub: true, // <-- A MÁGICA DO PARALLAX
+          },
+        });
+      });
+    }, mainRef); // O 'scope' do contexto é o 'div' principal
+
+    // Função de Limpeza (Cleanup) do React
+    return () => ctx.revert();
+    
+  }, [prefersReducedMotion]); // Executa apenas uma vez
+
   return (
     <>
-      {/* ==================================================================
-       * DOCUMENTAÇÃO (CORREÇÃO DO TÍTULO/DESCRIÇÃO)
-       * Corrigimos o título e a descrição para usar o nome completo da empresa.
-       * ================================================================== */}
       <Helmet>
         <title>MIRAGE SCRIPT</title> 
-        <meta
-          name="description"
-          content="MIRAGE SCRIPT"
-        />
+        <meta name="description" content="MIRAGE SCRIPT" />
       </Helmet>
       
-      {/* O resto do código da página inicial permanece o mesmo (removendo o fluff) */}
-      <div className="space-y-24">
-        <HeroSection />
-        <SmoothScrollReveal>
-          <TechMarquee />
-        </SmoothScrollReveal>
-        <SmoothScrollReveal>
-          <ServicesOverview />
-        </SmoothScrollReveal>
-        <SmoothScrollReveal>
-          <StatsCounter />
-        </SmoothScrollReveal>
-        <SmoothScrollReveal>
-          <OperationalHighlights />
-        </SmoothScrollReveal>
-        <SmoothScrollReveal>
-          <DeliveryPlaybook />
-        </SmoothScrollReveal>
-        <SmoothScrollReveal>
-          <CaseShowcase />
-        </SmoothScrollReveal>
-
-        {/* Secções de fluff comentadas (TestimonialsCarousel, PartnersShowcase, BlogHighlights) */}
+      {/* * 1. Adicionámos a 'ref={mainRef}'.
+       * 2. Removemos os '<SmoothScrollReveal>'.
+       * 3. Adicionámos 'data-parallax="true"' às secções.
+      */}
+      <div ref={mainRef} className="space-y-24">
         
-        <ContactCTA />
+        {/* A HeroSection NÃO tem 'data-parallax' porque
+            queremos que ela fique "presa" no topo enquanto as
+            outras passam por cima. */}
+        <HeroSection /> 
+        
+        <div data-parallax="true">
+          <TechMarquee />
+        </div>
+        
+        <div data-parallax="true">
+          <ServicesOverview />
+        </div>
+        
+        <div data-parallax="true">
+          <StatsCounter />
+        </div>
+        
+        <div data-parallax="true">
+          <OperationalHighlights />
+        </div>
+        
+        <div data-parallax="true">
+          <DeliveryPlaybook />
+        </div>
+        
+        <div data-parallax="true">
+          <CaseShowcase />
+        </div>
+
+        {/* --- Secções Desativadas (Fluff) --- */}
+        {/*
+        <TestimonialsCarousel />
+        <PartnersShowcase />
+        <BlogHighlights />
+        */}
+        
+        <div data-parallax="true">
+          <ContactCTA />
+        </div>
       </div>
     </>
   );

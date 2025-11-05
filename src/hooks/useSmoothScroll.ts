@@ -1,3 +1,5 @@
+// src/hooks/useSmoothScroll.ts (REVERTIDO PARA O ORIGINAL - ESTE CÓDIGO ESTÁ CORRETO)
+
 import Lenis from 'lenis';
 import { useEffect } from 'react';
 
@@ -16,10 +18,14 @@ export function useSmoothScroll(enabled: boolean) {
       syncTouch: true,
       syncTouchLerp: 0.08,
       wheelMultiplier: 1,
-      lerp: 0.1
+      lerp: 0.1,
     });
 
-  const unsubscribe = lenis.on('scroll', () => ScrollTrigger.update());
+    // ==================================================================
+    // DOCUMENTAÇÃO: Esta linha é a sincronização correta.
+    // Ela diz ao GSAP para atualizar em cada evento de scroll do Lenis.
+    // ==================================================================
+    const unsubscribe = lenis.on('scroll', () => ScrollTrigger.update());
 
     let animationFrame: number;
 

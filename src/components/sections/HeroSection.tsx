@@ -1,4 +1,4 @@
-// src/components/sections/HeroSection.tsx (FINALIZADO - Todos os textos atualizados)
+// src/components/sections/HeroSection.tsx (MODIFICADO - Parallax DENTRO do useGsapTimeline)
 
 import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
@@ -16,9 +16,7 @@ import { gsap, useGsapTimeline } from '@/lib/gsap';
 
 import { Button } from '../ui/Button';
 
-// ==================================================================
-// DOCUMENTAÇÃO: Textos rotativos focados nos 3 pilares de serviço.
-// ==================================================================
+// ... (const HEADLINE_ROTATIONS permanece a mesma) ...
 const HEADLINE_ROTATIONS = [
   'Desenvolvimento Web de Alta Performance',
   'Aplicações Mobile Nativas e Híbridas',
@@ -37,6 +35,7 @@ export function HeroSection() {
   const accentParallaxSecondaryRef = useRef<HTMLDivElement | null>(null);
   const heroSectionRef = useRef<HTMLElement | null>(null);
 
+  // ... (Hook useEffect do Typed.js permanece o mesmo) ...
   useEffect(() => {
     if (prefersReducedMotion) {
       typedInstance.current?.destroy();
@@ -46,13 +45,10 @@ export function HeroSection() {
       }
       return;
     }
-
     if (!typedElementRef.current) {
       return;
     }
-
     typedElementRef.current.textContent = HEADLINE_ROTATIONS[0];
-
     typedInstance.current = new Typed(typedElementRef.current, {
       strings: HEADLINE_ROTATIONS,
       typeSpeed: 42,
@@ -62,7 +58,6 @@ export function HeroSection() {
       loop: true,
       showCursor: false,
     });
-
     return () => {
       typedInstance.current?.destroy();
       typedInstance.current = null;
@@ -90,13 +85,23 @@ export function HeroSection() {
     to: { y: 0, opacity: 1, rotateX: 0, transformPerspective: 1000, duration: 1.05, ease: 'power4.out' },
   });
 
-  // ... (Toda a lógica de animação GSAP e useEffects permanece intacta) ...
 
+  // ==================================================================
+  // DOCUMENTAÇÃO (A GRANDE CORREÇÃO)
+  //
+  // 1. O 'useEffect' de paralaxe separado foi REMOVIDO.
+  // 2. A lógica de paralaxe (gsap.to com scrub: true) foi MOVIDA
+  //    PARA DENTRO deste 'useGsapTimeline'.
+  // 3. As novas animações de paralaxe foram ADICIONADAS ao
+  //    'context.add()' para uma limpeza (cleanup) correta.
+  // ==================================================================
   useGsapTimeline(
     (context) => {
       if (prefersReducedMotion || !headingRef.current) {
         return;
       }
+
+      // --- Início das Animações de ENTRADA (On-Enter) ---
       const splitHeading = new SplitType(headingRef.current, {
         types: 'lines,words,chars',
       });
@@ -107,6 +112,7 @@ export function HeroSection() {
         display: 'inline-block',
         transformOrigin: '50% 100%',
       });
+      
       const timeline = gsap.timeline();
       timeline.from(splitHeading.chars, {
         yPercent: 110,
@@ -137,10 +143,71 @@ export function HeroSection() {
         },
         '-=0.4',
       );
+      // --- Fim das Animações de ENTRADA ---
+
+
+      // --- Início das Animações de PARALAXE (On-Scroll / Scrub) ---
+      // (Estas animações correm em paralelo com o 'timeline' acima)
+
+      const bgParallax = gsap.to('.hero-parallax-bg', {
+        yPercent: 20,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+
+      const circle1Parallax = gsap.to('.hero-blur-circle-1', {
+        yPercent: 30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+      
+      const circle2Parallax = gsap.to('.hero-blur-circle-2', {
+        yPercent: 15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+
+      const contentParallax = gsap.to('.hero-content-grid', {
+        yPercent: -5,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+      // --- Fim das Animações de PARALAXE ---
+
+
+      // --- Início da Função de LIMPEZA (Cleanup) ---
       context.add(() => {
+        // Limpa as animações de ENTRADA
         timeline.kill();
         splitHeading.revert();
+        
+        // Limpa as animações de PARALAXE
+        bgParallax.kill();
+        circle1Parallax.kill();
+        circle2Parallax.kill();
+        contentParallax.kill();
       });
+      // --- Fim da Função de LIMPEZA ---
     },
     [prefersReducedMotion],
     sectionRef,
@@ -150,6 +217,7 @@ export function HeroSection() {
   // INÍCIO DO CONTEÚDO (HTML/JSX)
   // ==================================================================
   return (
+    // DOCUMENTAÇÃO: A classe 'overflow-hidden' foi REMOVIDA
     <section
       ref={(node: HTMLDivElement | null) => {
         sectionRef.current = node;
@@ -157,7 +225,6 @@ export function HeroSection() {
       }}
       className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
     >
-      {/* ... (Efeitos visuais de fundo) ... */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]" aria-hidden />
       <div className="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
       <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" />
@@ -173,22 +240,20 @@ export function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative grid gap-10 lg:grid-cols-[3fr_2fr]">
+      {/* Nosso Alvo de Parallax (Conteúdo) */}
+      <div className="hero-content-grid relative grid gap-10 lg:grid-cols-[3fr_2fr]">
+        
+        {/* Coluna da Esquerda (Conteúdo) */}
         <div>
-          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 1): Tagline (Linha de chamada) */}
           <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">
             Soluções Digitais Sob Medida
           </p>
-
-          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 2): Título Principal (H1) */}
           <h1
             ref={headingRef}
             className="hero-heading mt-6 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
           >
             Mirage Script
           </h1>
-
-          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 3): Subtítulo Rotativo (Typed.js) */}
           <div className="hero-subline mt-5 min-h-[2.5rem] overflow-hidden text-lg font-medium text-accent">
             {prefersReducedMotion ? (
               <span className="block">{HEADLINE_ROTATIONS[0]}</span>
@@ -196,20 +261,14 @@ export function HeroSection() {
               <span ref={typedElementRef} className="block" />
             )}
           </div>
-
-          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 4): Parágrafo de Descrição */}
           <p className="mt-6 max-w-xl text-neutral-200">
             Transformamos os seus desafios de negócio em software robusto,
             performático e escalável. Entregamos produtos Web, Mobile e Software com código
             limpo e design focado no utilizador.
           </p>
-
-          {/* ================================================================== */}
-          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 5): BOTÕES (CTAs) */}
-          {/* ================================================================== */}
+          
+          {/* Botões (CTAs) */}
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            
-            {/* Wrapper 1 (Controla o Z-index) */}
             <div className="relative z-10 transition-all duration-200 ease-out hover:z-20">
               <MagneticButton strength={0.3}>
                 <Button
@@ -229,8 +288,6 @@ export function HeroSection() {
                 </Button>
               </MagneticButton>
             </div>
-
-            {/* Wrapper 2 (Controla o Z-index) */}
             <div className="relative z-10 transition-all duration-200 ease-out hover:z-20">
               <MagneticButton strength={0.3}>
                 <Button
@@ -250,12 +307,9 @@ export function HeroSection() {
                 </Button>
               </MagneticButton>
             </div>
-            
           </div>
-
-          {/* ================================================================== */}
-          {/* DOCUMENTAÇÃO (SEM MODIFICAÇÃO): Estatísticas (Prova Social) */}
-          {/* ================================================================== */}
+          
+          {/* Estatísticas (Prova Social) */}
           <dl className="hero-stats mt-12 grid gap-6 text-sm sm:grid-cols-3">
             <div>
               <dt className="text-neutral-400">Deploys assistidos por IA</dt>
@@ -270,16 +324,9 @@ export function HeroSection() {
               <dd className="mt-1 text-2xl font-semibold">99.98%</dd>
             </div>
           </dl>
-
-          {/* ================================================================== */}
-          {/* DOCUMENTAÇÃO (MODIFICAÇÃO 6): CARDS DE PROCESSO (OPÇÃO 3)
-           *
-           * Substituí o jargão técnico (Discovery, Observabilidade, Cinemática)
-           * pelos 3 Pilares de Processo focados no cliente.
-           * ================================================================== */}
+          
+          {/* Cards de Processo */}
           <div className="mt-10 grid gap-4 rounded-3xl border border-white/20 bg-white/5 p-6 text-xs uppercase tracking-[0.35em] text-neutral-300 sm:grid-cols-2 lg:grid-cols-3">
-            
-            {/* CARD 1: ENTENDER PARA CONSTRUIR */}
             <div>
               <span className="text-neutral-400">Entender para Construir</span>
               <p className="mt-2 text-sm normal-case text-white">
@@ -287,8 +334,6 @@ export function HeroSection() {
                 garantir que a tecnologia proposta seja a solução perfeita para o seu crescimento.
               </p>
             </div>
-            
-            {/* CARD 2: CONSTRUIR COM QUALIDADE */}
             <div>
               <span className="text-neutral-400">Construir com Qualidade</span>
               <p className="mt-2 text-sm normal-case text-white">
@@ -296,8 +341,6 @@ export function HeroSection() {
                 projeto seja seguro, escalável e fácil de manter no futuro.
               </p>
             </div>
-            
-            {/* CARD 3: DESIGN QUE GERA VALOR */}
             <div>
               <span className="text-neutral-400">Design que Gera Valor</span>
               <p className="mt-2 text-sm normal-case text-white">
@@ -308,14 +351,9 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* ================================================================== */}
-        {/* DOCUMENTAÇÃO (MODIFICAÇÃO 7): CARDS DE SERVIÇOS (OS 3 PILARES)
-         *
-         * Substituí o jargão técnico (Stack, Governança, Squads)
-         * pelos 3 Pilares de Serviço da Mirage Script.
-         * ================================================================== */}
+        {/* Coluna da Direita (Cards de Serviço) */}
         <div className="space-y-6">
-          
+
           {/* CARD 1: DESENVOLVIMENTO WEB */}
           <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
@@ -328,7 +366,7 @@ export function HeroSection() {
               <li>Sistemas de Gestão de Conteúdo (CMS)</li>
             </ul>
           </div>
-          
+
           {/* CARD 2: APLICAÇÕES MOBILE */}
           <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
@@ -341,7 +379,7 @@ export function HeroSection() {
               <li>Integração com APIs e Serviços</li>
             </ul>
           </div>
-          
+
           {/* CARD 3: SOFTWARE E ECOSSISTEMAS */}
           <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
@@ -354,7 +392,7 @@ export function HeroSection() {
               <li>Consultoria e Arquitetura de Software</li>
             </ul>
           </div>
-          
+
         </div>
       </div>
     </section>
