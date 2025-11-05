@@ -3,7 +3,7 @@ import { useReducedMotion } from 'framer-motion';
 import { Application, BLEND_MODES, Container, Graphics, Sprite } from 'pixi.js';
 import { useEffect, useRef } from 'react';
 
-import { usePerformanceBudget } from '@/lib/metrics';
+
 
 interface PixiMarqueeParticlesProps {
   className?: string;
@@ -13,10 +13,9 @@ export function PixiMarqueeParticles({ className = '' }: PixiMarqueeParticlesPro
   const prefersReducedMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const appRef = useRef<Application | null>(null);
-  const isBudgetLimited = usePerformanceBudget(50, 4);
 
   useEffect(() => {
-    if (prefersReducedMotion || isBudgetLimited) {
+    if (prefersReducedMotion) {
       return;
     }
 
@@ -111,7 +110,7 @@ export function PixiMarqueeParticles({ className = '' }: PixiMarqueeParticlesPro
         container.removeChild(view);
       }
     };
-  }, [isBudgetLimited, prefersReducedMotion]);
+  }, [prefersReducedMotion]);
 
   return <div ref={containerRef} className={clsx('pointer-events-none', className)} aria-hidden />;
 }

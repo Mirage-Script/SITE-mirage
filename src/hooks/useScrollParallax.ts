@@ -2,7 +2,7 @@ import { useReducedMotion } from 'framer-motion';
 import { RefObject, useEffect } from 'react';
 
 import { gsap, ScrollTrigger } from '@/lib/gsap';
-import { usePerformanceBudget } from '@/lib/metrics';
+
 
 interface ScrollParallaxOptions {
   axis?: 'x' | 'y';
@@ -31,7 +31,6 @@ export function useScrollParallax(
   }: ScrollParallaxOptions = {}
 ) {
   const prefersReducedMotion = useReducedMotion();
-  const isBudgetLimited = usePerformanceBudget();
 
   useEffect(() => {
     const element = targetRef.current;
@@ -39,7 +38,7 @@ export function useScrollParallax(
       return;
     }
 
-    if (disabled || prefersReducedMotion || isBudgetLimited) {
+    if (disabled || prefersReducedMotion) {
       gsap.set(element, { [axis]: 0 });
       return;
     }
@@ -71,5 +70,5 @@ export function useScrollParallax(
         }
       });
     };
-  }, [axis, disabled, ease, end, intensity, isBudgetLimited, prefersReducedMotion, scrub, start, targetRef]);
+  }, [axis, disabled, ease, end, intensity, prefersReducedMotion, scrub, start, targetRef]);
 }

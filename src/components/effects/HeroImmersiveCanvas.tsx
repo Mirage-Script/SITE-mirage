@@ -7,7 +7,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 import type { Group, Mesh } from 'three';
 
-import { usePerformanceBudget } from '@/lib/metrics';
+
 
 interface HeroImmersiveCanvasProps {
   className?: string;
@@ -121,13 +121,12 @@ function HeroScene() {
 export function HeroImmersiveCanvas({ className = '' }: HeroImmersiveCanvasProps) {
   const prefersReducedMotion = useReducedMotion();
   const [isClient, setIsClient] = useState(false);
-  const isBudgetLimited = usePerformanceBudget(48, 3);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  if (prefersReducedMotion || !isClient || isBudgetLimited) {
+  if (prefersReducedMotion || !isClient) {
     return null;
   }
 
