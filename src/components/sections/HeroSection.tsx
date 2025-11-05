@@ -1,6 +1,6 @@
 // src/components/sections/HeroSection.tsx (FINALIZADO - Todos os textos atualizados)
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import SplitType from 'split-type';
 import Typed from 'typed.js';
@@ -9,8 +9,10 @@ import { HeroImmersiveCanvas } from '@/components/effects/HeroImmersiveCanvas';
 import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
-import { gsap, ScrollTrigger, useGsapTimeline } from '@/lib/gsap';
-import { ANIM } from '@/lib/animTokens'; // Corrigido (o seu paste tinha um typo aqui)
+import { useScrollParallax } from '@/hooks/useScrollParallax';
+import { useSectionReveal } from '@/hooks/useSectionReveal';
+import { ANIM } from '@/lib/animTokens';
+import { gsap, useGsapTimeline } from '@/lib/gsap';
 
 import { Button } from '../ui/Button';
 
@@ -31,6 +33,9 @@ export function HeroSection() {
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const primaryCtaRef = useRef<TextScrambleHandle | null>(null);
   const secondaryCtaRef = useRef<TextScrambleHandle | null>(null);
+  const accentParallaxRef = useRef<HTMLDivElement | null>(null);
+  const accentParallaxSecondaryRef = useRef<HTMLDivElement | null>(null);
+  const heroSectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -63,6 +68,27 @@ export function HeroSection() {
       typedInstance.current = null;
     };
   }, [prefersReducedMotion]);
+
+  useScrollParallax(accentParallaxRef, {
+    intensity: 120,
+    scrub: 1.1,
+    ease: 'power1.out',
+  });
+  useScrollParallax(accentParallaxSecondaryRef, {
+    axis: 'x',
+    intensity: 90,
+    scrub: 1,
+    ease: 'power1.out',
+  });
+
+  useSectionReveal(heroSectionRef, {
+    targets: ['.hero-card'],
+    y: 72,
+    stagger: 0.14,
+    once: false,
+    from: { y: 80, opacity: 0, rotateX: -10, transformPerspective: 1000 },
+    to: { y: 0, opacity: 1, rotateX: 0, transformPerspective: 1000, duration: 1.05, ease: 'power4.out' },
+  });
 
   // ... (Toda a lógica de animação GSAP e useEffects permanece intacta) ...
 
@@ -120,37 +146,15 @@ export function HeroSection() {
     sectionRef,
   );
 
-  useEffect(() => {
-    if (prefersReducedMotion || !sectionRef.current) {
-      return;
-    }
-    const cards = sectionRef.current.querySelectorAll('.hero-card');
-    const triggers: ScrollTrigger[] = [];
-    cards.forEach((card) => {
-      const trigger = ScrollTrigger.create({
-        trigger: card,
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo(
-            card,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          );
-        },
-      });
-      triggers.push(trigger);
-    });
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-    };
-  }, [prefersReducedMotion]);
-
   // ==================================================================
   // INÍCIO DO CONTEÚDO (HTML/JSX)
   // ==================================================================
   return (
     <section
-      ref={sectionRef}
+      ref={(node: HTMLDivElement | null) => {
+        sectionRef.current = node;
+        heroSectionRef.current = node;
+      }}
       className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
     >
       {/* ... (Efeitos visuais de fundo) ... */}
@@ -158,8 +162,16 @@ export function HeroSection() {
       <div className="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
       <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" />
       <ShaderAurora className="pointer-events-none absolute inset-0 mix-blend-screen opacity-80" />
-      <div className="pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
-      <div className="pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
+      <div
+        ref={accentParallaxRef}
+        className="pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow"
+        aria-hidden
+      />
+      <div
+        ref={accentParallaxSecondaryRef}
+        className="pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow"
+        aria-hidden
+      />
 
       <div className="relative grid gap-10 lg:grid-cols-[3fr_2fr]">
         <div>
@@ -305,11 +317,7 @@ export function HeroSection() {
         <div className="space-y-6">
           
           {/* CARD 1: DESENVOLVIMENTO WEB */}
-          <motion.div
-            className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-            whileHover={{ y: -12, boxShadow: '0 20px 45px -20px rgba(74,123,167,0.6)' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-          >
+          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Desenvolvimento Web
             </p>
@@ -319,14 +327,10 @@ export function HeroSection() {
               <li>Landing Pages Otimizadas (SEO)</li>
               <li>Sistemas de Gestão de Conteúdo (CMS)</li>
             </ul>
-          </motion.div>
+          </div>
           
           {/* CARD 2: APLICAÇÕES MOBILE */}
-          <motion.div
-            className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-            whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(15,58,102,0.6)' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-          >
+          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Aplicações Mobile
             </p>
@@ -336,14 +340,10 @@ export function HeroSection() {
               <li>Design focado na Experiência (UX/UI)</li>
               <li>Integração com APIs e Serviços</li>
             </ul>
-          </motion.div>
+          </div>
           
           {/* CARD 3: SOFTWARE E ECOSSISTEMAS */}
-          <motion.div
-            className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
-            whileHover={{ y: -12, boxShadow: '0 24px 50px -24px rgba(74,123,167,0.6)' }}
-            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-          >
+          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Software e Ecossistemas
             </p>
@@ -353,7 +353,7 @@ export function HeroSection() {
               <li>Arquitetura de APIs (Microsserviços)</li>
               <li>Consultoria e Arquitetura de Software</li>
             </ul>
-          </motion.div>
+          </div>
           
         </div>
       </div>

@@ -1,19 +1,47 @@
 // src/components/sections/CaseShowcase.tsx (MODIFICADO - Projeto Destaque)
 
-import { motion, useReducedMotion } from 'framer-motion';
-// DOCUMENTAÇÃO: Importamos o ícone de Check (✓) para o nosso checklist
 import { CheckIcon } from '@heroicons/react/24/outline';
-// DOCUMENTAÇÃO: Removemos 'caseStudies' e 'gsap'.
+import { useRef } from 'react';
+
+import { useScrollParallax } from '@/hooks/useScrollParallax';
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 
 export function CaseShowcase() {
-  const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const artworkRef = useRef<HTMLDivElement | null>(null);
 
-  // DOCUMENTAÇÃO: Removemos o 'useEffect' do GSAP pois
-  // agora temos uma animação 'framer-motion' mais simples.
+  useSectionReveal(sectionRef, {
+    targets: ['.case-badge', '.case-title', '.case-lead'],
+    y: 40,
+    stagger: 0.12,
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.case-banner'],
+    y: 64,
+    stagger: 0.12,
+    from: { y: 80, opacity: 0, rotateX: -8, transformPerspective: 1000, filter: 'blur(8px)' },
+    to: { y: 0, opacity: 1, rotateX: 0, transformPerspective: 1000, filter: 'blur(0px)', duration: 1.1, ease: 'power4.out' },
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.case-point'],
+    y: 32,
+    stagger: 0.1,
+    once: false,
+    from: { y: 24, opacity: 0, x: -12 },
+    to: { y: 0, opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' },
+  });
+
+  useScrollParallax(artworkRef, {
+    intensity: 110,
+    scrub: 1.1,
+    ease: 'power2.out',
+  });
 
   return (
     // DOCUMENTAÇÃO: Adicionamos o 'max-w-7xl' para centralizar
-    <section className="mt-24 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+    <section ref={sectionRef} className="mt-24 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
       
       {/* ==================================================================
        * DOCUMENTAÇÃO (NOVOS TÍTULOS)
@@ -21,11 +49,11 @@ export function CaseShowcase() {
        * e alinhámos o texto com a nossa estratégia 100% autêntica.
        * ================================================================== */}
       <div className="text-center">
-        <p className="text-xs uppercase tracking-[0.4em] text-primary">PROJETO EM DESTAQUE</p>
-        <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
+        <p className="case-badge text-xs uppercase tracking-[0.4em] text-primary">PROJETO EM DESTAQUE</p>
+        <h2 className="case-title mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
           Nosso Código em Ação.
         </h2>
-        <p className="mt-4 max-w-2xl mx-auto text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="case-lead mt-4 mx-auto max-w-2xl text-sm text-neutral-600 dark:text-neutral-300">
           Acreditamos que o código fala por si.
           Este é um projeto de e-commerce de alta performance construído do zero, demonstrando a nossa expertise em arquitetura e experiência do usuário.
         </p>
@@ -39,19 +67,18 @@ export function CaseShowcase() {
        * "embrulha" o nosso banner inteiro, como você sugeriu.
        * 3. O 'href' aponta para o site real.
        * ================================================================== */}
-      <motion.a
+      <a
         href="https://casadascamisetasoficial.com.br/"
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-12 grid grid-cols-1 items-center gap-8 overflow-hidden rounded-3xl border border-neutral-200 bg-white/90 p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-primary/40 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40 lg:grid-cols-2 lg:gap-16 lg:p-12"
-        initial={prefersReducedMotion ? undefined : { opacity: 0, y: 50 }}
-        whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="case-banner mt-12 grid grid-cols-1 items-center gap-8 overflow-hidden rounded-3xl border border-neutral-200 bg-white/90 p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:border-primary/40 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40 lg:grid-cols-2 lg:gap-16 lg:p-12"
       >
-        
+
         {/* COLUNA DA ESQUERDA (A IMAGEM) */}
-        <div className="overflow-hidden rounded-xl border-2 border-neutral-300 shadow-md dark:border-neutral-700">
+        <div
+          ref={artworkRef}
+          className="overflow-hidden rounded-xl border-2 border-neutral-300 shadow-md dark:border-neutral-700"
+        >
           <img
             // DOCUMENTAÇÃO: Verifique se este é o caminho para a sua screenshot!
             src="/images/casadascamisetas.png"
@@ -74,25 +101,25 @@ export function CaseShowcase() {
 
           {/* CHECKLIST (PROVA REAL) */}
           <ul className="mt-6 space-y-3">
-            <li className="flex items-start gap-3">
+            <li className="case-point flex items-start gap-3">
               <CheckIcon className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent" />
               <span className="text-sm text-neutral-700 dark:text-neutral-200">
                 Plataforma de E-commerce 100% Customizada
               </span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="case-point flex items-start gap-3">
               <CheckIcon className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent" />
               <span className="text-sm text-neutral-700 dark:text-neutral-200">
                 Design Otimizado para Conversão (Mobile-First)
               </span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="case-point flex items-start gap-3">
               <CheckIcon className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent" />
               <span className="text-sm text-neutral-700 dark:text-neutral-200">
                 Integração Segura com Meios de Pagamento
               </span>
             </li>
-            <li className="flex items-start gap-3">
+            <li className="case-point flex items-start gap-3">
               <CheckIcon className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent" />
               <span className="text-sm text-neutral-700 dark:text-neutral-200">
                 SEO Técnico para melhor ranking no Google
@@ -100,8 +127,8 @@ export function CaseShowcase() {
             </li>
           </ul>
         </div>
-        
-      </motion.a>
+
+      </a>
     </section>
   );
 }

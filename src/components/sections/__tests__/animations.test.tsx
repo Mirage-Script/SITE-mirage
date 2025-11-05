@@ -1,12 +1,12 @@
+import { describe, expect, it } from '@jest/globals';
 import { render } from '@testing-library/react';
-import { describe, it, expect } from '@jest/globals';
 
-import { StatsCounter } from '../StatsCounter';
-import { TestimonialsCarousel } from '../TestimonialsCarousel';
-import { ServicesOverview } from '../ServicesOverview';
 import { CaseShowcase } from '../CaseShowcase';
 import { DeliveryPlaybook } from '../DeliveryPlaybook';
 import { OperationalHighlights } from '../OperationalHighlights';
+import { ServicesOverview } from '../ServicesOverview';
+import { StatsCounter } from '../StatsCounter';
+import { TestimonialsCarousel } from '../TestimonialsCarousel';
 
 describe('Animation Components - Tokens Applied', () => {
   it('StatsCounter renders without errors', () => {

@@ -2,7 +2,6 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 import { gsap } from '@/lib/gsap';
-import { ANIM } from '@/lib/animTokens';
 import { revealDefaults } from '@/lib/scroll';
 interface SmoothScrollRevealProps {
   children: React.ReactNode;

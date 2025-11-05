@@ -4,10 +4,17 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 import { gsap } from '@/lib/gsap';
 
 export function ContactCTA() {
   const sectionRef = useRef<HTMLElement | null>(null);
+
+  useSectionReveal(sectionRef, {
+    targets: ['.cta-badge', '.cta-title', '.cta-copy', '.cta-action', '.cta-meta'],
+    y: 40,
+    stagger: 0.12,
+  });
 
   useEffect(() => {
     if (!sectionRef.current) {
@@ -50,13 +57,13 @@ export function ContactCTA() {
       />
       <div className="relative flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.4em] text-accent">Próximo passo</p>
+          <p className="cta-badge text-xs uppercase tracking-[0.4em] text-accent">Próximo passo</p>
           
           {/* ==================================================================
            * DOCUMENTAÇÃO (MODIFICAÇÃO DO TÍTULO)
            * Trocamos o título focado em "roadmap" por um mais direto.
            * ================================================================== */}
-          <h2 className="mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
+          <h2 className="cta-title mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
             Pronto para Começar?
           </h2>
           
@@ -65,7 +72,7 @@ export function ContactCTA() {
            * Removemos o jargão de "squads" e destacamos a sessão "sem custo"
            * e o acesso direto aos "fundadores".
            * ================================================================== */}
-          <p className="mt-4 max-w-2xl text-sm text-neutral-200">
+          <p className="cta-copy mt-4 max-w-2xl text-sm text-neutral-200">
             Tem um desafio ou uma nova ideia? Agende uma sessão estratégica **sem custo**,
             diretamente com os nossos fundadores, e vamos desenhar a solução técnica ideal para o seu negócio.
           </p>
@@ -79,12 +86,12 @@ export function ContactCTA() {
            * ================================================================== */}
           <NavLink
             to="/contato"
-            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-neutral-900 shadow-subtle transition hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+            className="cta-action inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-neutral-900 shadow-subtle transition hover:bg-neutral-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           >
             Agendar uma Reunião
           </NavLink>
           
-          <span className="text-xs uppercase tracking-[0.4em] text-neutral-400">
+          <span className="cta-meta text-xs uppercase tracking-[0.4em] text-neutral-400">
             Tempo de resposta em até 12h
           </span>
         </div>

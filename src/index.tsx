@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import { QueryProvider } from './providers/QueryProvider';
+import { SmoothScrollProvider } from './providers/SmoothScrollProvider';
 import { ThemeProvider } from './providers/ThemeProvider';
 
 import './index.css';
@@ -23,7 +24,9 @@ root.render(
       <QueryProvider>
         <ThemeProvider>
           <BrowserRouter>
-            <App />
+            <SmoothScrollProvider>
+              <App />
+            </SmoothScrollProvider>
           </BrowserRouter>
         </ThemeProvider>
       </QueryProvider>

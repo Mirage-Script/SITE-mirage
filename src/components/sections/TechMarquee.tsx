@@ -1,26 +1,38 @@
 // src/components/sections/TechMarquee.tsx (Revertido para Layout 100%)
 
+import { useRef } from 'react';
+
 import { PixiMarqueeParticles } from '@/components/effects/PixiMarqueeParticles';
 import { techMarqueeItems } from '@/data/highlights';
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 
 export function TechMarquee() {
+  const sectionRef = useRef<HTMLElement | null>(null);
   const items = [...techMarqueeItems, ...techMarqueeItems];
+
+  useSectionReveal(sectionRef, {
+    targets: ['.tech-marquee-intro', '.marquee-item'],
+    y: 64,
+    stagger: 0.1,
+    from: { y: 80, opacity: 0, filter: 'blur(12px)' },
+    to: { y: 0, opacity: 1, filter: 'blur(0px)', duration: 1, ease: 'power3.out' },
+  });
 
   return (
     // DOCUMENTAÇÃO: O "wrapper" de layout foi removido
     // para que a secção volte a ocupar 100% da largura.
-    <section className="mt-24">
+    <section ref={sectionRef} className="mt-24">
       <div className="relative overflow-hidden rounded-[2.5rem] border border-neutral-200 bg-white/80 shadow-sm dark:border-neutral-800 dark:bg-neutral-900/60">
         <PixiMarqueeParticles className="absolute inset-0 opacity-60 mix-blend-screen" />
         <div className="relative z-10 p-6">
           <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
+            <div className="tech-marquee-intro space-y-2">
               <p className="text-xs uppercase tracking-[0.4em] text-primary">Stack vivo</p>
-              <h2 className="mt-2 text-2xl font-semibold text-neutral-900 dark:text-neutral-50">
+              <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">
                 Tecnologias que rodamos todos os dias.
               </h2>
             </div>
-            <p className="max-w-md text-sm text-neutral-600 dark:text-neutral-300">
+            <p className="tech-marquee-intro max-w-md text-sm text-neutral-600 dark:text-neutral-300">
               Mais do que buzzwords, esta é a nossa stack de produção. Usamos estas ferramentas diariamente para construir, escalar e modernizar aplicações robustas.
             </p>
           </div>

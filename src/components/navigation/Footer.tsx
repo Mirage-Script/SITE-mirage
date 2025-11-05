@@ -4,11 +4,10 @@ import { EnvelopeIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline
 import { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { gsap } from '@/lib/gsap';
-// ==================================================================
-// DOCUMENTAÇÃO: Importamos o logo e definimos a localização correta
-// ==================================================================
 import logoMirage from '@/assets/logotipo.png';
+import { gsap } from '@/lib/gsap';
+
+const logoSrc = logoMirage;
 
 const footerLinks = [
   {
@@ -67,7 +66,7 @@ export function Footer() {
              * Usamos h-14 w-14 (56px) e removemos as classes de sombra.
              * ================================================================== */}
             <img
-              src={logoMirage}
+              src={logoSrc}
               alt="Mirage Script Logo"
               width={56}
               height={56}

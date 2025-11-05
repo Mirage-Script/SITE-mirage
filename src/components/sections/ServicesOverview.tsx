@@ -1,50 +1,31 @@
 // src/components/sections/ServicesOverview.tsx (Correção Final de Layout)
 
 import clsx from 'clsx';
-import { useReducedMotion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { services } from '@/data/services';
-import { gsap, ScrollTrigger } from '@/lib/gsap';
-import { ANIM, prefersReducedMotion as checkReducedMotion } from '@/lib/animTokens';
+import { useSectionReveal } from '@/hooks/useSectionReveal';
+
 import { MagneticButton } from '../effects/MagneticButton';
 import { Button } from '../ui/Button';
 
 export function ServicesOverview() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const framerReducedMotion = useReducedMotion();
 
-  useEffect(() => {
-    // ... (Lógica de animação GSAP permanece a mesma) ...
-    if (framerReducedMotion || checkReducedMotion() || !sectionRef.current) {
-      return;
-    }
-    const cards = sectionRef.current.querySelectorAll('.service-card');
-    const triggers: ScrollTrigger[] = [];
-    cards.forEach((card, index) => {
-      const tween = gsap.fromTo(
-        card,
-        { y: ANIM.distance.y.md, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: ANIM.duration.md,
-          ease: ANIM.ease.out,
-          delay: index * 0.08,
-        },
-      );
-      const trigger = ScrollTrigger.create({
-        trigger: card,
-        start: ANIM.scroll.start,
-        animation: tween,
-        once: true,
-      });
-      triggers.push(trigger);
-    });
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-    };
-  }, []);
+  useSectionReveal(sectionRef, {
+    targets: ['.services-badge', '.services-title', '.services-intro'],
+    y: 36,
+    stagger: 0.16,
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.service-card'],
+    y: 72,
+    stagger: 0.12,
+    once: false,
+    from: { y: 72, opacity: 0, rotateX: -6 },
+    to: { y: 0, opacity: 1, rotateX: 0, duration: 1, ease: 'power3.out' },
+  });
 
   // ==================================================================
   // DOCUMENTAÇÃO (CORREÇÃO 1: CARDS "FINOS")
@@ -55,14 +36,14 @@ export function ServicesOverview() {
   // ==================================================================
   return (
     <section ref={sectionRef} className="mt-24 px-6 sm:px-10 lg:px-16">
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div className="services-heading flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="text-xs uppercase tracking-[0.4em] text-primary">Serviços</p>
-          <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
+          <p className="services-badge text-xs uppercase tracking-[0.4em] text-primary">Serviços</p>
+          <h2 className="services-title mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
             Soluções de Software de Ponta a Ponta.
           </h2>
         </div>
-        <p className="max-w-2xl text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="services-intro max-w-2xl text-sm text-neutral-600 dark:text-neutral-300">
           Cobrimos o ciclo de vida completo do seu produto. Da arquitetura inicial ao deploy final, o nosso processo garante uma solução robusta, segura e focada no retorno do seu investimento.
         </p>
       </div>

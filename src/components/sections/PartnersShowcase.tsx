@@ -1,8 +1,8 @@
+import { BuildingOffice2Icon, ChartBarIcon, CloudIcon, ComputerDesktopIcon, Cog6ToothIcon, CpuChipIcon, LockClosedIcon, RocketLaunchIcon } from '@heroicons/react/24/outline';
 import { useEffect, useRef } from 'react';
 
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
-
-import { BuildingOffice2Icon, RocketLaunchIcon, ChartBarIcon, CloudIcon, LockClosedIcon, CpuChipIcon, Cog6ToothIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
 
 const partners = [
   { id: 1, name: 'TechCorp', Icon: BuildingOffice2Icon },
@@ -17,6 +17,14 @@ const partners = [
 
 export function PartnersShowcase() {
   const sectionRef = useRef<HTMLElement | null>(null);
+
+  useSectionReveal(sectionRef, {
+    targets: ['.partner-heading', '.partner-logo'],
+    y: 48,
+    stagger: 0.08,
+    from: { y: 48, opacity: 0, scale: 0.92 },
+    to: { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out' },
+  });
 
   useEffect(() => {
     if (!sectionRef.current) {
@@ -45,8 +53,8 @@ export function PartnersShowcase() {
           delay: index * 0.08
         }
       );
-      if ((intro as any).scrollTrigger) {
-        localTriggers.push((intro as any).scrollTrigger as ScrollTrigger);
+      if (intro.scrollTrigger) {
+        localTriggers.push(intro.scrollTrigger);
       }
 
       const floatTrig = ScrollTrigger.create({
@@ -74,7 +82,7 @@ export function PartnersShowcase() {
   return (
     <section ref={sectionRef} className="mt-24">
       <div className="rounded-[2.5rem] border border-neutral-200 bg-white p-12 dark:border-neutral-800 dark:bg-neutral-900">
-        <div className="mb-10 text-center">
+        <div className="partner-heading mb-10 text-center">
           <p className="text-xs uppercase tracking-[0.4em] text-primary">Ecossistema</p>
           <h2 className="mt-3 text-2xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-3xl">
             Confiança de marcas enterprise e scale-ups

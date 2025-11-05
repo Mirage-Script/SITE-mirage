@@ -1,6 +1,8 @@
 // src/components/sections/StatsCounter.tsx (MODIFICADO com nova ordem e descrição)
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 
 // ==================================================================
 // DOCUMENTAÇÃO (MODIFICAÇÃO DOS DADOS)
@@ -36,29 +38,41 @@ const teamCards = [
 ];
 
 export function StatsCounter() {
-  // A lógica do componente permanece a mesma
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  useSectionReveal(sectionRef, {
+    targets: ['.stats-badge', '.stats-title'],
+    y: 32,
+    stagger: 0.14,
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.stats-card'],
+    y: 64,
+    stagger: 0.18,
+    once: false,
+    from: { y: 64, opacity: 0, rotateX: -10, transformPerspective: 800 },
+    to: { y: 0, opacity: 1, rotateX: 0, transformPerspective: 800, duration: 1, ease: 'power3.out' },
+  });
 
   return (
-    <section className="mt-24">
+    <section ref={sectionRef} className="mt-24">
       <div className="rounded-[2.5rem] border border-neutral-200 bg-gradient-to-br from-neutral-50 to-white p-12 shadow-subtle dark:border-neutral-800 dark:from-neutral-900 dark:to-neutral-800">
         {/* Títulos da Secção */}
         <div className="mb-10 text-center">
-          <p className="text-xs uppercase tracking-[0.4em] text-primary">LIDERANÇA TÉCNICA</p>
-          <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
+          <p className="stats-badge text-xs uppercase tracking-[0.4em] text-primary">LIDERANÇA TÉCNICA</p>
+          <h2 className="stats-title mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
             As Mentes por Trás do Código.
           </h2>
         </div>
 
         {/* Grid de 3 colunas */}
         <dl className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {teamCards.map((card, index) => (
-            <motion.div
+          {teamCards.map((card) => (
+            <div
               key={card.title}
-              className="group flex h-full flex-col items-center gap-4 rounded-3xl border border-neutral-200 bg-white p-8 text-center shadow-sm transition-all hover:scale-105 hover:shadow-subtle dark:border-neutral-700 dark:bg-neutral-900"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.1 }}
+              className="stats-card group flex h-full flex-col items-center gap-4 rounded-3xl border border-neutral-200 bg-white p-8 text-center shadow-sm transition-all hover:-translate-y-1.5 hover:shadow-subtle dark:border-neutral-700 dark:bg-neutral-900"
+              style={{ transformStyle: 'preserve-3d' }}
             >
               {/* Imagem (tag <img> padrão) */}
               <img
@@ -99,7 +113,7 @@ export function StatsCounter() {
                 </svg>
                 {card.linkLabel}
               </a>
-            </motion.div>
+            </div>
           ))}
         </dl>
       </div>

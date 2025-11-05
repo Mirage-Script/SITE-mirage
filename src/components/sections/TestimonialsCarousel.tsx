@@ -1,7 +1,9 @@
+import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
+import { useSectionReveal } from '@/hooks/useSectionReveal';
 import { gsap, ScrollTrigger } from '@/lib/gsap';
-import { UserCircleIcon } from '@heroicons/react/24/solid';
 
 const testimonials = [
   {
@@ -32,47 +34,66 @@ const testimonials = [
 
 export function TestimonialsCarousel() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  useSectionReveal(sectionRef, {
+    targets: ['.testimonials-badge', '.testimonials-title', '.testimonials-copy'],
+    y: 32,
+    stagger: 0.12,
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.testimonial-card'],
+    y: 72,
+    stagger: 0.18,
+    once: false,
+    from: { y: 72, opacity: 0, rotateX: -14, transformPerspective: 900 },
+    to: { y: 0, opacity: 1, rotateX: 0, transformPerspective: 900, duration: 1.1, ease: 'power4.out' },
+  });
 
   useEffect(() => {
-    if (!sectionRef.current) {
+    if (!sectionRef.current || prefersReducedMotion) {
       return;
     }
 
     const cards = sectionRef.current.querySelectorAll('.testimonial-card');
+    const floatTweens: gsap.core.Tween[] = [];
+    const floatTriggers: ScrollTrigger[] = [];
 
-    cards.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, y: 50, rotateX: -15 },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            once: true
-          },
-          delay: index * 0.15
-        }
-      );
+    cards.forEach((card) => {
+      const element = card as HTMLElement;
+      const trigger = ScrollTrigger.create({
+        trigger: element,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          const tween = gsap.to(element, {
+            y: '-=12',
+            duration: gsap.utils.random(2.2, 3),
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+          });
+          floatTweens.push(tween);
+        },
+      });
+      floatTriggers.push(trigger);
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      floatTriggers.forEach((t) => t.kill());
+      floatTweens.forEach((tween) => tween.kill());
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <section ref={sectionRef} className="mt-24">
       <div className="mb-12 text-center">
-        <p className="text-xs uppercase tracking-[0.4em] text-primary">Depoimentos</p>
-        <h2 className="mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
+        <p className="testimonials-badge text-xs uppercase tracking-[0.4em] text-primary">Depoimentos</p>
+        <h2 className="testimonials-title mt-3 text-3xl font-semibold text-neutral-900 dark:text-neutral-50 sm:text-4xl">
           O que lideranças técnicas dizem sobre nós
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-sm text-neutral-600 dark:text-neutral-300">
+        <p className="testimonials-copy mx-auto mt-4 max-w-2xl text-sm text-neutral-600 dark:text-neutral-300">
           Feedback de CTOs, heads e VPs que confiam na MIRAGE para entregar produtos críticos de negócio.
         </p>
       </div>

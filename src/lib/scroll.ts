@@ -1,8 +1,14 @@
-import { ScrollTrigger } from './gsap';
 import { ANIM, prefersReducedMotion } from './animTokens';
+import { ScrollTrigger } from './gsap';
+
+interface LenisController {
+  on(event: 'scroll', handler: (event: unknown) => void): (() => void) | undefined;
+  raf(time: number): void;
+  destroy(): void;
+}
 
 // Helper to wire Lenis scroll with ScrollTrigger in one place if needed elsewhere
-export function bindLenisToScrollTrigger(lenis: { on: Function; raf: Function; destroy: Function }) {
+export function bindLenisToScrollTrigger(lenis: LenisController) {
   const off = lenis.on('scroll', () => ScrollTrigger.update());
   let rafId: number;
   const raf = (time: number) => {
