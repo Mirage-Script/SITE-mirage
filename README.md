@@ -47,7 +47,6 @@ O projeto integra recursos avançados para uma experiência *premium*:
 * **Animações Avançadas:**
     * Seção **Hero** com animações GSAP/A11y, fundo com `Shader-doodle` (shaders GLSL) e botões magnéticos (`MagneticButton`) com `TextScramble`.
     * Marquee técnico implementado com **PixiJS** para alta performance.
-* **Performance Adaptativa:** O `usePerformanceBudget` monitora ativamente o FPS e aciona *fallbacks* (alternativas de menor consumo) para garantir uma boa experiência em dispositivos com recursos limitados.
 * **Acessibilidade e Usabilidade:** Cursor customizado, *scroll* suave com Lenis e `React Hot Toast` para feedback instantâneo nos formulários.
 
 ## 💻 Scripts Disponíveis
