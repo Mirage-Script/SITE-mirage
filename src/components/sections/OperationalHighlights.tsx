@@ -1,11 +1,21 @@
-// src/components/sections/OperationalHighlights.tsx (MODIFICADO - Mais Margem Acima da Animação)
+// src/components/sections/OperationalHighlights.tsx
 
 import { CheckIcon } from '@heroicons/react/24/outline';
 import { useRef } from 'react';
 
+// ==================================================================
+// * CORREÇÃO FINAL: CAMINHO RELATIVO AJUSTADO
+// * O caminho correto é: '../effects/OrbitAnimation'
+// ==================================================================
+import { OrbitAnimation } from '../effects/OrbitAnimation'; 
+
 import logoMirage from '@/assets/logotipo.png';
 
 export function OperationalHighlights() {
+  // CORREÇÃO #1: DECLARAÇÃO DOS useRef
+  const sectionRef = useRef(null);
+  const logoRef = useRef(null);
+
   return (
     <section ref={sectionRef} className="mt-24 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
       
@@ -17,13 +27,7 @@ export function OperationalHighlights() {
         </h2>
       </div>
 
-      {/* ==================================================================
-       * DOCUMENTAÇÃO (A CORREÇÃO)
-       *
-       * Aumentámos a margem superior de "mt-16" (4rem) para "mt-32" (8rem).
-       * Isto empurra a secção da animação para baixo,
-       * dando mais espaço para os títulos.
-       * ================================================================== */}
+      {/* DOCUMENTAÇÃO */}
       <div className="mt-32 grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         
         {/* COLUNA DA ESQUERDA (O VISUAL) */}

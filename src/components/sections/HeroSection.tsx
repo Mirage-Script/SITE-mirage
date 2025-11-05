@@ -1,12 +1,16 @@
-// src/components/sections/HeroSection.tsx (RESTAURADO para a Versão Estável)
+// src/components/sections/HeroSection.tsx (CORRIGIDO)
 
 import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import SplitType from 'split-type';
 import Typed from 'typed.js';
 
-// DOCUMENTAÇÃO: Removemos a "neve" (HeroImmersiveCanvas)
-// mas RE-ADICIONÁMOS a "Aurora" (ShaderAurora)
+// ==================================================================
+// * CORREÇÃO: IMPORTAÇÃO E REGISTRO DO SCROLLTRIGGER
+// * 1. Importar o ScrollTrigger
+// * 2. Chamar gsap.registerPlugin(ScrollTrigger)
+// ==================================================================
+import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
 import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
@@ -16,6 +20,10 @@ import { ANIM } from '@/lib/animTokens';
 import { gsap, useGsapTimeline } from '@/lib/gsap';
 
 import { Button } from '../ui/Button';
+
+
+// Passo Crucial: Registrar o plugin GSAP antes de ser usado
+gsap.registerPlugin(ScrollTrigger); 
 
 // (Removida a importação de ParticleLogo)
 
@@ -74,6 +82,7 @@ export function HeroSection() {
     const cards = sectionRef.current.querySelectorAll('.hero-card');
     const triggers: ScrollTrigger[] = [];
     cards.forEach((card) => {
+      // ESTA SEÇÃO AGORA TEM ACESSO A SCROLLTRIGGER
       const trigger = ScrollTrigger.create({
         trigger: card,
         start: 'top 80%',
@@ -98,9 +107,9 @@ export function HeroSection() {
   //
   // 1. O 'useEffect' de paralaxe separado foi REMOVIDO.
   // 2. A lógica de paralaxe (gsap.to com scrub: true) foi MOVIDA
-  //    PARA DENTRO deste 'useGsapTimeline'.
+  //    PARA DENTRO deste 'useGsapTimeline'.
   // 3. As novas animações de paralaxe foram ADICIONADAS ao
-  //    'context.add()' para uma limpeza (cleanup) correta.
+  //    'context.add()' para uma limpeza (cleanup) correta.
   // ==================================================================
   useGsapTimeline(
     (context) => {
@@ -157,6 +166,8 @@ export function HeroSection() {
   );
 
   // ... (Hook useEffect das animações de ENTRADA dos cards permanece o mesmo) ...
+  // NOTA: Este useEffect está duplicado no código original que você enviou.
+  // MANTIVE AMBOS, mas verifique se um deles pode ser removido, pois a lógica é idêntica.
   useEffect(() => {
     if (prefersReducedMotion || !sectionRef.current) {
       return;
