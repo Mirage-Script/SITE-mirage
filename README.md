@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Mirage-Script/SITE-mirage/main/banner.jpg" alt="Banner: MIRAGE SCRIPT - Conecte-se, Colabore e Crie" width="100%">
-  <br>
-  <h1>MIRAGE · Plataforma Digital Enterprise-Grade</h1>
+  <img src="https://raw.githubusercontent.com/Mirage-Script/SITE-mirage/main/**banner.png**" alt="Banner: MIRAGE SCRIPT - Conecte-se, Colabore e Crie" width="100%">
+  <br>
+  <h1>MIRAGE · Plataforma Digital Enterprise-Grade</h1>
 </div>
 
 ---
@@ -35,18 +35,18 @@ O projeto integra recursos avançados para uma experiência *premium*:
 ### Arquitetura de Código
 
 * **Estrutura Lógica:** Código organizado em pastas claras:
-    * `src/components`: Componentes reutilizáveis, incluindo **Layout**, **Navegação** e **Seções**.
-    * `src/routes`: Definição das páginas (**Home**, **Serviços**, **Blog**, **Admin**, etc.).
-    * `src/data`: Conteúdo estático (definição de serviços, cases, artigos de blog).
-    * `src/lib`: Utilitários centrais para GSAP e integração Supabase.
-    * `src/providers`: Gestão de contextos globais (ex: Tema Light/Dark).
+    * `src/components`: Componentes reutilizáveis, incluindo **Layout**, **Navegação** e **Seções**.
+    * `src/routes`: Definição das páginas (**Home**, **Serviços**, **Blog**, **Admin**, etc.).
+    * `src/data`: Conteúdo estático (definição de serviços, cases, artigos de blog).
+    * `src/lib`: Utilitários centrais para GSAP e integração Supabase.
+    * `src/providers`: Gestão de contextos globais (ex: Tema Light/Dark).
 
 ### Funcionalidades de Performance e Experiência
 
 * **Animações de Entrada:** Efeitos suaves de *reveal* controlados por *scroll* em seções críticas, garantindo foco no conteúdo.
 * **Animações Avançadas:**
-    * Seção **Hero** com animações GSAP/A11y, fundo com `Shader-doodle` (shaders GLSL) e botões magnéticos (`MagneticButton`) com `TextScramble`.
-    * Marquee técnico implementado com **PixiJS** para alta performance.
+    * Seção **Hero** com animações GSAP/A11y, fundo com `Shader-doodle` (shaders GLSL) e botões magnéticos (`MagneticButton`) com `TextScramble`.
+    * Marquee técnico implementado com **PixiJS** para alta performance.
 * **Acessibilidade e Usabilidade:** Cursor customizado, *scroll* suave com Lenis e `React Hot Toast` para feedback instantâneo nos formulários.
 
 ## 💻 Scripts Disponíveis
