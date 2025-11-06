@@ -1,4 +1,4 @@
-// Ficheiro: src/components/sections/HeroSection.tsx (CORRIGIDO)
+// Ficheiro: src/components/sections/HeroSection.tsx (MODIFICADO)
 
 import { useReducedMotion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,8 +16,8 @@ import { ANIM } from '@/lib/animTokens';
 import { gsap, useGsapTimeline } from '@/lib/gsap';
 
 import { Button } from '../ui/Button';
-// O import para a nova animação de partículas (já estava correto no teu código)
-import LogoParticleAnimation from './LogoParticleAnimation';
+// <-- MUDANÇA 1: Importamos a nossa nova animação de "Rede"
+import NetworkAnimation from './NetworkAnimation';
 
 // Passo Crucial: Registrar o plugin GSAP antes de ser usado
 gsap.registerPlugin(ScrollTrigger);
@@ -216,13 +216,11 @@ export function HeroSection() {
       className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
     >
       {/* ==================================================================
-       * DOCUMENTAÇÃO (FUNDOS)
-       * Estes são os teus elementos de fundo estáticos e com parallax.
+       * FUNDOS (Estáticos e Parallax)
        * ================================================================== */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]" aria-hidden />
-      <div className="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
+      <div className="absolute inset-y-0 left-0 w-1B/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
 
-      {/* Nossos Alvos de Parallax (Fundo) */}
       <div ref={auroraWrapperRef} className="pointer-events-none absolute inset-0" aria-hidden>
         <ShaderAurora className="hero-parallax-bg absolute inset-0 mix-blend-screen opacity-80" />
       </div>
@@ -238,15 +236,14 @@ export function HeroSection() {
       />
 
       {/* ==================================================================
-       * <<< A NOSSA MODIFICAÇÃO >>>
-       * Aqui substituímos o <HeroAnimation /> (scroll de texto)
-       * pelo <LogoParticleAnimation /> (partículas do logo)
-       * que criámos no passo anterior.
+       * <-- MUDANÇA 2: A NOSSA NOVA ANIMAÇÃO "A REDE"
        * ================================================================== */}
-      <LogoParticleAnimation />
+      <NetworkAnimation />
 
       {/* O Conteúdo (agora com a classe 'hero-content-grid') */}
       <div className="hero-content-grid relative grid gap-10 lg:grid-cols-[3fr_2fr]">
+        
+        {/* ... (Todo o resto do teu JSX permanece igual) ... */}
         
         {/* Coluna da Esquerda (Conteúdo) */}
         <div>
