@@ -1,4 +1,4 @@
-// Ficheiro: src/components/sections/HeroSection.tsx (MODIFICADO)
+// Ficheiro: src/components/sections/HeroSection.tsx (CORRIGIDO)
 
 import { useReducedMotion } from 'framer-motion';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,6 +9,8 @@ import Typed from 'typed.js';
 import { CounterCard } from '@/components/effects/CounterCard';
 import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
+// <<< MUDANÇA 1 DE 2: Importamos o novo componente 'ScrambleOnHover' >>>
+import { ScrambleOnHover } from '@/components/effects/ScrambleOnHover'; 
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
 import { useScrollParallax } from '@/hooks/useScrollParallax';
 import { useSectionReveal } from '@/hooks/useSectionReveal';
@@ -16,7 +18,7 @@ import { ANIM } from '@/lib/animTokens';
 import { gsap, useGsapTimeline } from '@/lib/gsap';
 
 import { Button } from '../ui/Button';
-// <-- MUDANÇA 1: Importamos a nossa nova animação de "Rede"
+// Import da animação de rede (esta está correta)
 import NetworkAnimation from './NetworkAnimation';
 
 // Passo Crucial: Registrar o plugin GSAP antes de ser usado
@@ -42,9 +44,7 @@ export function HeroSection() {
   const processGridRef = useRef<HTMLDivElement | null>(null);
   const serviceColumnRef = useRef<HTMLDivElement | null>(null);
 
-  // ... (Todos os teus hooks: useEffect, useGsapTimeline, useSectionReveal, useScrollParallax) ...
-  // ... (Estes permanecem exatamente iguais) ...
-
+  // ... (Hook useEffect do Typed.js permanece o mesmo) ...
   useEffect(() => {
     if (prefersReducedMotion) {
       typedInstance.current?.destroy();
@@ -73,6 +73,8 @@ export function HeroSection() {
     };
   }, [prefersReducedMotion]);
 
+  // <<< REVERSÃO: O hook 'useGsapTimeline' está ATIVO novamente >>>
+  // A animação de entrada original do h1 vai voltar a funcionar.
   useGsapTimeline(
     (context) => {
       if (prefersReducedMotion || !headingRef.current) {
@@ -126,6 +128,8 @@ export function HeroSection() {
     [prefersReducedMotion],
     sectionRef,
   );
+
+  // ... (Todos os outros hooks permanecem iguais) ...
 
   useSectionReveal(sectionRef, {
     targets: ['.hero-stat-block'],
@@ -215,12 +219,11 @@ export function HeroSection() {
       ref={sectionRef}
       className="relative overflow-hidden rounded-[3rem] bg-neutral-900 px-8 py-24 text-white shadow-2xl"
     >
-      {/* ==================================================================
-       * FUNDOS (Estáticos e Parallax)
-       * ================================================================== */}
+      
+      {/* Fundos (Animação de Rede, Gradientes, Aurora, etc.) */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(74,123,167,0.45),transparent_60%)]" aria-hidden />
-      <div className="absolute inset-y-0 left-0 w-1B/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
-
+      <div className="absolute inset-y-0 left-0 w-1/2 bg-[radial-gradient(circle_at_left,rgba(15,58,102,0.35),transparent_70%)]" aria-hidden />
+      
       <div ref={auroraWrapperRef} className="pointer-events-none absolute inset-0" aria-hidden>
         <ShaderAurora className="hero-parallax-bg absolute inset-0 mix-blend-screen opacity-80" />
       </div>
@@ -234,22 +237,20 @@ export function HeroSection() {
         className="hero-blur-circle-2 pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow"
         aria-hidden
       />
-
-      {/* ==================================================================
-       * <-- MUDANÇA 2: A NOSSA NOVA ANIMAÇÃO "A REDE"
-       * ================================================================== */}
+      
+      {/* A nossa animação de Rede leve */}
       <NetworkAnimation />
 
       {/* O Conteúdo (agora com a classe 'hero-content-grid') */}
       <div className="hero-content-grid relative grid gap-10 lg:grid-cols-[3fr_2fr]">
-        
-        {/* ... (Todo o resto do teu JSX permanece igual) ... */}
         
         {/* Coluna da Esquerda (Conteúdo) */}
         <div>
           <p className="text-sm uppercase tracking-[0.5em] text-neutral-400">
             Soluções Digitais Sob Medida
           </p>
+          
+          {/* <<< REVERSÃO: A classe 'text-gradient-animation' foi removida >>> */}
           <h1
             ref={headingRef}
             className="hero-heading mt-6 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
@@ -263,13 +264,23 @@ export function HeroSection() {
               <span ref={typedElementRef} className="block" />
             )}
           </div>
-          <p className="mt-6 max-w-xl text-neutral-200">
-            Transformamos os seus desafios de negócio em software robusto,
-            performático e escalável. Entregamos produtos Web, Mobile e Software com código
-            limpo e design focado no utilizador.
-          </p>
 
-          {/* Botões (CTAs) */}
+          {/*
+           * ==================================================================
+           * <<< MUDANÇA 2 DE 2: Implementação do ScrambleOnHover >>>
+           * Envolvemos o parágrafo <p> com o nosso novo componente
+           * <ScrambleOnHover> para aplicar o efeito.
+           * ==================================================================
+          */}
+          <ScrambleOnHover>
+            <p className="mt-6 max-w-xl text-neutral-200">
+              Transformamos os seus desafios de negócio em software robusto,
+              performático e escalável. Entregamos produtos Web, Mobile e Software com código
+              limpo e design focado no utilizador.
+            </p>
+          </ScrambleOnHover>
+          
+          {/* Botões (CTAs) - Mantêm o 'TextScramble' original, como pediste */}
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <div className="relative z-10 transition-all duration-200 ease-out hover:z-20">
               <MagneticButton strength={0.3}>
@@ -310,8 +321,8 @@ export function HeroSection() {
               </MagneticButton>
             </div>
           </div>
-
-          {/* Estatísticas (Prova Social) */}
+          
+          {/* O resto do teu código original (Estatísticas, Cards de Processo) */}
           <dl className="hero-stats mt-12 grid gap-6 text-sm sm:grid-cols-3">
             <CounterCard
               label="Deploys assistidos por IA"
@@ -333,8 +344,7 @@ export function HeroSection() {
               <dd className="mt-1 text-2xl font-semibold">99.98%</dd>
             </div>
           </dl>
-
-          {/* Cards de Processo */}
+          
           <div
             ref={processGridRef}
             className="mt-10 grid gap-4 rounded-3xl border border-white/20 bg-white/5 p-6 text-xs uppercase tracking-[0.35em] text-neutral-300 sm:grid-cols-2 lg:grid-cols-3"
@@ -365,9 +375,9 @@ export function HeroSection() {
 
         {/* Coluna da Direita (Cards de Serviço) */}
         <div ref={serviceColumnRef} className="space-y-6">
-          
+
           {/* CARD 1: DESENVOLVIMENTO WEB */}
-          <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
+            <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Desenvolvimento Web
             </p>
@@ -380,7 +390,7 @@ export function HeroSection() {
           </div>
 
           {/* CARD 2: APLICAÇÕES MOBILE */}
-          <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
+            <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Aplicações Mobile
             </p>
@@ -393,7 +403,7 @@ export function HeroSection() {
           </div>
 
           {/* CARD 3: SOFTWARE E ECOSSISTEMAS */}
-          <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
+            <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Software e Ecossistemas
             </p>
