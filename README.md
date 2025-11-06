@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Mirage-Script/SITE-mirage/main/**banner.png**" alt="Banner: MIRAGE SCRIPT - Conecte-se, Colabore e Crie" width="100%">
+  <img src="./banner.jpg" alt="Banner: MIRAGE SCRIPT - Conecte-se, Colabore e Crie" width="100%">
   <br>
   <h1>MIRAGE · Plataforma Digital Enterprise-Grade</h1>
 </div>
