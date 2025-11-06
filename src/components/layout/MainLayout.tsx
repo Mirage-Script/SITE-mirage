@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Outlet, useLocation } from 'react-router-dom';
 
+import { ScrollProgressBar } from '@/components/effects/ScrollProgressBar';
 import { useSmoothScroll } from '@/hooks/useSmoothScroll';
 import { useTheme } from '@/providers/ThemeProvider';
 
@@ -32,6 +33,7 @@ export function MainLayout() {
   return (
     <div className="bg-white text-neutral-900 transition-colors duration-300 dark:bg-neutral-900 dark:text-neutral-50">
       <ScrollToTop />
+      <ScrollProgressBar />
       <Toaster
         position="top-right"
         toastOptions={{

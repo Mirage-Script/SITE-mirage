@@ -1,16 +1,12 @@
 // src/components/sections/HeroSection.tsx (CORRIGIDO)
 
 import { useReducedMotion } from 'framer-motion';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef } from 'react';
 import SplitType from 'split-type';
 import Typed from 'typed.js';
 
-// ==================================================================
-// * CORREÇÃO: IMPORTAÇÃO E REGISTRO DO SCROLLTRIGGER
-// * 1. Importar o ScrollTrigger
-// * 2. Chamar gsap.registerPlugin(ScrollTrigger)
-// ==================================================================
-import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
+import { CounterCard } from '@/components/effects/CounterCard';
 import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
@@ -41,9 +37,11 @@ export function HeroSection() {
   const headingRef = useRef<HTMLHeadingElement | null>(null);
   const primaryCtaRef = useRef<TextScrambleHandle | null>(null);
   const secondaryCtaRef = useRef<TextScrambleHandle | null>(null);
-  const accentParallaxRef = useRef<HTMLDivElement | null>(null);
-  const accentParallaxSecondaryRef = useRef<HTMLDivElement | null>(null);
-  const heroSectionRef = useRef<HTMLElement | null>(null);
+  const auroraWrapperRef = useRef<HTMLDivElement | null>(null);
+  const blurLeftRef = useRef<HTMLDivElement | null>(null);
+  const blurRightRef = useRef<HTMLDivElement | null>(null);
+  const processGridRef = useRef<HTMLDivElement | null>(null);
+  const serviceColumnRef = useRef<HTMLDivElement | null>(null);
 
   // ... (Hook useEffect do Typed.js permanece o mesmo) ...
   useEffect(() => {
@@ -74,43 +72,6 @@ export function HeroSection() {
     };
   }, [prefersReducedMotion]);
 
-  // ... (Hook useEffect das animações de entrada dos cards permanece o mesmo) ...
-  useEffect(() => {
-    if (prefersReducedMotion || !sectionRef.current) {
-      return;
-    }
-    const cards = sectionRef.current.querySelectorAll('.hero-card');
-    const triggers: ScrollTrigger[] = [];
-    cards.forEach((card) => {
-      // ESTA SEÇÃO AGORA TEM ACESSO A SCROLLTRIGGER
-      const trigger = ScrollTrigger.create({
-        trigger: card,
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo(
-            card,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          );
-        },
-      });
-      triggers.push(trigger);
-    });
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-    };
-  }, [prefersReducedMotion]);
-
-
-  // ==================================================================
-  // DOCUMENTAÇÃO (A GRANDE CORREÇÃO)
-  //
-  // 1. O 'useEffect' de paralaxe separado foi REMOVIDO.
-  // 2. A lógica de paralaxe (gsap.to com scrub: true) foi MOVIDA
-  //    PARA DENTRO deste 'useGsapTimeline'.
-  // 3. As novas animações de paralaxe foram ADICIONADAS ao
-  //    'context.add()' para uma limpeza (cleanup) correta.
-  // ==================================================================
   useGsapTimeline(
     (context) => {
       if (prefersReducedMotion || !headingRef.current) {
@@ -165,39 +126,88 @@ export function HeroSection() {
     sectionRef,
   );
 
-  // ... (Hook useEffect das animações de ENTRADA dos cards permanece o mesmo) ...
-  // NOTA: Este useEffect está duplicado no código original que você enviou.
-  // MANTIVE AMBOS, mas verifique se um deles pode ser removido, pois a lógica é idêntica.
-  useEffect(() => {
-    if (prefersReducedMotion || !sectionRef.current) {
-      return;
-    }
-    const cards = sectionRef.current.querySelectorAll('.hero-card');
-    const triggers: ScrollTrigger[] = [];
-    cards.forEach((card) => {
-      const trigger = ScrollTrigger.create({
-        trigger: card,
-        start: 'top 80%',
-        onEnter: () => {
-          gsap.fromTo(
-            card,
-            { y: 40, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
-          );
-        },
-      });
-      triggers.push(trigger);
-    });
-    return () => {
-      triggers.forEach((trigger) => trigger.kill());
-    };
-  }, [prefersReducedMotion]);
+  useSectionReveal(sectionRef, {
+    targets: ['.hero-stat-block'],
+    start: 'top 85%',
+    from: { y: 32, opacity: 0, filter: 'blur(6px)' },
+    to: { y: 0, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out' },
+    stagger: 0.08,
+  });
 
-  // ==================================================================
-  // DOCUMENTAÇÃO (REMOÇÃO DO PARALLAX)
-  // Removemos todos os 'useEffect' de paralaxe que falharam.
-  // O código está agora 100% estável.
-  // ==================================================================
+  useSectionReveal(sectionRef, {
+    targets: ['.hero-process-card'],
+    start: 'top 85%',
+    from: {
+      y: 48,
+      opacity: 0,
+      rotateZ: -4,
+      skewY: 3,
+      filter: 'blur(10px)',
+    },
+    to: {
+      y: 0,
+      opacity: 1,
+      rotateZ: 0,
+      skewY: 0,
+      filter: 'blur(0px)',
+      duration: 0.95,
+      ease: 'power3.out',
+    },
+    stagger: 0.1,
+  });
+
+  useSectionReveal(sectionRef, {
+    targets: ['.hero-service-card'],
+    start: 'top 85%',
+    from: {
+      y: 72,
+      opacity: 0,
+      rotateX: -18,
+      rotateY: 8,
+      scale: 0.9,
+      filter: 'blur(14px)',
+    },
+    to: {
+      y: 0,
+      opacity: 1,
+      rotateX: 0,
+      rotateY: 0,
+      scale: 1,
+      filter: 'blur(0px)',
+      duration: 1.05,
+      ease: 'power3.out',
+    },
+    stagger: 0.16,
+  });
+
+  useScrollParallax(auroraWrapperRef, {
+    intensity: 140,
+    scrub: 0.85,
+  });
+
+  useScrollParallax(blurLeftRef, {
+    intensity: 120,
+    scrub: 0.9,
+  });
+
+  useScrollParallax(blurRightRef, {
+    intensity: 160,
+    scrub: 0.95,
+  });
+
+  useScrollParallax(processGridRef, {
+    intensity: 60,
+    scrub: 0.8,
+    start: 'top bottom',
+    end: 'bottom 45%',
+  });
+
+  useScrollParallax(serviceColumnRef, {
+    intensity: 90,
+    scrub: 0.85,
+    start: 'top 90%',
+    end: 'bottom top',
+  });
 
   return (
     // DOCUMENTAÇÃO: 'overflow-hidden' foi RE-ADICIONADO
@@ -218,9 +228,19 @@ export function HeroSection() {
       {/* <HeroImmersiveCanvas className="pointer-events-none absolute inset-0 mix-blend-screen" /> */}
       
       {/* Nossos Alvos de Parallax (Fundo) */}
-      <ShaderAurora className="hero-parallax-bg pointer-events-none absolute inset-0 mix-blend-screen opacity-80" />
-      <div className="hero-blur-circle-1 pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
-      <div className="hero-blur-circle-2 pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow" aria-hidden />
+      <div ref={auroraWrapperRef} className="pointer-events-none absolute inset-0" aria-hidden>
+        <ShaderAurora className="hero-parallax-bg absolute inset-0 mix-blend-screen opacity-80" />
+      </div>
+      <div
+        ref={blurLeftRef}
+        className="hero-blur-circle-1 pointer-events-none absolute -left-20 top-24 h-64 w-64 rounded-full bg-primary/40 blur-3xl motion-safe:animate-pulse-glow"
+        aria-hidden
+      />
+      <div
+        ref={blurRightRef}
+        className="hero-blur-circle-2 pointer-events-none absolute -bottom-10 right-[-6rem] h-80 w-80 rounded-full bg-accent/30 blur-3xl motion-safe:animate-pulse-glow"
+        aria-hidden
+      />
 
       {/* O Conteúdo (agora com a classe 'hero-content-grid') */}
       <div className="hero-content-grid relative grid gap-10 lg:grid-cols-[3fr_2fr]">
@@ -293,37 +313,47 @@ export function HeroSection() {
           
           {/* Estatísticas (Prova Social) */}
           <dl className="hero-stats mt-12 grid gap-6 text-sm sm:grid-cols-3">
-            <div>
-              <dt className="text-neutral-400">Deploys assistidos por IA</dt>
-              <dd className="mt-1 text-2xl font-semibold">42</dd>
-            </div>
-            <div>
-              <dt className="text-neutral-400">Plataformas escaladas</dt>
-              <dd className="mt-1 text-2xl font-semibold">+80</dd>
-            </div>
-            <div>
+            <CounterCard
+              label="Deploys assistidos por IA"
+              value={42}
+              className="hero-stat-block"
+              labelClassName="text-neutral-400 text-sm"
+              valueClassName="mt-1 text-2xl font-semibold text-neutral-900 dark:text-neutral-50"
+            />
+            <CounterCard
+              label="Plataformas escaladas"
+              value={80}
+              suffix="+"
+              className="hero-stat-block"
+              labelClassName="text-neutral-400 text-sm"
+              valueClassName="mt-1 text-2xl font-semibold text-neutral-900 dark:text-neutral-50"
+            />
+            <div className="hero-stat-block">
               <dt className="text-neutral-400">SLA crítico</dt>
               <dd className="mt-1 text-2xl font-semibold">99.98%</dd>
             </div>
           </dl>
           
           {/* Cards de Processo */}
-          <div className="mt-10 grid gap-4 rounded-3xl border border-white/20 bg-white/5 p-6 text-xs uppercase tracking-[0.35em] text-neutral-300 sm:grid-cols-2 lg:grid-cols-3">
-            <div>
+          <div
+            ref={processGridRef}
+            className="mt-10 grid gap-4 rounded-3xl border border-white/20 bg-white/5 p-6 text-xs uppercase tracking-[0.35em] text-neutral-300 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            <div className="hero-process-card">
               <span className="text-neutral-400">Entender para Construir</span>
               <p className="mt-2 text-sm normal-case text-white">
                 O nosso primeiro passo é ouvir. Analisamos os seus objetivos de negócio para
                 garantir que a tecnologia proposta seja a solução perfeita para o seu crescimento.
               </p>
             </div>
-            <div>
+            <div className="hero-process-card">
               <span className="text-neutral-400">Construir com Qualidade</span>
               <p className="mt-2 text-sm normal-case text-white">
                 Escrevemos código limpo e testado. O nosso processo garante que o seu
                 projeto seja seguro, escalável e fácil de manter no futuro.
               </p>
             </div>
-            <div>
+            <div className="hero-process-card">
               <span className="text-neutral-400">Design que Gera Valor</span>
               <p className="mt-2 text-sm normal-case text-white">
                 Uma boa interface faz mais do que parecer bonita. Criamos um design
@@ -334,10 +364,10 @@ export function HeroSection() {
         </div>
 
         {/* Coluna da Direita (Cards de Serviço) */}
-        <div className="space-y-6">
+  <div ref={serviceColumnRef} className="space-y-6">
 
           {/* CARD 1: DESENVOLVIMENTO WEB */}
-          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
+            <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Desenvolvimento Web
             </p>
@@ -350,7 +380,7 @@ export function HeroSection() {
           </div>
 
           {/* CARD 2: APLICAÇÕES MOBILE */}
-          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
+            <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Aplicações Mobile
             </p>
@@ -363,7 +393,7 @@ export function HeroSection() {
           </div>
 
           {/* CARD 3: SOFTWARE E ECOSSISTEMAS */}
-          <div className="hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
+            <div className="hero-service-card hero-card rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20">
             <p className="text-xs uppercase tracking-[0.4em] text-accent">
               Software e Ecossistemas
             </p>

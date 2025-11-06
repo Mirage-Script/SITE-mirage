@@ -2,8 +2,9 @@
 
 import Lenis from 'lenis';
 import { useEffect } from 'react';
+
 // DOCUMENTAÇÃO: Importamos o 'gsap' principal
-import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { gsap } from '@/lib/gsap';
 
 export function useSmoothScroll(enabled: boolean) {
   useEffect(() => {

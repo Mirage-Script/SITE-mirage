@@ -1,10 +1,8 @@
 // src/routes/home/index.tsx (MODIFICADO - A Correção Definitiva do Parallax)
 
-import { Helmet } from 'react-helmet-async';
-// DOCUMENTAÇÃO: Imports corretos do React e GSAP
-import { useEffect, useRef } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { gsap, ScrollTrigger } from '@/lib/gsap';
+import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 // Importações das suas Secções
 import { CaseShowcase } from '@/components/sections/CaseShowcase';
@@ -15,6 +13,7 @@ import { OperationalHighlights } from '@/components/sections/OperationalHighligh
 import { ServicesOverview } from '@/components/sections/ServicesOverview';
 import { StatsCounter } from '@/components/sections/StatsCounter';
 import { TechMarquee } from '@/components/sections/TechMarquee';
+import { gsap } from '@/lib/gsap';
 
 export default function HomePage() {
   const mainRef = useRef<HTMLDivElement | null>(null);

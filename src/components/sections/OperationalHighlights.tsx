@@ -7,9 +7,9 @@ import { useRef } from 'react';
 // * CORREÇÃO FINAL: CAMINHO RELATIVO AJUSTADO
 // * O caminho correto é: '../effects/OrbitAnimation'
 // ==================================================================
-import { OrbitAnimation } from '../effects/OrbitAnimation'; 
-
 import logoMirage from '@/assets/logotipo.png';
+
+import { OrbitAnimation } from '../effects/OrbitAnimation';
 
 export function OperationalHighlights() {
   // CORREÇÃO #1: DECLARAÇÃO DOS useRef
