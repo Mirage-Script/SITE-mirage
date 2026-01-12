@@ -44,7 +44,7 @@ export function ServicesOverview() {
           </h2>
         </div>
         <p className="services-intro max-w-2xl text-sm text-neutral-600 dark:text-neutral-300">
-          Cobrimos o ciclo de vida completo do seu produto. Da arquitetura inicial ao deploy final, o nosso processo garante uma solução robusta, segura e focada no retorno do seu investimento.
+          Cobrimos o ciclo de vida completo do seu produto. Da arquitetura inicial ao lançamento final, o nosso processo garante uma solução robusta, segura e focada no retorno do seu investimento.
         </p>
       </div>
 

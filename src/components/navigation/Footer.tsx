@@ -82,10 +82,10 @@ export function Footer() {
           {/* Contactos */}
           <div className="flex flex-wrap gap-4 text-sm text-neutral-600 dark:text-neutral-300">
             <a href="tel:+5511932212697" className="flex items-center gap-2 hover:text-primary">
-              <PhoneIcon className="h-4 w-4" /> +55 (11) 9.3221-2697 (Miguel)
+              <PhoneIcon className="h-4 w-4" /> +55 (11) 9.3221-2697
             </a>
             <a href="tel:+5561991810148" className="flex items-center gap-2 hover:text-primary">
-              <PhoneIcon className="h-4 w-4" /> +55 (61) 9.9181-0148 (Kauã)
+              <PhoneIcon className="h-4 w-4" /> +55 (61) 9.9181-0148
             </a>
             <a href="mailto:contato@miragescript.com" className="flex items-center gap-2 hover:text-primary">
               <EnvelopeIcon className="h-4 w-4" /> contato@miragescript.com

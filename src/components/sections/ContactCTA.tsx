@@ -73,8 +73,7 @@ export function ContactCTA() {
            * e o acesso direto aos "fundadores".
            * ================================================================== */}
           <p className="cta-copy mt-4 max-w-2xl text-sm text-neutral-200">
-            Tem um desafio ou uma nova ideia? Agende uma sessão estratégica **sem custo**,
-            diretamente com os nossos fundadores, e vamos desenhar a solução técnica ideal para o seu negócio.
+            Tem um desafio ou uma nova ideia? Agende uma sessão estratégica gratuita e vamos desenhar a solução técnica ideal para o seu negócio.
           </p>
         </div>
         <div className="flex flex-col gap-4 text-sm text-neutral-200">

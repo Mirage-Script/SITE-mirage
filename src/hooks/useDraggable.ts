@@ -37,12 +37,12 @@ export function useDraggable(
 
     // Note: This requires gsap-draggable plugin
     // If not available, gracefully degrade
-    if (!gsap.Draggable) {
+    if (!(gsap as any).Draggable) {
       console.warn('GSAP Draggable plugin not loaded');
       return;
     }
 
-    const draggable = gsap.Draggable.create(element, {
+    const draggable = (gsap as any).Draggable.create(element, {
       type: 'x,y',
       bounds,
       onDragStart,

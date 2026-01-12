@@ -54,10 +54,7 @@ export function OperationalHighlights() {
             A Nossa Garantia de Performance
           </h3>
           <p className="mt-4 text-sm text-neutral-600 dark:text-neutral-300">
-            O nosso trabalho não termina no *deploy*. Na Mirage Script, &lsquo;Governança&rsquo; significa que
-            garantimos a saúde do seu produto com um ecossistema robusto de segurança e
-            monitoramento 24/7. Aplicamos processos de resposta a incidentes e um *delivery* ágil
-            para que o seu sistema esteja sempre online, seguro e confiável.
+            O nosso trabalho não termina no lançamento. Na Mirage Script, continuamos monitorando seu sistema 24/7 com segurança robusta e respostas rápidas a qualquer problema. Garantimos que seu produto esteja sempre funcionando, protegido e confiável para os seus usuários.
           </p>
 
           {/* CHECKLIST */}
@@ -95,7 +92,7 @@ export function OperationalHighlights() {
                 aria-hidden="true"
               />
               <span className="text-sm text-neutral-700 dark:text-neutral-200">
-                Entregas Ágeis e Previsíveis (CI/CD)
+                Entregas Ágeis e Previsíveis
               </span>
             </div>
           </div>

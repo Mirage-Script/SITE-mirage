@@ -8,6 +8,16 @@ import { QueryProvider } from './providers/QueryProvider';
 import { SmoothScrollProvider } from './providers/SmoothScrollProvider';
 import { ThemeProvider } from './providers/ThemeProvider';
 
+// Polyfill for requestAnimationFrame and cancelAnimationFrame (some libraries need these in certain contexts)
+if (typeof window !== 'undefined') {
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = (cb: FrameRequestCallback) => setTimeout(cb, 16) as unknown as number;
+  }
+  if (!window.cancelAnimationFrame) {
+    window.cancelAnimationFrame = (id: number) => clearTimeout(id);
+  }
+}
+
 import './index.css';
 
 const container = document.getElementById('root');

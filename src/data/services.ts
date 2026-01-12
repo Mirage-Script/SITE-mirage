@@ -26,9 +26,9 @@ export type ServiceCategory = {
 export const services: ServiceCategory[] = [
   {
     id: 'discovery',
-    title: 'Discovery & Estratégia',
+    title: 'Análise & Planejamento',
     description:
-      'O ponto de partida para o sucesso. Analisamos os seus objetivos de negócio e desenhamos o roadmap técnico completo da sua solução.',
+      'O ponto de partida para o sucesso. Analisamos os seus objetivos de negócio e desenhamos o planejamento técnico completo da sua solução.',
     features: [
       'Workshops de Imersão e Requisitos',
       'Mapeamento da Jornada do Utilizador',

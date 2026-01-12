@@ -9,8 +9,7 @@ import Typed from 'typed.js';
 import { CounterCard } from '@/components/effects/CounterCard';
 import { MagneticButton } from '@/components/effects/MagneticButton';
 import { ShaderAurora } from '@/components/effects/ShaderAurora';
-// <<< MUDANÇA 1 DE 2: Importamos o novo componente 'ScrambleOnHover' >>>
-import { ScrambleOnHover } from '@/components/effects/ScrambleOnHover'; 
+// <<< ScrambleOnHover removido - animação de hover desabilitada >>>
 import { TextScramble, type TextScrambleHandle } from '@/components/effects/TextScramble';
 import { useScrollParallax } from '@/hooks/useScrollParallax';
 import { useSectionReveal } from '@/hooks/useSectionReveal';
@@ -19,7 +18,7 @@ import { gsap, useGsapTimeline } from '@/lib/gsap';
 
 import { Button } from '../ui/Button';
 // Import da animação de rede (esta está correta)
-import NetworkAnimation from './NetworkAnimation';
+// import NetworkAnimation from './NetworkAnimation';
 
 // Passo Crucial: Registrar o plugin GSAP antes de ser usado
 gsap.registerPlugin(ScrollTrigger);
@@ -239,7 +238,7 @@ export function HeroSection() {
       />
       
       {/* A nossa animação de Rede leve */}
-      <NetworkAnimation />
+      {/* <NetworkAnimation /> */}
 
       {/* O Conteúdo (agora com a classe 'hero-content-grid') */}
       <div className="hero-content-grid relative grid gap-10 lg:grid-cols-[3fr_2fr]">
@@ -267,18 +266,16 @@ export function HeroSection() {
 
           {/*
            * ==================================================================
-           * <<< MUDANÇA 2 DE 2: Implementação do ScrambleOnHover >>>
-           * Envolvemos o parágrafo <p> com o nosso novo componente
-           * <ScrambleOnHover> para aplicar o efeito.
+           * <<< MUDANÇA 2 DE 2: ScrambleOnHover removido >>>
+           * O componente ScrambleOnHover foi removido para eliminar a animação
+           * de letras aleatórias no hover.
            * ==================================================================
           */}
-          <ScrambleOnHover>
-            <p className="mt-6 max-w-xl text-neutral-200">
-              Transformamos os seus desafios de negócio em software robusto,
-              performático e escalável. Entregamos produtos Web, Mobile e Software com código
-              limpo e design focado no utilizador.
-            </p>
-          </ScrambleOnHover>
+          <p className="mt-6 max-w-xl text-neutral-200">
+            Transformamos os seus desafios de negócio em software robusto,
+            performático e escalável. Entregamos produtos Web, Mobile e Software com código
+            limpo e design focado no utilizador.
+          </p>
           
           {/* Botões (CTAs) - Mantêm o 'TextScramble' original, como pediste */}
           <div className="mt-10 flex flex-wrap items-center gap-4">

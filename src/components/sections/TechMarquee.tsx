@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 
-import { PixiMarqueeParticles } from '@/components/effects/PixiMarqueeParticles';
+// import { PixiMarqueeParticles } from '@/components/effects/PixiMarqueeParticles';
 import { techMarqueeItems } from '@/data/highlights';
 import { useSectionReveal } from '@/hooks/useSectionReveal';
 
@@ -23,7 +23,7 @@ export function TechMarquee() {
     // para que a secção volte a ocupar 100% da largura.
     <section ref={sectionRef} className="mt-24">
       <div className="relative overflow-hidden rounded-[2.5rem] border border-neutral-200 bg-white/80 shadow-sm dark:border-neutral-800 dark:bg-neutral-900/60">
-        <PixiMarqueeParticles className="absolute inset-0 opacity-60 mix-blend-screen" />
+        {/* PixiMarqueeParticles removido - animação de fundo desabilitada */}
         <div className="relative z-10 p-6">
           <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="tech-marquee-intro space-y-2">
@@ -33,7 +33,7 @@ export function TechMarquee() {
               </h2>
             </div>
             <p className="tech-marquee-intro max-w-md text-sm text-neutral-600 dark:text-neutral-300">
-              Mais do que buzzwords, esta é a nossa stack de produção. Usamos estas ferramentas diariamente para construir, escalar e modernizar aplicações robustas.
+              Mais do que palavras bonitas, esta é a nossa caixa de ferramentas de produção real. Usamos estas ferramentas diariamente para construir, escalar e modernizar aplicações robustas.
             </p>
           </div>
 

@@ -1,0 +1,510 @@
+### New console messages
+- [WARNING] Element not found: body @ webpack-internal:///./node_modules/gsap/Observer.js:138
+- [WARNING] Element not found: body @ webpack-internal:///./node_modules/gsap/Observer.js:138
+
+### Page state
+- Page URL: http://localhost:3000/servicos
+- Page Title: Serviços · MIRAGE
+- Page Snapshot:
+```yaml
+- generic [ref=e7]:
+  - banner [ref=e8]:
+    - navigation [ref=e9]:
+      - link "Mirage Script Logo MIRAGE SCRIPT" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e11]:
+          - img "Mirage Script Logo" [ref=e12]
+          - generic [ref=e13]: MIRAGE SCRIPT
+      - generic [ref=e14]:
+        - list [ref=e15]:
+          - listitem [ref=e16]:
+            - link "Início" [ref=e17] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e18]:
+            - link "Serviços" [ref=e19] [cursor=pointer]:
+              - /url: /servicos
+          - listitem [ref=e20]:
+            - link "Sobre" [ref=e21] [cursor=pointer]:
+              - /url: /sobre
+        - generic [ref=e22]:
+          - button "Alternar tema" [ref=e23] [cursor=pointer]:
+            - img [ref=e24]
+          - link "Iniciar Projeto" [ref=e26] [cursor=pointer]:
+            - /url: /contato
+  - main [ref=e27]:
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - paragraph [ref=e30]: Entrega full-cycle
+        - heading "Operamos desde discovery até observabilidade contínua." [level=1] [ref=e31]
+        - paragraph [ref=e32]: Cada projeto recebe uma arquitetura desenhada sob medida, alinhada a OKRs e indicadores de negócio. Foco em resiliência, governança, automação e documentação viva.
+      - generic [ref=e33]:
+        - article [ref=e34]:
+          - generic [ref=e35]:
+            - generic [ref=e36]:
+              - generic [ref=e37]:
+                - generic [ref=e38]: Discovery & Estratégia
+                - generic [ref=e39]: START RECOMENDADO
+              - paragraph [ref=e40]: O ponto de partida para o sucesso. Analisamos os seus objetivos de negócio e desenhamos o roadmap técnico completo da sua solução.
+              - list [ref=e41]:
+                - listitem [ref=e42]:
+                  - generic [ref=e44]: Workshops de Imersão e Requisitos
+                - listitem [ref=e45]:
+                  - generic [ref=e47]: Mapeamento da Jornada do Utilizador
+                - listitem [ref=e48]:
+                  - generic [ref=e50]: Definição de Arquitetura e Stack
+                - listitem [ref=e51]:
+                  - generic [ref=e53]: Protótipos Navegáveis (UI/UX)
+            - complementary [ref=e54]:
+              - generic [ref=e55]:
+                - heading "Deliverables" [level=3] [ref=e56]
+                - list [ref=e57]:
+                  - listitem [ref=e58]: BLUEPRINT TÉCNICO
+                  - listitem [ref=e59]: ROADMAP DO PRODUTO
+                  - listitem [ref=e60]: PROTÓTIPO INTERATIVO
+              - generic [ref=e61]:
+                - text: Investimento
+                - paragraph
+              - button "Solicitar escopo detalhado" [ref=e62] [cursor=pointer]
+        - article [ref=e63]:
+          - generic [ref=e64]:
+            - generic [ref=e65]:
+              - generic [ref=e66]:
+                - generic [ref=e67]: Desenvolvimento Web
+                - generic [ref=e68]: MAIS SOLICITADO
+              - paragraph [ref=e69]: Criamos soluções web de alta performance, desde e-commerce e plataformas SaaS até landing pages otimizadas, com foco em SEO, escalabilidade e design.
+              - list [ref=e70]:
+                - listitem [ref=e71]:
+                  - generic [ref=e73]: Aplicações (React, Next.js, TypeScript)
+                - listitem [ref=e74]:
+                  - generic [ref=e76]: Design de Alto Impacto (GSAP & Motion)
+                - listitem [ref=e77]:
+                  - generic [ref=e79]: Integrações com APIs e CMS (Supabase, etc.)
+                - listitem [ref=e80]:
+                  - generic [ref=e82]: Otimização de Performance (Core Web Vitals)
+            - complementary [ref=e83]:
+              - generic [ref=e84]:
+                - heading "Deliverables" [level=3] [ref=e85]
+                - list [ref=e86]:
+                  - listitem [ref=e87]: PLATAFORMA WEB COMPLETA
+                  - listitem [ref=e88]: PLAYBOOKS DE DEVOPS
+                  - listitem [ref=e89]: TESTES AUTOMATIZADOS
+              - generic [ref=e90]:
+                - text: Investimento
+                - paragraph
+              - button "Solicitar escopo detalhado" [ref=e91] [cursor=pointer]
+        - article [ref=e92]:
+          - generic [ref=e93]:
+            - generic [ref=e94]:
+              - generic [ref=e96]: Desenvolvimento Mobile
+              - paragraph [ref=e97]: Desenvolvemos aplicações nativas (iOS/Android) e híbridas (React Native/Flutter) focadas na experiência do utilizador, performance e arquitetura offline-first.
+              - list [ref=e98]:
+                - listitem [ref=e99]:
+                  - generic [ref=e101]: Nativo (Swift, Kotlin) & Híbrido (React Native)
+                - listitem [ref=e102]:
+                  - generic [ref=e104]: Funcionalidades Offline-first e Push
+                - listitem [ref=e105]:
+                  - generic [ref=e107]: Análise e Monitoramento em Tempo Real
+                - listitem [ref=e108]:
+                  - generic [ref=e110]: Performance Mobile Otimizada
+            - complementary [ref=e111]:
+              - generic [ref=e112]:
+                - heading "Deliverables" [level=3] [ref=e113]
+                - list [ref=e114]:
+                  - listitem [ref=e115]: PLAYBOOK DE RELEASE (STORES)
+                  - listitem [ref=e116]: TESTES INSTRUMENTADOS
+                  - listitem [ref=e117]: DOCUMENTAÇÃO TÉCNICA
+              - generic [ref=e118]:
+                - text: Investimento
+                - paragraph
+              - button "Solicitar escopo detalhado" [ref=e119] [cursor=pointer]
+        - article [ref=e120]:
+          - generic [ref=e121]:
+            - generic [ref=e122]:
+              - generic [ref=e123]:
+                - generic [ref=e124]: Engenharia de Software
+                - generic [ref=e125]: SOLUÇÕES ROBUSTAS
+              - paragraph [ref=e126]: Para desafios complexos. Desenhamos e modernizamos sistemas internos (ERPs, CRMs), arquiteturas de microsserviços e automações seguras.
+              - list [ref=e127]:
+                - listitem [ref=e128]:
+                  - generic [ref=e130]: Arquitetura de Microsserviços & APIs
+                - listitem [ref=e131]:
+                  - generic [ref=e133]: Modernização de Código (Legacy)
+                - listitem [ref=e134]:
+                  - generic [ref=e136]: Governança de Dados com Auditoria
+                - listitem [ref=e137]:
+                  - generic [ref=e139]: Automação de Processos e Orquestração
+            - complementary [ref=e140]:
+              - generic [ref=e141]:
+                - heading "Deliverables" [level=3] [ref=e142]
+                - list [ref=e143]:
+                  - listitem [ref=e144]: GUIA DE OPERAÇÃO
+                  - listitem [ref=e145]: RUNBOOKS DE INCIDENTES
+                  - listitem [ref=e146]: TREINAMENTOS HANDS-ON
+              - generic [ref=e147]:
+                - text: Investimento
+                - paragraph
+              - button "Solicitar escopo detalhado" [ref=e148] [cursor=pointer]
+      - generic [ref=e149]:
+        - generic [ref=e150]:
+          - generic [ref=e151]:
+            - paragraph [ref=e152]: Planos Flexíveis
+            - heading "Escolha o plano certo para seu projeto" [level=2] [ref=e153]
+            - paragraph [ref=e154]: Todos os planos incluem suporte técnico, documentação e atualizações de segurança. Upgrade ou downgrade quando quiser.
+          - generic [ref=e155]:
+            - generic [ref=e157]:
+              - generic [ref=e158]:
+                - heading "Starter" [level=3] [ref=e159]
+                - paragraph [ref=e160]: Para testar
+              - generic [ref=e161]:
+                - generic [ref=e162]:
+                  - generic [ref=e163]: R$ 799
+                  - generic [ref=e164]: /mês
+                - paragraph [ref=e165]:
+                  - text: "Setup:"
+                  - generic [ref=e166]: R$ 5.000
+                - paragraph [ref=e167]: "Ano 1: R$ 14.588"
+              - paragraph [ref=e168]: Ideal para pequenos projetos e primeiros clientes. Prototipagem rápida com suporte básico.
+              - button "Começar com Starter" [ref=e169] [cursor=pointer]
+              - generic [ref=e170]:
+                - generic [ref=e171]:
+                  - img [ref=e172]
+                  - generic [ref=e174]: Discovery & Estratégia (1 semana)
+                - generic [ref=e175]:
+                  - img [ref=e176]
+                  - generic [ref=e178]: Desenvolvimento Web (até 4 semanas)
+                - generic [ref=e179]:
+                  - img [ref=e180]
+                  - generic [ref=e182]: Design (Templates pré-definidos)
+                - generic [ref=e183]:
+                  - img [ref=e184]
+                  - generic [ref=e186]: Testes Básicos
+                - generic [ref=e187]:
+                  - img [ref=e188]
+                  - generic [ref=e190]: Suporte Email (48h)
+                - generic [ref=e191]:
+                  - img [ref=e192]
+                  - generic [ref=e194]: Documentação Técnica
+                - generic [ref=e195]:
+                  - img [ref=e196]
+                  - generic [ref=e198]: Customização Visual Avançada
+                - generic [ref=e199]:
+                  - img [ref=e200]
+                  - generic [ref=e202]: Suporte Prioritário (2h)
+                - generic [ref=e203]:
+                  - img [ref=e204]
+                  - generic [ref=e206]: Desenvolvimento Contínuo (4h/mês)
+              - generic [ref=e207]:
+                - paragraph [ref=e208]: Suporte
+                - paragraph [ref=e209]: Email (48h)
+            - generic [ref=e210]:
+              - generic [ref=e211]: ⭐ Mais Popular
+              - generic [ref=e212]:
+                - generic [ref=e213]:
+                  - heading "Professional" [level=3] [ref=e214]
+                  - paragraph [ref=e215]: Recomendado
+                - generic [ref=e216]:
+                  - generic [ref=e217]:
+                    - generic [ref=e218]: R$ 1.199
+                    - generic [ref=e219]: /mês
+                  - paragraph [ref=e220]:
+                    - text: "Setup:"
+                    - generic [ref=e221]: R$ 9.000
+                  - paragraph [ref=e222]: "Ano 1: R$ 23.388"
+                - paragraph [ref=e223]: Perfeito para agências e PMEs. Solução completa com customização e suporte robusto.
+                - button "Começar com Professional" [ref=e224] [cursor=pointer]
+                - generic [ref=e225]:
+                  - generic [ref=e226]:
+                    - img [ref=e227]
+                    - generic [ref=e229]: Discovery & Estratégia (2 semanas)
+                  - generic [ref=e230]:
+                    - img [ref=e231]
+                    - generic [ref=e233]: Desenvolvimento Web (até 8 semanas)
+                  - generic [ref=e234]:
+                    - img [ref=e235]
+                    - generic [ref=e237]: Desenvolvimento Mobile (React Native)
+                  - generic [ref=e238]:
+                    - img [ref=e239]
+                    - generic [ref=e241]: Design Customizado
+                  - generic [ref=e242]:
+                    - img [ref=e243]
+                    - generic [ref=e245]: Testes Automatizados
+                  - generic [ref=e246]:
+                    - img [ref=e247]
+                    - generic [ref=e249]: Suporte Email + Chat (24h)
+                  - generic [ref=e250]:
+                    - img [ref=e251]
+                    - generic [ref=e253]: Desenvolvimento Contínuo (4h/mês)
+                  - generic [ref=e254]:
+                    - img [ref=e255]
+                    - generic [ref=e257]: API Customizadas
+                  - generic [ref=e258]:
+                    - img [ref=e259]
+                    - generic [ref=e261]: Suporte Prioritário (2h)
+                  - generic [ref=e262]:
+                    - img [ref=e263]
+                    - generic [ref=e265]: Reunião Mensal Strategy
+                - generic [ref=e266]:
+                  - paragraph [ref=e267]: Suporte
+                  - paragraph [ref=e268]: Email + Chat (24h)
+            - generic [ref=e269]:
+              - generic [ref=e270]: 🚀 Dedicado
+              - generic [ref=e271]:
+                - generic [ref=e272]:
+                  - heading "Enterprise" [level=3] [ref=e273]
+                  - paragraph [ref=e274]: Para empresas
+                - generic [ref=e275]:
+                  - generic [ref=e276]:
+                    - generic [ref=e277]: R$ 2.499
+                    - generic [ref=e278]: /mês
+                  - paragraph [ref=e279]:
+                    - text: "Setup:"
+                    - generic [ref=e280]: R$ 15.000
+                  - paragraph [ref=e281]: "Ano 1: R$ 44.988"
+                - paragraph [ref=e282]: Solução premium com suporte dedicado, desenvolvimento contínuo e programa de afiliados.
+                - button "Falar com Especialista" [ref=e283] [cursor=pointer]
+                - generic [ref=e284]:
+                  - generic [ref=e285]:
+                    - img [ref=e286]
+                    - generic [ref=e288]: Discovery & Estratégia (4 semanas)
+                  - generic [ref=e289]:
+                    - img [ref=e290]
+                    - generic [ref=e292]: Desenvolvimento Full-Stack
+                  - generic [ref=e293]:
+                    - img [ref=e294]
+                    - generic [ref=e296]: Web + Mobile + Backend Robusto
+                  - generic [ref=e297]:
+                    - img [ref=e298]
+                    - generic [ref=e300]: Design de Alta Performance
+                  - generic [ref=e301]:
+                    - img [ref=e302]
+                    - generic [ref=e304]: Testes Completos (Unit + E2E)
+                  - generic [ref=e305]:
+                    - img [ref=e306]
+                    - generic [ref=e308]: Suporte Prioritário (2h resposta)
+                  - generic [ref=e309]:
+                    - img [ref=e310]
+                    - generic [ref=e312]: Desenvolvimento Contínuo (16h/mês)
+                  - generic [ref=e313]:
+                    - img [ref=e314]
+                    - generic [ref=e316]: Reunião Mensal Strategy
+                  - generic [ref=e317]:
+                    - img [ref=e318]
+                    - generic [ref=e320]: Integração ERP/CRM
+                  - generic [ref=e321]:
+                    - img [ref=e322]
+                    - generic [ref=e324]: Programa de Afiliados (30% comissão)
+                - generic [ref=e325]:
+                  - paragraph [ref=e326]: Suporte
+                  - paragraph [ref=e327]: Dedicado (2h)
+          - table [ref=e329]:
+            - rowgroup [ref=e330]:
+              - row "Recurso Starter Professional Enterprise" [ref=e331]:
+                - columnheader "Recurso" [ref=e332]
+                - columnheader "Starter" [ref=e333]
+                - columnheader "Professional" [ref=e334]
+                - columnheader "Enterprise" [ref=e335]
+            - rowgroup [ref=e336]:
+              - row "Discovery & Estratégia" [ref=e337]:
+                - cell "Discovery & Estratégia" [ref=e338]
+                - cell [ref=e339]:
+                  - img [ref=e341]
+                - cell [ref=e343]:
+                  - img [ref=e345]
+                - cell [ref=e347]:
+                  - img [ref=e349]
+              - row "Desenvolvimento Web" [ref=e351]:
+                - cell "Desenvolvimento Web" [ref=e352]
+                - cell [ref=e353]:
+                  - img [ref=e355]
+                - cell [ref=e357]:
+                  - img [ref=e359]
+                - cell [ref=e361]:
+                  - img [ref=e363]
+              - row "Desenvolvimento Mobile" [ref=e365]:
+                - cell "Desenvolvimento Mobile" [ref=e366]
+                - cell [ref=e367]:
+                  - img [ref=e369]
+                - cell [ref=e371]:
+                  - img [ref=e373]
+                - cell [ref=e375]:
+                  - img [ref=e377]
+              - row "Design Customizado" [ref=e379]:
+                - cell "Design Customizado" [ref=e380]
+                - cell [ref=e381]:
+                  - img [ref=e383]
+                - cell [ref=e385]:
+                  - img [ref=e387]
+                - cell [ref=e389]:
+                  - img [ref=e391]
+              - row "Testes Automatizados" [ref=e393]:
+                - cell "Testes Automatizados" [ref=e394]
+                - cell [ref=e395]:
+                  - img [ref=e397]
+                - cell [ref=e399]:
+                  - img [ref=e401]
+                - cell [ref=e403]:
+                  - img [ref=e405]
+              - row "Documentação Viva" [ref=e407]:
+                - cell "Documentação Viva" [ref=e408]
+                - cell [ref=e409]:
+                  - img [ref=e411]
+                - cell [ref=e413]:
+                  - img [ref=e414]
+                - cell [ref=e416]:
+                  - img [ref=e417]
+              - row "Suporte Prioritário" [ref=e419]:
+                - cell "Suporte Prioritário" [ref=e420]
+                - cell [ref=e421]:
+                  - img [ref=e423]
+                - cell [ref=e425]:
+                  - img [ref=e427]
+                - cell [ref=e429]:
+                  - img [ref=e431]
+              - row "Desenvolvimento Contínuo 4h/mês 16h/mês" [ref=e433]:
+                - cell "Desenvolvimento Contínuo" [ref=e434]
+                - cell [ref=e435]:
+                  - img [ref=e436]
+                - cell "4h/mês" [ref=e438]:
+                  - generic [ref=e439]:
+                    - img [ref=e440]
+                    - generic [ref=e442]: 4h/mês
+                - cell "16h/mês" [ref=e443]:
+                  - generic [ref=e444]:
+                    - img [ref=e445]
+                    - generic [ref=e447]: 16h/mês
+              - row "Reunião Mensal Sob demanda 1/mês" [ref=e448]:
+                - cell "Reunião Mensal" [ref=e449]
+                - cell [ref=e450]:
+                  - img [ref=e451]
+                - cell "Sob demanda" [ref=e453]:
+                  - generic [ref=e454]:
+                    - img [ref=e455]
+                    - generic [ref=e457]: Sob demanda
+                - cell "1/mês" [ref=e458]:
+                  - generic [ref=e459]:
+                    - img [ref=e460]
+                    - generic [ref=e462]: 1/mês
+              - row "Programa Afiliados Sim (30%)" [ref=e463]:
+                - cell "Programa Afiliados" [ref=e464]
+                - cell [ref=e465]:
+                  - img [ref=e466]
+                - cell [ref=e468]:
+                  - img [ref=e469]
+                - cell "Sim (30%)" [ref=e471]:
+                  - generic [ref=e472]:
+                    - img [ref=e473]
+                    - generic [ref=e475]: Sim (30%)
+        - generic [ref=e476]:
+          - generic [ref=e477]:
+            - paragraph [ref=e478]: Perguntas Frequentes
+            - heading "Dúvidas sobre os planos?" [level=2] [ref=e479]
+          - generic [ref=e480]:
+            - button "Posso começar com um plano e mudar depois?" [ref=e483] [cursor=pointer]:
+              - generic [ref=e484]: Posso começar com um plano e mudar depois?
+              - img [ref=e485]
+            - button "Há contrato mínimo?" [ref=e489] [cursor=pointer]:
+              - generic [ref=e490]: Há contrato mínimo?
+              - img [ref=e491]
+            - button "O que está incluído no \"Desenvolvimento Contínuo\"?" [ref=e495] [cursor=pointer]:
+              - generic [ref=e496]: O que está incluído no "Desenvolvimento Contínuo"?
+              - img [ref=e497]
+            - button "Como funciona o programa de afiliados (Enterprise)?" [ref=e501] [cursor=pointer]:
+              - generic [ref=e502]: Como funciona o programa de afiliados (Enterprise)?
+              - img [ref=e503]
+            - button "Posso pedir customizações fora do escopo?" [ref=e507] [cursor=pointer]:
+              - generic [ref=e508]: Posso pedir customizações fora do escopo?
+              - img [ref=e509]
+            - button "Incluem reuniões de alinhamento?" [ref=e513] [cursor=pointer]:
+              - generic [ref=e514]: Incluem reuniões de alinhamento?
+              - img [ref=e515]
+        - generic [ref=e517]:
+          - generic [ref=e518]:
+            - paragraph [ref=e519]: Quem Confia na Gente
+            - heading "Veja o que nossos clientes dizem" [level=2] [ref=e520]
+          - generic [ref=e521]:
+            - generic [ref=e522]:
+              - generic [ref=e523]:
+                - img [ref=e524]
+                - img [ref=e526]
+                - img [ref=e528]
+                - img [ref=e530]
+                - img [ref=e532]
+              - blockquote [ref=e534]: “Conseguimos implementar a plataforma em 3 semanas. O suporte deles respondeu todas as dúvidas técnicas rapidinho. Voltaria a chamar com certeza.”
+              - generic [ref=e535]:
+                - paragraph [ref=e536]: João Silva
+                - paragraph [ref=e537]: Fundador • Agência XYZ
+            - generic [ref=e538]:
+              - generic [ref=e539]:
+                - img [ref=e540]
+                - img [ref=e542]
+                - img [ref=e544]
+                - img [ref=e546]
+                - img [ref=e548]
+              - blockquote [ref=e550]: “Desde o primeiro dia ficou claro que sabiam do que estavam falando. Design impecável, código limpo, documentação excelente. Recomendo!”
+              - generic [ref=e551]:
+                - paragraph [ref=e552]: Maria Santos
+                - paragraph [ref=e553]: Diretora de Produto • E-commerce Plus
+            - generic [ref=e554]:
+              - generic [ref=e555]:
+                - img [ref=e556]
+                - img [ref=e558]
+                - img [ref=e560]
+                - img [ref=e562]
+                - img [ref=e564]
+              - blockquote [ref=e566]: “O plano Enterprise valeu cada centavo. Temos um time dedicado resolvendo problemas e implementando features. Impacto direto nos resultados.”
+              - generic [ref=e567]:
+                - paragraph [ref=e568]: Carlos Oliveira
+                - paragraph [ref=e569]: CTO • TechStudio
+      - generic [ref=e571]:
+        - generic [ref=e572]:
+          - heading "Pronto para começar?" [level=2] [ref=e573]
+          - paragraph [ref=e574]: Escolha o plano que melhor se adequa às suas necessidades. Sem contratos longos, cancele quando quiser.
+        - generic [ref=e575]:
+          - button "Começar Agora" [ref=e576] [cursor=pointer]
+          - button "Agendar Demo" [ref=e577] [cursor=pointer]
+  - contentinfo [ref=e578]:
+    - generic [ref=e579]:
+      - generic [ref=e580]:
+        - generic [ref=e581]:
+          - img "Mirage Script Logo" [ref=e582]
+          - text: Mirage SCRIPT
+        - paragraph [ref=e583]: Somos uma software house de elite. Transformamos as suas ideias em produtos digitais robustos, focados em qualidade, escalabilidade e performance de nível enterprise.
+        - generic [ref=e584]:
+          - link "+55 (11) 9.3221-2697 (Miguel)" [ref=e585] [cursor=pointer]:
+            - /url: tel:+5511932212697
+            - img [ref=e586]
+            - text: +55 (11) 9.3221-2697 (Miguel)
+          - link "+55 (61) 9.9181-0148 (Kauã)" [ref=e588] [cursor=pointer]:
+            - /url: tel:+5561991810148
+            - img [ref=e589]
+            - text: +55 (61) 9.9181-0148 (Kauã)
+          - link "contato@miragescript.com" [ref=e591] [cursor=pointer]:
+            - /url: mailto:contato@miragescript.com
+            - img [ref=e592]
+            - text: contato@miragescript.com
+          - generic [ref=e594]:
+            - img [ref=e595]
+            - text: Brasília · Recife
+      - generic [ref=e598]:
+        - heading "Empresa" [level=4] [ref=e599]
+        - list [ref=e600]:
+          - listitem [ref=e601]:
+            - link "Início" [ref=e602] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e603]:
+            - link "Sobre" [ref=e604] [cursor=pointer]:
+              - /url: /sobre
+          - listitem [ref=e605]:
+            - link "Serviços" [ref=e606] [cursor=pointer]:
+              - /url: /servicos
+      - generic [ref=e607]:
+        - heading "Recursos" [level=4] [ref=e608]
+        - list [ref=e609]:
+          - listitem [ref=e610]:
+            - link "Contato" [ref=e611] [cursor=pointer]:
+              - /url: /contato
+    - generic [ref=e612]:
+      - paragraph [ref=e613]: © 2025 Mirage Script. Todos os direitos reservados.
+      - link "GitHub" [ref=e615] [cursor=pointer]:
+        - /url: https://github.com/Mirage-Script
+```

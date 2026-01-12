@@ -5,8 +5,13 @@ export function ShaderAurora({ className = '' }: { className?: string }) {
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || typeof window === 'undefined') {
       return;
+    }
+
+    // Polyfill para clearAnimationFrame se não existir
+    if (typeof window.clearAnimationFrame === 'undefined') {
+      window.clearAnimationFrame = (id: number) => clearTimeout(id);
     }
 
     void import('shader-doodle');
