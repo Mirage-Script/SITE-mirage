@@ -33,12 +33,14 @@ export function PricingComparison({ onSelectPlan }: PricingComparisonProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6 }}
-            className={`relative rounded-[2rem] border p-8 transition-all duration-300 ${
+            className={`group relative overflow-hidden rounded-[2rem] border p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl ${
               plan.highlighted
-                ? 'border-primary bg-primary/5 ring-2 ring-primary/20 shadow-lg dark:border-accent dark:bg-accent/5 dark:ring-accent/20'
-                : 'border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900'
+                ? 'border-primary bg-primary/5 ring-2 ring-primary/20 shadow-lg dark:border-accent dark:bg-accent/5 dark:ring-accent/20 hover:shadow-primary/20'
+                : 'border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900/60 hover:border-primary/40 dark:hover:border-accent/40 hover:shadow-primary/5 dark:hover:shadow-accent/5'
             }`}
           >
+            {/* Hover Gradient Overlay */}
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
             {plan.badge && (
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-semibold whitespace-nowrap">
                 {plan.badge}

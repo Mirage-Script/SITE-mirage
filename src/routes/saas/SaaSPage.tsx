@@ -119,12 +119,13 @@ export default function SaaSPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="rounded-3xl border border-neutral-200/60 bg-white p-8 shadow-sm transition-all hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900/50"
+              className="group relative overflow-hidden rounded-3xl border border-neutral-200/60 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 dark:border-neutral-800 dark:bg-neutral-900/50 dark:hover:border-accent/40 dark:hover:shadow-accent/5"
             >
-              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
+              <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:bg-primary/20 dark:text-accent dark:bg-accent/10 dark:group-hover:bg-accent/20">
                 <feature.icon className="h-6 w-6" />
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
+              <h3 className="mb-3 text-xl font-semibold text-neutral-900 transition-colors group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">
                 {feature.title}
               </h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -146,11 +147,20 @@ export default function SaaSPage() {
               Construir uma infraestrutura multi-tenant do zero leva meses de desenvolvimento caro e arriscado. Com a MIRAGE, você salta essa etapa e vai direto para a criação de valor.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-              {benefits.map((benefit) => (
-                <div key={benefit} className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-primary flex-shrink-0" />
+              {benefits.map((benefit, idx) => (
+                <motion.div 
+                  key={benefit} 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.4 }}
+                  className="flex flex-col gap-2 rounded-2xl border border-neutral-200/50 bg-white/50 p-4 transition-colors hover:border-primary/20 hover:bg-white dark:border-neutral-800/50 dark:bg-neutral-800/30 dark:hover:border-accent/30 dark:hover:bg-neutral-800/80"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <CheckCircleIcon className="h-5 w-5 text-primary flex-shrink-0 dark:text-accent" />
+                  </div>
                   <span className="text-sm font-medium text-neutral-800 dark:text-neutral-300">{benefit}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>

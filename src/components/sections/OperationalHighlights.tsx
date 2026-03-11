@@ -58,40 +58,40 @@ export function OperationalHighlights() {
           </p>
 
           {/* CHECKLIST */}
-          <div className="mt-8 space-y-4">
-            <div className="operational-check flex items-start gap-3">
+          <div className="mt-8 space-y-3">
+            <div className="operational-check flex items-center gap-4 rounded-2xl border border-neutral-200/50 bg-white/50 p-4 transition-colors hover:border-primary/20 hover:bg-white dark:border-neutral-800/60 dark:bg-neutral-900/30 dark:hover:border-accent/30 dark:hover:bg-neutral-800/80">
               <CheckIcon
                 className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
                 aria-hidden="true"
               />
-              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+              <span className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
                 Segurança de ponta a ponta
               </span>
             </div>
-            <div className="operational-check flex items-start gap-3">
+            <div className="operational-check flex items-center gap-4 rounded-2xl border border-neutral-200/50 bg-white/50 p-4 transition-colors hover:border-primary/20 hover:bg-white dark:border-neutral-800/60 dark:bg-neutral-900/30 dark:hover:border-accent/30 dark:hover:bg-neutral-800/80">
               <CheckIcon
                 className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
                 aria-hidden="true"
               />
-              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+              <span className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
                 Monitoramento Ativo 24/7
               </span>
             </div>
-            <div className="operational-check flex items-start gap-3">
+            <div className="operational-check flex items-center gap-4 rounded-2xl border border-neutral-200/50 bg-white/50 p-4 transition-colors hover:border-primary/20 hover:bg-white dark:border-neutral-800/60 dark:bg-neutral-900/30 dark:hover:border-accent/30 dark:hover:bg-neutral-800/80">
               <CheckIcon
                 className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
                 aria-hidden="true"
               />
-              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+              <span className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
                 Resposta Rápida a Incidentes
               </span>
             </div>
-            <div className="operational-check flex items-start gap-3">
+            <div className="operational-check flex items-center gap-4 rounded-2xl border border-neutral-200/50 bg-white/50 p-4 transition-colors hover:border-primary/20 hover:bg-white dark:border-neutral-800/60 dark:bg-neutral-900/30 dark:hover:border-accent/30 dark:hover:bg-neutral-800/80">
               <CheckIcon
                 className="h-5 w-5 flex-shrink-0 text-primary dark:text-accent"
                 aria-hidden="true"
               />
-              <span className="text-sm text-neutral-700 dark:text-neutral-200">
+              <span className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
                 Entregas Ágeis e Previsíveis
               </span>
             </div>

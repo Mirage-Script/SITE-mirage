@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
 import { EcommerceAudience } from '@/components/sections/EcommerceAudience';
 import { EcommerceFeatures } from '@/components/sections/EcommerceFeatures';
@@ -11,6 +12,7 @@ import { TestimonialsPricing } from '@/components/sections/TestimonialsPricing';
 import { Button } from '@/components/ui/Button';
 
 export default function EcommercePage() {
+  const navigate = useNavigate();
   const pricingRef = useRef<HTMLDivElement>(null);
 
   const scrollToPricing = () => {
@@ -59,7 +61,7 @@ export default function EcommercePage() {
       >
         <PricingComparison
           onSelectPlan={(planId) => {
-            console.log(`Plano selecionado: ${planId}`);
+            navigate('/contato');
           }}
         />
 
@@ -83,10 +85,10 @@ export default function EcommercePage() {
           Escolha o plano que melhor se adequa às suas necessidades. Sem contratos longos, cancele quando quiser.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button size="lg">
+          <Button size="lg" onClick={() => navigate('/contato')}>
             Começar Agora
           </Button>
-          <Button size="lg" variant="outline">
+          <Button size="lg" variant="outline" onClick={() => navigate('/contato')}>
             Agendar Demo
           </Button>
         </div>

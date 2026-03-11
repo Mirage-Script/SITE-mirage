@@ -117,15 +117,16 @@ export default function ConsultoriaPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="relative rounded-3xl bg-white p-8 border border-neutral-100 shadow-sm dark:bg-neutral-900 dark:border-neutral-800"
+              className="group relative overflow-hidden rounded-3xl border border-neutral-100 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40 dark:hover:shadow-accent/5"
             >
-              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold shadow-lg shadow-primary/30">
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
+              <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold shadow-lg shadow-primary/30 dark:bg-accent dark:shadow-accent/30">
                 {item.step}
               </div>
-              <div className="mt-4 mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+              <div className="mt-4 mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 group-hover:bg-primary/20 dark:bg-accent/10 dark:text-accent dark:group-hover:bg-accent/20">
                 <item.icon className="h-6 w-6" />
               </div>
-              <h3 className="mb-3 text-xl font-bold text-neutral-900 dark:text-neutral-100">
+              <h3 className="mb-3 text-xl font-bold text-neutral-900 transition-colors group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">
                 {item.title}
               </h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -154,12 +155,13 @@ export default function ConsultoriaPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="text-center group"
+              className="group relative flex flex-col items-center overflow-hidden rounded-3xl border border-neutral-200/50 bg-white/50 p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white hover:shadow-lg hover:shadow-primary/5 dark:border-neutral-800/50 dark:bg-neutral-800/30 dark:hover:border-accent/30 dark:hover:bg-neutral-800/80 dark:hover:shadow-accent/5"
             >
-              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-800 transition-colors group-hover:bg-primary/10">
-                <outcome.icon className="h-8 w-8 text-neutral-700 dark:text-neutral-300 transition-colors group-hover:text-primary" />
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110 group-hover:bg-primary/10 dark:bg-accent/5 dark:group-hover:bg-accent/10">
+                <outcome.icon className="h-8 w-8 text-primary/80 transition-colors group-hover:text-primary dark:text-accent/80 dark:group-hover:text-accent" />
               </div>
-              <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-3">
+              <h3 className="mb-3 text-lg font-bold text-neutral-900 transition-colors group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">
                 {outcome.title}
               </h3>
               <p className="text-sm text-neutral-600 dark:text-neutral-400">

@@ -54,13 +54,13 @@ export function DeliveryPlaybook() {
         {deliveryPlaybook.map((stage, index) => (
           <li
             key={stage.id}
-            className="playbook-stage relative flex h-full flex-col gap-4 p-6"
+            className="playbook-stage group relative flex h-full flex-col gap-4 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-950/40 p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-accent/40 hover:bg-neutral-900/80 hover:shadow-xl hover:shadow-accent/5"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            {/* O conteúdo é carregado do novo array 'deliveryPlaybook' */}
-            <span className="text-[0.65rem] uppercase tracking-[0.45em] text-accent/80">{stage.duration}</span>
-            <h3 className="text-lg font-semibold text-white">{stage.title}</h3>
-            <p className="text-sm text-neutral-200">{stage.focus}</p>
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-accent/0 via-accent/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
+            <span className="text-[0.65rem] uppercase tracking-[0.45em] text-accent/80 transition-colors group-hover:text-accent">{stage.duration}</span>
+            <h3 className="text-lg font-semibold text-white transition-colors group-hover:text-accent">{stage.title}</h3>
+            <p className="text-sm text-neutral-300">{stage.focus}</p>
             <ul className="mt-4 space-y-2 text-sm text-neutral-100/80">
               {stage.outputs.map((output) => (
                 <li key={output} className="flex items-start gap-3">
