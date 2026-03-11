@@ -3,7 +3,11 @@ import { ShoppingCartIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 import { Button } from '../ui/Button';
 
-export function EcommerceHero() {
+interface EcommerceHeroProps {
+  onVerPlanos?: () => void;
+}
+
+export function EcommerceHero({ onVerPlanos }: EcommerceHeroProps) {
   return (
     <section className="relative space-y-8">
       {/* Decorative elements */}
@@ -29,7 +33,7 @@ export function EcommerceHero() {
 
         {/* CTAs */}
         <div className="flex flex-wrap gap-4 pt-4">
-          <Button size="lg" className="gap-2">
+          <Button size="lg" className="gap-2" onClick={onVerPlanos}>
             <SparklesIcon className="h-5 w-5" />
             Ver Planos
           </Button>

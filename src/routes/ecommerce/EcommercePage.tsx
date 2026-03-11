@@ -42,7 +42,7 @@ export default function EcommercePage() {
       </motion.div>
 
       {/* E-COMMERCE PRODUCT SECTION */}
-      <EcommerceHero />
+      <EcommerceHero onVerPlanos={scrollToPricing} />
 
       <EcommerceFeatures />
 
@@ -54,7 +54,7 @@ export default function EcommercePage() {
         className="space-y-16 scroll-mt-24"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
         <PricingComparison

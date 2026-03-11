@@ -120,7 +120,7 @@ export function PricingComparison({ onSelectPlan }: PricingComparisonProps) {
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
         className="mt-16 rounded-[2rem] border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 overflow-x-auto"
       >
