@@ -192,7 +192,7 @@ export default function ServicesPage() {
                     Investimento
                     <p className="mt-2 text-lg font-semibold text-neutral-900 dark:text-neutral-100">{service.investment}</p>
                   </div>
-                  <Button variant="outline" className="justify-center">
+                  <Button variant="outline" className="justify-center" onClick={() => navigate('/contato')}>
                     Solicitar escopo detalhado
                   </Button>
                 </aside>

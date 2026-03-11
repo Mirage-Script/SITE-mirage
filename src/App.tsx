@@ -12,6 +12,8 @@ const AboutPage = lazy(() => import('./routes/about/AboutPage'));
 const BlogPage = lazy(() => import('./routes/blog/BlogPage'));
 const BlogPostPage = lazy(() => import('./routes/blog/BlogPostPage'));
 const ContactPage = lazy(() => import('./routes/contact/ContactPage'));
+const SaaSPage = lazy(() => import('./routes/saas/SaaSPage'));
+const ConsultoriaPage = lazy(() => import('./routes/consultoria/ConsultoriaPage'));
 const AdminDashboard = lazy(() => import('./routes/admin/AdminDashboard'));
 const NotFoundPage = lazy(() => import('./routes/not-found/NotFoundPage'));
 
@@ -30,6 +32,8 @@ export default function App() {
               <Route path=":slug" element={<BlogPostPage />} />
             </Route>
             <Route path="contato" element={<ContactPage />} />
+            <Route path="saas" element={<SaaSPage />} />
+            <Route path="consultoria" element={<ConsultoriaPage />} />
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
