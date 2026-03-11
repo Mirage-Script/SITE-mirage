@@ -71,7 +71,6 @@ export default function SaaSPage() {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden rounded-[2.5rem] bg-neutral-900 px-6 py-24 sm:px-12 sm:py-32 lg:px-16 dark:bg-black">
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-20 mix-blend-overlay"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
         
         <div className="relative z-10 mx-auto max-w-4xl text-center">

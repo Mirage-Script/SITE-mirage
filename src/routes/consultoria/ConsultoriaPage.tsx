@@ -173,7 +173,6 @@ export default function ConsultoriaPage() {
       {/* Final Call to Action */}
       <section className="mx-auto max-w-5xl px-4 py-12">
         <div className="rounded-[2.5rem] bg-primary px-8 py-16 text-center sm:px-16 flex flex-col items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay"></div>
           <h2 className="text-3xl font-bold text-white mb-6 relative z-10">
             Pronto para dar o próximo passo?
           </h2>
