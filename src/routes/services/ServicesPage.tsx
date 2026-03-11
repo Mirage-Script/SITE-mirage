@@ -75,15 +75,16 @@ export default function ServicesPage() {
             return (
               <motion.div
                 key={product.id}
-                className="group relative rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm hover:shadow-lg transition-all duration-300 dark:border-neutral-800 dark:bg-neutral-900 hover:border-primary/30 dark:hover:border-accent/30 flex flex-col h-full"
+                className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-neutral-200 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40 dark:hover:shadow-accent/5"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
+                <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
                 {/* Icon */}
-                <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                  <Icon className="h-7 w-7 text-primary" />
+                <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover:scale-110 group-hover:bg-primary/20 dark:bg-accent/10 dark:group-hover:bg-accent/20">
+                  <Icon className="h-7 w-7 text-primary transition-colors duration-300 dark:text-accent" />
                 </div>
 
                 {/* Content */}
@@ -149,16 +150,17 @@ export default function ServicesPage() {
           {services.map((service) => (
             <motion.article
               key={service.id}
-              className="rounded-[2.5rem] border border-neutral-200 bg-white p-10 shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
+              className="group relative overflow-hidden rounded-[2.5rem] border border-neutral-200 bg-white p-10 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/5 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/30 dark:hover:shadow-accent/5"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <div className="flex flex-col gap-6 lg:flex-row lg:justify-between">
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
+              <div className="flex flex-col gap-6 lg:flex-row lg:justify-between relative z-10">
                 <div className="max-w-2xl space-y-4">
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+                    <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary transition-colors group-hover:bg-primary/20 dark:bg-accent/10 dark:text-accent dark:group-hover:bg-accent/20">
                       {service.title}
                     </span>
                     {service.badge && (

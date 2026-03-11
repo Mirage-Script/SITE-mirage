@@ -54,10 +54,12 @@ export function ServicesOverview() {
           <article
             key={service.id}
             className={clsx(
-              'service-card group relative flex h-full flex-col gap-6 overflow-hidden rounded-3xl border border-neutral-200 bg-white/90 p-8 shadow-lg transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-gradient-to-br before:from-primary/0 before:via-primary/0 before:to-accent/5 before:opacity-0 before:transition-opacity before:duration-500 group-hover:before:opacity-100 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/50 dark:hover:shadow-accent/20 dark:before:to-primary/10',
+              'service-card group relative flex h-full flex-col gap-6 overflow-hidden rounded-3xl border border-neutral-200 bg-white/90 p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40 dark:hover:shadow-accent/5',
               service.badge ? 'ring-2 ring-primary/40 dark:ring-accent/50' : undefined,
             )}
           >
+            {/* Hover Gradient Overlay */}
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
             {/* ==================================================================
              * DOCUMENTAÇÃO (CORREÇÃO 2: TAG SOBREPOSTA)
              *
@@ -93,11 +95,11 @@ export function ServicesOverview() {
               Entregas: {service.deliverables.join(' · ')}
             </div>
 
-            <div className="mt-auto border-t border-neutral-200 pt-4 dark:border-neutral-800">
+            <div className="mt-auto border-t border-neutral-200 pt-4 dark:border-neutral-800 transition-colors group-hover:border-primary/20 dark:group-hover:border-accent/20">
               <MagneticButton strength={0.2} className="w-full">
                 <Button
                   variant="ghost"
-                  className="w-full border border-neutral-300/80 bg-transparent text-neutral-800 hover:bg-neutral-100/70 dark:border-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-800/70"
+                  className="w-full border border-neutral-300/80 bg-transparent text-neutral-800 hover:bg-neutral-100/70 dark:border-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-800/70 transition-all group-hover:border-primary/30 group-hover:text-primary dark:group-hover:border-accent/30 dark:group-hover:text-accent"
                 >
                   Solicite um Orçamento
                 </Button>

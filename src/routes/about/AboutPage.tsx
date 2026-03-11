@@ -60,13 +60,14 @@ export default function AboutPage() {
           {values.map((value) => (
             <motion.article
               key={value.title}
-              className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
+              className="group relative overflow-hidden rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/40 dark:hover:shadow-accent/5"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{value.title}</h3>
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
+              <h3 className="text-lg font-semibold text-neutral-900 transition-colors group-hover:text-primary dark:text-neutral-100 dark:group-hover:text-accent">{value.title}</h3>
               <p className="mt-3 text-sm text-neutral-600 dark:text-neutral-300">{value.description}</p>
             </motion.article>
           ))}
@@ -86,8 +87,9 @@ export default function AboutPage() {
         <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-50">Linha do tempo</h2>
         <ol className="mt-8 grid gap-6 text-sm text-neutral-600 dark:text-neutral-300 md:grid-cols-2">
           {timeline.map((item) => (
-            <li key={item.year} className="rounded-3xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900">
-              <span className="text-xs uppercase tracking-[0.4em] text-primary">{item.year}</span>
+            <li key={item.year} className="group relative overflow-hidden rounded-3xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 dark:border-neutral-800 dark:bg-neutral-900/60 dark:hover:border-accent/30 dark:hover:shadow-accent/5">
+              <div className="pointer-events-none absolute inset-0 -z-10 rounded-[inherit] bg-gradient-to-br from-primary/0 via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100 dark:via-accent/5" aria-hidden="true" />
+              <span className="text-xs font-semibold uppercase tracking-[0.4em] text-primary transition-colors group-hover:text-black dark:group-hover:text-white dark:text-accent">{item.year}</span>
               <p className="mt-3 text-base font-semibold text-neutral-900 dark:text-neutral-100">{item.event}</p>
             </li>
           ))}
